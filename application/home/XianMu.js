@@ -8,7 +8,7 @@ export default  class  extends React.Component {
             list: [{},{},{}],
             activity: ''
         }
-    }
+    } 
     render() {
         return (
             <View style={{flex: 1, backgroundColor: '#f5f5f5'}} >

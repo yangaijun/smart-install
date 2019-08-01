@@ -26,43 +26,43 @@ export default  class  extends React.Component {
                 event={params => { }}
                 columns={[
                     [
-                        {type: 'text-h4', value: '物资编码', style: {width: 100}},
+                        {type: 'text-form-label', value: '物资编码', style: {flex: 1}},
                         {type: 'text', value: 'hh'},
-                        {type: 'br-row', style: {marginBottom: 1}}
+                        {type: 'br-form-row'}
                     ], [
-                        {type: 'text-h4', value: '物资名称', style: {width: 100}},
-                        {type: 'text', value: '请输入物资名称', style: {flex: 1}},
-                        {type: 'image-icon', value: require('../../assets/right.png')},
-                        {type: 'br-row', style: {marginBottom: 1}}
+                        {type: 'text-form-label', value: '物资名称', style: {flex: 1}},
+                        {type: 'input-text', prop: 'd', placeholder: '请输入物资名称'},
+                        {type: 'br-form-row'}
                     ], [
-                        {type: 'text-h4', value: '分类', style: {width: 100}},
-                        {type: 'text', value: '必填', style: {flex: 1}},
-                        {type: 'image-icon', value: require('../../assets/right.png')},
-                        {type: 'br-row', style: {marginBottom: 1}}
+                        {type: 'text-form-label', value: '分类'},
+                        {type: 'text-must', value: '*',style: {flex: 1}}, 
+                        {type: 'text', value: '必填'},
+                        {type: 'image-form', value: require('../../assets/right.png')},
+                        {type: 'click-form-row'}
                     ], [
-                        {type: 'text-h4', value: '规格型号', style: {width: 100}},
+                        {type: 'text-form-label', value: '规格型号', style: {flex: 1}},
                         {type: 'text', value: 'hh'},
-                        {type: 'br-row', style: {marginBottom: 1}}
+                        {type: 'br-form-row'}
                     ], [
-                        {type: 'text-h4', value: '单位', style: {width: 100}},
-                        {type: 'input-text', prop: 'dw', placeholder: '请输入单位（必填）', style: {height: 38}},
-                        {type: 'br-row', style: {marginBottom: 1}}
+                        {type: 'text-h4', value: '单位', style: {flex: 1}},
+                        {type: 'input-text', prop: 'dw', placeholder: '请输入单位(必填)'},
+                        {type: 'br-form-row'}
                     ], [
-                        {type: 'text-h4', value: '入库数量', style: {width: 100}},
-                        {type: 'input-text', prop: 'dw', placeholder: '请输入入库数量（必填）', style: {height: 38}},
-                        {type: 'br-row', style: {marginBottom: 1}}
+                        {type: 'text-h4', value: '入库数量', style: {flex: 1}},
+                        {type: 'input-text', prop: 'dw', placeholder: '请输入入库数量(必填)'},
+                        {type: 'br-form-row'}
                     ], [ 
-                        {type: 'text-h4', value: '单价', style: {width: 100}},
-                        {type: 'input-text', prop: 'dw', placeholder: '请输入单价（元）', style: {height: 38}},
-                        {type: 'br-row', style: {marginBottom: 1}}
+                        {type: 'text-h4', value: '单价', style: {flex: 1}},
+                        {type: 'input-text', prop: 'dw', placeholder: '请输入单价(元)'},
+                        {type: 'br-form-row'}
                     ], [ 
-                        {type: 'text-h4', value: '备注', style: {width: 100}},
-                        {type: 'input-text', prop: 'bz', placeholder: '请输入备注', style: {height: 38}},
-                        {type: 'br-row', style: {marginBottom: 1}}
+                        {type: 'text-h4', value: '备注', style: {flex: 1}},
+                        {type: 'input-text', prop: 'bz', placeholder: '请输入备注'},
+                        {type: 'br-form-row'}
                     ], [ 
                         {type: 'text-h4', value: '是否常用', style: {flex: 1}},
                         {type: 'switch', prop: 'cy', value: '1'},
-                        {type: 'br-row'}
+                        {type: 'br-form-row'}
                     ]
                 ]}
             />

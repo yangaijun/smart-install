@@ -22,6 +22,7 @@ import GonZuoXinJian from '../page/GonZuo/GonZuoXinJian'
 import SC_JinXinZhon from '../page/ShiCeShiLian/SC_JinXinZhon'
 import SC_YanShou from '../page/ShiCeShiLian/SC_YanShou'
 import GuoLvQiRuKou from '../page/ShiCeShiLian/GuoLvQiRuKou'
+import BaoDianQinDan from '../page/ShiCeShiLian/BaoDianQinDan'
 import ShiCeShiLian from '../page/ShiCeShiLian/ShiCeShiLian'
 import WenTiXianQin from '../page/ShiCeShiLian/WenTiXianQin'
 import SC_ZhiPai from '../page/ShiCeShiLian/SC_ZhiPai'
@@ -36,13 +37,17 @@ import WuZiGuanLi from '../page/XianMu/WuZiGuanLi'
 import RuKu from '../page/XianMu/RuKu'
 import XinJianWuZi from '../page/XianMu/XinJianWuZi'
 
+import RiZhouYueBao_Page from  '../page/RiZhouYueBao'
+import WuZi_Page from '../page/WuZi'
+import ZhiLianAnQuan_Page from '../page/ZhiLianAnQuan'
+import XueXi_Page from '../page/XueXi'
+
 const Home = createBottomTabNavigator({
     GonZuoTai: GonZuoTai,
     YinYong: YinYong,
     TianJia: TianJia,
     XianMu: XianMu,
     XueXi: XueXi,
-    
 }, {
     initialRouteName: "YinYong",
     tabBarComponent: BottomBar,
@@ -64,14 +69,6 @@ const ShiCeShiLianHome = createBottomTabNavigator({
     },
     navigationOptions :{
         title:'实测实量', 
-        // headerRight: <Freedomen.Region 
-        //     redux={'rw_title'}
-        //     columns={[
-        //         {type: 'button-text', value: '同步', style: {color: '#2EBBC4', fontSize: 16}},
-        //         {type: 'text-badge', prop: 'qipao', value: 1},
-        //         {type: 'br', load: (value, data) => data, style: {flexDirection: 'row', paddingRight: 10}}
-        //     ]}
-        // />
     }
 });
   
@@ -83,19 +80,29 @@ const AppNavigator = createStackNavigator({
     MiaoDian: MiaoDian,
     WenTiXianQin: WenTiXianQin,
     ZhenGaiRen: ZhenGaiRen,
-    XianMuHome: XianMuHome,
-    WuZiGuanLi: WuZiGuanLi,
     SC_ZhiPai: SC_ZhiPai,
     XinZen:XinZen,
-    RuKu: RuKu,
-    XinJianWuZi: XinJianWuZi,
+    // XianMuHome: XianMuHome,
+    // WuZiGuanLi: WuZiGuanLi,
+    // RuKu: RuKu,
+    // XinJianWuZi: XinJianWuZi,
     SC_JinXinZhon: SC_JinXinZhon,
     SC_YanShou: SC_YanShou,
     ZiXun: ZiXun,
+    BaoDianQinDan: BaoDianQinDan,
     GonZuoHome: GonZuoHome,
     ZhiLianJianCha: ZhiLianJianCha,
     ZhiLianZhenGai: ZhiLianZhenGai,
-    GonZuoXinJian: GonZuoXinJian
+    GonZuoXinJian: GonZuoXinJian,
+    
+    //日报 周报 月报
+    ...RiZhouYueBao_Page,
+    //物资
+    ...WuZi_Page,
+    //质量安全
+    ...ZhiLianAnQuan_Page,
+    //学习模块
+    ...XueXi_Page
 }, {
     initialRouteName: "Home",
 });

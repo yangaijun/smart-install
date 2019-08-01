@@ -2,7 +2,11 @@ package com.nsmarti;
 
 import android.app.Application;
 
-import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactApplication; 
+import it.innove.BleManagerPackage;
+import com.zmxv.RNSound.RNSoundPackage;
+import com.imagepicker.ImagePickerPackage;
+import com.rnim.rn.audio.ReactNativeAudioPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,6 +29,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new BleManagerPackage(),
+            new RNSoundPackage(),
+            new ImagePickerPackage(),
+            new ReactNativeAudioPackage(),
             new RNCWebViewPackage(),
             new RNGestureHandlerPackage()
       );

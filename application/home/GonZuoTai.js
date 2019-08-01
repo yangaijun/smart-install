@@ -13,14 +13,19 @@ export default  class  extends React.Component {
             }
         }
     }
-   
+    componentWillMount() {console.log(this.state.data)
+        Freedomen.global.api.get('api/newsInfo/admin/getNewsInfoList', {
+            pageSize: 2
+        }).then(res => { 
+        })
+    }
     render() {
         return (
             <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: '#f5f5f5'}}> 
                 <Swiper autoplay={true} style={{height: 160, width: '100%', backgroundColor: 'white', paddingTop: 10}}>
                 {
                     [require('../assets/banner1.jpg'), require('../assets/banner2.jpg'), require('../assets/banner3.jpg'), require('../assets/banner4.jpg')].map((el, key) => {
-                        return <Image source={el} key={key} style={{width: '96%', height: 160, alignSelf: 'center', borderRadius: 5}} />
+                        return <Image source={el} key={key} style={{width: '96%', height: 160, alignSelf: 'center', borderRadius: 5, resizeMode: 'cover'}} />
                     })
                 }
                 </Swiper>

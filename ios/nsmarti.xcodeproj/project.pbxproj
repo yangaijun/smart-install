@@ -42,6 +42,24 @@
 		01731B53DBDA4F998DC2AB6A /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F18EC234DB734C459665881B /* libRNGestureHandler.a */; };
 		463E58BA575F40D4A9A47CB6 /* libRNGestureHandler-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 95E6480F57474A7F8A87CC63 /* libRNGestureHandler-tvOS.a */; };
 		FE094258D77045FDB96EB78F /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EDEE61A38F7C4B8A82CBBB40 /* libRNCWebView.a */; };
+		C246D47659284F7CBE21548F /* libRNAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E376DE051C44B7894BB4A75 /* libRNAudio.a */; };
+		B143C3FD342945FAA02AD45B /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC88172150042CA9FF755F3 /* libRNCamera.a */; };
+		5C9C01A19AE046C28E5484B4 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57FB74599F9346318C7FF64E /* libRNImagePicker.a */; };
+		D2DC926633644F3FAE178924 /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D05C2C46820846248F9C9CEE /* libRNSound.a */; };
+		AF06B757E38E44D8944FBCCE /* libRCTJCoreModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3DD1A0C2DF438882B8CBCC /* libRCTJCoreModule.a */; };
+		CCF49A245D374AD98B4A7AFF /* libRCTJPushModule.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4240FE7CC9DC459BB2FCBAD0 /* libRCTJPushModule.a */; };
+		0586597732C24F41863CF13E /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D3C270E7BC429E8289C663 /* libz.tbd */; };
+		EF55F89BCB724B54AE060C84 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1371BD2C43444755A594270E /* UserNotifications.framework */; };
+		07B0AD82981446F597B8E006 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE2F157B4B5A43E2A8286DB1 /* CoreTelephony.framework */; };
+		3690972D5ED54B9F869CB7B6 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFE6853B3E4241DDBC47C702 /* Security.framework */; };
+		D0A4CAF7B6064FF29ED0BB8F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 011A8A94D83042B19F874C4A /* CFNetwork.framework */; };
+		EE408923FFC54551B0418302 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8325969744F64153B2A79C69 /* CoreFoundation.framework */; };
+		94C92914AB0F44E2B7D5F6EC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32B446C5DD7546EC986D4617 /* SystemConfiguration.framework */; };
+		70D0FD9874FC4783A1073888 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8782CBFDE9B942F1A63BAD49 /* Foundation.framework */; };
+		DC929F99069B44FC956C356B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE2526FBD84842A980C73ECA /* UIKit.framework */; };
+		10F7CFD12DCE4EAAB50CBEE4 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B19174C29524CDD8E18776F /* libresolv.tbd */; };
+		0DD9D75779A74E4CA6405D03 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3021DE06F0432EB2464CB7 /* CoreGraphics.framework */; };
+		7E413B7E13BB4180A3563734 /* libBleManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 408E516BBB3F4BE9AEA5BE3D /* libBleManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -354,6 +372,31 @@
 		95E6480F57474A7F8A87CC63 /* libRNGestureHandler-tvOS.a */ = {isa = PBXFileReference; name = "libRNGestureHandler-tvOS.a"; path = "libRNGestureHandler-tvOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		DD395108996C4A72802BFA00 /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; name = "RNCWebView.xcodeproj"; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		EDEE61A38F7C4B8A82CBBB40 /* libRNCWebView.a */ = {isa = PBXFileReference; name = "libRNCWebView.a"; path = "libRNCWebView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		17AFC16262A445F2B68784BD /* RNAudio.xcodeproj */ = {isa = PBXFileReference; name = "RNAudio.xcodeproj"; path = "../node_modules/react-native-audio/ios/RNAudio.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		9E376DE051C44B7894BB4A75 /* libRNAudio.a */ = {isa = PBXFileReference; name = "libRNAudio.a"; path = "libRNAudio.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		2F130E6C8F6F4D08AA4E271F /* RNCamera.xcodeproj */ = {isa = PBXFileReference; name = "RNCamera.xcodeproj"; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		3CC88172150042CA9FF755F3 /* libRNCamera.a */ = {isa = PBXFileReference; name = "libRNCamera.a"; path = "libRNCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		88961C19EAC64D87B59FCBB2 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		57FB74599F9346318C7FF64E /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		49406749C6A84608A0AA8D3A /* RNSound.xcodeproj */ = {isa = PBXFileReference; name = "RNSound.xcodeproj"; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		D05C2C46820846248F9C9CEE /* libRNSound.a */ = {isa = PBXFileReference; name = "libRNSound.a"; path = "libRNSound.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		1EAE22085B9E4F69BD4DAFA4 /* RCTJCoreModule.xcodeproj */ = {isa = PBXFileReference; name = "RCTJCoreModule.xcodeproj"; path = "../node_modules/jcore-react-native/ios/RCTJCoreModule.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		1E3DD1A0C2DF438882B8CBCC /* libRCTJCoreModule.a */ = {isa = PBXFileReference; name = "libRCTJCoreModule.a"; path = "libRCTJCoreModule.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		1C47FEC87D334AF5B7800462 /* RCTJPushModule.xcodeproj */ = {isa = PBXFileReference; name = "RCTJPushModule.xcodeproj"; path = "../node_modules/jpush-react-native/ios/RCTJPushModule.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		4240FE7CC9DC459BB2FCBAD0 /* libRCTJPushModule.a */ = {isa = PBXFileReference; name = "libRCTJPushModule.a"; path = "libRCTJPushModule.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		B2D3C270E7BC429E8289C663 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		1371BD2C43444755A594270E /* UserNotifications.framework */ = {isa = PBXFileReference; name = "UserNotifications.framework"; path = "System/Library/Frameworks/UserNotifications.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		CE2F157B4B5A43E2A8286DB1 /* CoreTelephony.framework */ = {isa = PBXFileReference; name = "CoreTelephony.framework"; path = "System/Library/Frameworks/CoreTelephony.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		AFE6853B3E4241DDBC47C702 /* Security.framework */ = {isa = PBXFileReference; name = "Security.framework"; path = "System/Library/Frameworks/Security.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		011A8A94D83042B19F874C4A /* CFNetwork.framework */ = {isa = PBXFileReference; name = "CFNetwork.framework"; path = "System/Library/Frameworks/CFNetwork.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		8325969744F64153B2A79C69 /* CoreFoundation.framework */ = {isa = PBXFileReference; name = "CoreFoundation.framework"; path = "System/Library/Frameworks/CoreFoundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		32B446C5DD7546EC986D4617 /* SystemConfiguration.framework */ = {isa = PBXFileReference; name = "SystemConfiguration.framework"; path = "System/Library/Frameworks/SystemConfiguration.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		8782CBFDE9B942F1A63BAD49 /* Foundation.framework */ = {isa = PBXFileReference; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		AE2526FBD84842A980C73ECA /* UIKit.framework */ = {isa = PBXFileReference; name = "UIKit.framework"; path = "System/Library/Frameworks/UIKit.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		1B19174C29524CDD8E18776F /* libresolv.tbd */ = {isa = PBXFileReference; name = "libresolv.tbd"; path = "usr/lib/libresolv.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
+		8C3021DE06F0432EB2464CB7 /* CoreGraphics.framework */ = {isa = PBXFileReference; name = "CoreGraphics.framework"; path = "System/Library/Frameworks/CoreGraphics.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		BC1A0A7195984C73A84C908B /* BleManager.xcodeproj */ = {isa = PBXFileReference; name = "BleManager.xcodeproj"; path = "../node_modules/react-native-ble-manager/ios/BleManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		408E516BBB3F4BE9AEA5BE3D /* libBleManager.a */ = {isa = PBXFileReference; name = "libBleManager.a"; path = "libBleManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +427,24 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				01731B53DBDA4F998DC2AB6A /* libRNGestureHandler.a in Frameworks */,
 				FE094258D77045FDB96EB78F /* libRNCWebView.a in Frameworks */,
+				C246D47659284F7CBE21548F /* libRNAudio.a in Frameworks */,
+				B143C3FD342945FAA02AD45B /* libRNCamera.a in Frameworks */,
+				5C9C01A19AE046C28E5484B4 /* libRNImagePicker.a in Frameworks */,
+				D2DC926633644F3FAE178924 /* libRNSound.a in Frameworks */,
+				AF06B757E38E44D8944FBCCE /* libRCTJCoreModule.a in Frameworks */,
+				CCF49A245D374AD98B4A7AFF /* libRCTJPushModule.a in Frameworks */,
+				0586597732C24F41863CF13E /* libz.tbd in Frameworks */,
+				EF55F89BCB724B54AE060C84 /* UserNotifications.framework in Frameworks */,
+				07B0AD82981446F597B8E006 /* CoreTelephony.framework in Frameworks */,
+				3690972D5ED54B9F869CB7B6 /* Security.framework in Frameworks */,
+				D0A4CAF7B6064FF29ED0BB8F /* CFNetwork.framework in Frameworks */,
+				EE408923FFC54551B0418302 /* CoreFoundation.framework in Frameworks */,
+				94C92914AB0F44E2B7D5F6EC /* SystemConfiguration.framework in Frameworks */,
+				70D0FD9874FC4783A1073888 /* Foundation.framework in Frameworks */,
+				DC929F99069B44FC956C356B /* UIKit.framework in Frameworks */,
+				10F7CFD12DCE4EAAB50CBEE4 /* libresolv.tbd in Frameworks */,
+				0DD9D75779A74E4CA6405D03 /* CoreGraphics.framework in Frameworks */,
+				7E413B7E13BB4180A3563734 /* libBleManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,6 +598,17 @@
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				2D16E6891FA4F8E400B85C8A /* libReact.a */,
+				B2D3C270E7BC429E8289C663 /* libz.tbd */,
+				1371BD2C43444755A594270E /* UserNotifications.framework */,
+				CE2F157B4B5A43E2A8286DB1 /* CoreTelephony.framework */,
+				AFE6853B3E4241DDBC47C702 /* Security.framework */,
+				011A8A94D83042B19F874C4A /* CFNetwork.framework */,
+				8325969744F64153B2A79C69 /* CoreFoundation.framework */,
+				32B446C5DD7546EC986D4617 /* SystemConfiguration.framework */,
+				8782CBFDE9B942F1A63BAD49 /* Foundation.framework */,
+				AE2526FBD84842A980C73ECA /* UIKit.framework */,
+				1B19174C29524CDD8E18776F /* libresolv.tbd */,
+				8C3021DE06F0432EB2464CB7 /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -576,6 +648,13 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				825A6ACB85344471AEBD55F5 /* RNGestureHandler.xcodeproj */,
 				DD395108996C4A72802BFA00 /* RNCWebView.xcodeproj */,
+				17AFC16262A445F2B68784BD /* RNAudio.xcodeproj */,
+				2F130E6C8F6F4D08AA4E271F /* RNCamera.xcodeproj */,
+				88961C19EAC64D87B59FCBB2 /* RNImagePicker.xcodeproj */,
+				49406749C6A84608A0AA8D3A /* RNSound.xcodeproj */,
+				1EAE22085B9E4F69BD4DAFA4 /* RCTJCoreModule.xcodeproj */,
+				1C47FEC87D334AF5B7800462 /* RCTJPushModule.xcodeproj */,
+				BC1A0A7195984C73A84C908B /* BleManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1206,11 +1285,25 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-audio\ios",
+					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-sound\RNSound",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
+					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 				);
 			};
 			name = Debug;
@@ -1235,11 +1328,25 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-audio\ios",
+					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-sound\RNSound",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
+					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 				);
 			};
 			name = Release;
@@ -1264,6 +1371,13 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-audio\ios",
+					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-sound\RNSound",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
+					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 				);
 			};
 			name = Debug;
@@ -1287,6 +1401,13 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-audio\ios",
+					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-sound\RNSound",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
+					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 				);
 			};
 			name = Release;
@@ -1319,11 +1440,25 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-audio\ios",
+					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-sound\RNSound",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
+					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 				);
 			};
 			name = Debug;
@@ -1356,11 +1491,25 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-audio\ios",
+					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-sound\RNSound",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
+					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 				);
 			};
 			name = Release;
@@ -1392,11 +1541,25 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-audio\ios",
+					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-sound\RNSound",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
+					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 				);
 			};
 			name = Debug;
@@ -1428,11 +1591,25 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-audio\ios",
+					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-sound\RNSound",
+					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
+					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
+					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
 				);
 			};
 			name = Release;

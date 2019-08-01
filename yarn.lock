@@ -993,7 +993,7 @@ ansi-cyan@^0.1.1:
   dependencies:
     ansi-wrap "0.1.0"
 
-ansi-escapes@^3.0.0:
+ansi-escapes@^3.0.0, ansi-escapes@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/ansi-escapes/-/ansi-escapes-3.2.0.tgz#8780b98ff9dbf5638152d1f1fe5c1d7b4442976b"
   integrity sha512-cBhpre4ma+U0T1oM5fXg7Dy1Jw7zzwv7lt/GoCpr+hDQJoYnKVPLL4dCvSEFMmQurOQvSrwT7SL/DAlhBI97RQ==
@@ -1645,6 +1645,11 @@ chardet@^0.4.0:
   resolved "https://registry.npmjs.org/chardet/-/chardet-0.4.2.tgz#b5473b33dc97c424e5d98dc87d55d4d8a29c8bf2"
   integrity sha1-tUc7M9yXxCTl2Y3IfVXU2KKci/I=
 
+chardet@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmjs.org/chardet/-/chardet-0.7.0.tgz#90094849f0937f2eedc2425d0d28a9e5f0cbad9e"
+  integrity sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==
+
 chownr@^1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/chownr/-/chownr-1.1.1.tgz#54726b8b8fff4df053c42187e801fb4412df1494"
@@ -1813,6 +1818,11 @@ convert-source-map@^1.1.0, convert-source-map@^1.4.0, convert-source-map@^1.5.1:
   integrity sha512-eFu7XigvxdZ1ETfbgPBohgyQ/Z++C0eEhTor0qRwBw9unw+L0/6V8wkSuGgzdThkiS5lSpdptOQPD8Ak40a+7A==
   dependencies:
     safe-buffer "~5.1.1"
+
+convert-string@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.npmjs.org/convert-string/-/convert-string-0.1.0.tgz#79ce41a9bb0d03bcf72cdc6a8f3c56fbbc64410a"
+  integrity sha1-ec5BqbsNA7z3LNxqjzxW+7xkQQo=
 
 copy-descriptor@^0.1.0:
   version "0.1.1"
@@ -2288,6 +2298,15 @@ external-editor@^2.0.4:
   dependencies:
     chardet "^0.4.0"
     iconv-lite "^0.4.17"
+    tmp "^0.0.33"
+
+external-editor@^3.0.3:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/external-editor/-/external-editor-3.1.0.tgz#cb03f740befae03ea4d283caed2741a83f335495"
+  integrity sha512-hMQ4CX1p1izmuLYyZqLMO/qGNw10wSv9QDCPfzXfyFrOaCSSoRfqE1Kf1s5an66J5JZC62NewG+mK49jOCtQew==
+  dependencies:
+    chardet "^0.7.0"
+    iconv-lite "^0.4.24"
     tmp "^0.0.33"
 
 extglob@^0.3.1:
@@ -2803,7 +2822,7 @@ http-signature@~1.2.0:
     jsprim "^1.2.2"
     sshpk "^1.7.0"
 
-iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
+iconv-lite@0.4.24, iconv-lite@^0.4.17, iconv-lite@^0.4.24, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
   version "0.4.24"
   resolved "https://registry.npmjs.org/iconv-lite/-/iconv-lite-0.4.24.tgz#2022b4b25fbddc21d2f524974a474aafe733908b"
   integrity sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==
@@ -2860,6 +2879,25 @@ ini@~1.3.0:
   version "1.3.5"
   resolved "https://registry.npmjs.org/ini/-/ini-1.3.5.tgz#eee25f56db1c9ec6085e0c22778083f596abf927"
   integrity sha512-RZY5huIKCMRWDUqZlEi72f/lmXKMvuszcMBduliQ3nnWbx9X/ZBQO7DijMEYS9EhHBb2qacRUMtC7svLwe0lcw==
+
+inquirer@*:
+  version "6.5.0"
+  resolved "https://registry.npmjs.org/inquirer/-/inquirer-6.5.0.tgz#2303317efc9a4ea7ec2e2df6f86569b734accf42"
+  integrity sha512-scfHejeG/lVZSpvCXpsB4j/wQNPM5JC8kiElOI0OUTwmc1RTpXr4H32/HOlQHcZiYl2z2VElwuCVDRG8vFmbnA==
+  dependencies:
+    ansi-escapes "^3.2.0"
+    chalk "^2.4.2"
+    cli-cursor "^2.1.0"
+    cli-width "^2.0.0"
+    external-editor "^3.0.3"
+    figures "^2.0.0"
+    lodash "^4.17.12"
+    mute-stream "0.0.7"
+    run-async "^2.2.0"
+    rxjs "^6.4.0"
+    string-width "^2.1.0"
+    strip-ansi "^5.1.0"
+    through "^2.3.6"
 
 inquirer@^3.0.6:
   version "3.3.0"
@@ -3200,6 +3238,11 @@ istanbul-reports@^2.1.1:
   integrity sha512-SKi4rnMyLBKe0Jy2uUdx28h8oG7ph2PPuQPvIAh31d+Ci+lSiEu4C+h3oBPuJ9+mPKhOyW0M8gY4U5NM1WLeXA==
   dependencies:
     handlebars "^4.1.2"
+
+jcore-react-native@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/jcore-react-native/-/jcore-react-native-1.3.2.tgz#478cee8d6f488ded4bc69e9f3f4c7100753afcee"
+  integrity sha512-zQtv5Y505b+bBGGIaF6VQD1KtcZpqSrLxXPcdEh4eEPhBOuqV6bUA8OwQOZj2BFFJaHfVRSX/JnVM9JHvwQUdw==
 
 jest-changed-files@^24.8.0:
   version "24.8.0"
@@ -3578,6 +3621,14 @@ jest@^24.8.0:
     import-local "^2.0.0"
     jest-cli "^24.8.0"
 
+jpush-react-native@^2.5.3:
+  version "2.5.3"
+  resolved "https://registry.npmjs.org/jpush-react-native/-/jpush-react-native-2.5.3.tgz#21cd25ba5e40e543deb4240a97a119e9ffd7ba3e"
+  integrity sha512-3aJUzvJx7HFxAIjJHoE+GgjoOD0K7cCjSdMsZNB8VGBNrCVvcmzsh0EPJi3kCYeSpsTP9O+OJ9pNj7OuJpH8yQ==
+  dependencies:
+    inquirer "*"
+    mpatch "^0.1.0"
+
 js-md5@^0.7.3:
   version "0.7.3"
   resolved "https://registry.npmjs.org/js-md5/-/js-md5-0.7.3.tgz#b4f2fbb0b327455f598d6727e38ec272cd09c3f2"
@@ -3859,6 +3910,11 @@ lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.11"
   resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+
+lodash@^4.17.12:
+  version "4.17.14"
+  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
+  integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
 
 loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.3.1, loose-envify@^1.4.0:
   version "1.4.0"
@@ -4404,6 +4460,13 @@ morgan@^1.9.0:
     depd "~1.1.2"
     on-finished "~2.3.0"
     on-headers "~1.0.1"
+
+mpatch@^0.1.0:
+  version "0.1.2"
+  resolved "https://registry.npmjs.org/mpatch/-/mpatch-0.1.2.tgz#2b3f89b5b33118d54b9fe9b4a9cfb322842cedae"
+  integrity sha1-Kz+JtbMxGNVLn+m0qc+zIoQs7a4=
+  dependencies:
+    glob "^7.1.2"
 
 ms@2.0.0:
   version "2.0.0"
@@ -5136,10 +5199,22 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.npmjs.org/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-animatable@^1.3.1:
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/react-native-animatable/-/react-native-animatable-1.3.2.tgz#4783ee1a73dc98815aef234ce6b819f80bfe7d80"
+  integrity sha512-rmah3KQ63ft8DxkzFUwJSuZeq+oSYwldoGF4DTOR5WM2WR5wiWLgBAtrAHlI3Di3by323uOR21s+MlqPcHz2Kw==
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-audio@^4.3.0:
   version "4.3.0"
   resolved "https://registry.npmjs.org/react-native-audio/-/react-native-audio-4.3.0.tgz#fae22b81f6a4dda706fd4837d0c6a89c66cf2e7e"
   integrity sha512-QQYq28eSJy+y/Ukvry0AkbwMVELAj+LcEwCVRH+7sKLqlnoBBxGd4ilhgJHjwOiC70192LueGbjXJjPPEwW3iA==
+
+react-native-ble-manager@^6.6.8:
+  version "6.6.8"
+  resolved "https://registry.npmjs.org/react-native-ble-manager/-/react-native-ble-manager-6.6.8.tgz#bc85406f9aad0f539c7c7416ae19354c45572f70"
+  integrity sha512-wAQbqTHFcc/n3IUZ0V4jNHdzeLQ6qBD3COtSgB4EISexLhdUObLZQBotPWK2c7zFuqm7eNCZKuAWcv+WXu+EiQ==
 
 react-native-camera@^2.11.0:
   version "2.11.0"
@@ -5148,6 +5223,11 @@ react-native-camera@^2.11.0:
   dependencies:
     prop-types "^15.6.2"
 
+react-native-carousel-pager@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.npmjs.org/react-native-carousel-pager/-/react-native-carousel-pager-1.5.0.tgz#d1bcffbea0ad2153098c1077fa24477e8b67f12a"
+  integrity sha512-tijpGdXFA/DZHxtBTbVUxRJy+oklU4BuBE+CgrwUGDrhYsVm1nSTh6h4VBJCtMPw3gTgcXtt63PK08Os6tmA3g==
+
 react-native-datepicker@^1.7.2:
   version "1.7.2"
   resolved "https://registry.npmjs.org/react-native-datepicker/-/react-native-datepicker-1.7.2.tgz#58d0822591a0ac9b32aba082650222a0ee29669d"
@@ -5155,10 +5235,10 @@ react-native-datepicker@^1.7.2:
   dependencies:
     moment "^2.22.0"
 
-react-native-freedomen@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/react-native-freedomen/-/react-native-freedomen-0.2.1.tgz#0974b65d4d2877984c24813599f09090f1b39059"
-  integrity sha512-ACG0O8rDL0jkgJvmKhWr4g4Q1sFur7aiLinqbyVX3Fs/upiL41/Uw1w29NVUSrlvu1RiPM3AG1ZgwOYblxmSZw==
+react-native-freedomen@^0.2.8:
+  version "0.2.8"
+  resolved "https://registry.npmjs.org/react-native-freedomen/-/react-native-freedomen-0.2.8.tgz#7ddd05a609261287d550b6c0df536005b78b7f0d"
+  integrity sha512-n7B+eueHnn3rsKl7mGon8Q8AaGZImZIkDOr+2QRD62ltSaZoP4IfOHv+KKG9veuFKY38zX14UAToQ0iumtaN8A==
   dependencies:
     react-native-datepicker "^1.7.2"
     react-native-progress "^3.6.0"
@@ -5191,6 +5271,14 @@ react-native-image-zoom-viewer@^2.2.26:
   integrity sha512-Mh4+CJQCDcAumLFXLlDk8nQ5iMxNnupc9HwktsZ3I/v4HULcFPmTLDQ0HGAxjLa5foZRPnKDN06iKGsEb9raoA==
   dependencies:
     react-native-image-pan-zoom "^2.1.9"
+
+react-native-modal@^11.3.0:
+  version "11.3.0"
+  resolved "https://registry.npmjs.org/react-native-modal/-/react-native-modal-11.3.0.tgz#b80406025dd0af06e6ce5e007981ab2f4a6b2ae7"
+  integrity sha512-574hg0dF/gKY0jICg+D4j10F4fKQR8/u88DcVx82LU9QkuYokHr5Rn4E+BoaOUNf3BdNi1z9vzItMQEZa3M8rQ==
+  dependencies:
+    prop-types "^15.6.2"
+    react-native-animatable "^1.3.1"
 
 react-native-permissions@^1.1.1:
   version "1.1.1"
@@ -5292,10 +5380,10 @@ react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
   dependencies:
     prop-types "^15.6.1"
 
-react-native-webview@^5.12.0:
-  version "5.12.0"
-  resolved "https://registry.npmjs.org/react-native-webview/-/react-native-webview-5.12.0.tgz#e673f72a287829444ddcbc7ea2f28f2e5862f9fb"
-  integrity sha512-tdKBRgxq/DP6kg/B3tYoqmWiARY2BKTqbjFHJ8vH7TcThaPprlyWJyHuO54FfrS9dnPpU2H4C5i3btJvvy2OVQ==
+react-native-webview@^5.12.1:
+  version "5.12.1"
+  resolved "https://registry.npmjs.org/react-native-webview/-/react-native-webview-5.12.1.tgz#5e2b124e9087d64fc40040d911c10ee5744b5d4d"
+  integrity sha512-pFYzyNUG+k7Jk2a0Z3S1+OL9qtp0VQxVP08d1ume/O6l1Xibi0K0hRZms7zPUHqQc2uWEfjZ0FOa17MIN7vruw==
   dependencies:
     escape-string-regexp "1.0.5"
     invariant "2.2.4"
@@ -5721,6 +5809,13 @@ rx-lite@*, rx-lite@^4.0.8:
   version "4.0.8"
   resolved "https://registry.npmjs.org/rx-lite/-/rx-lite-4.0.8.tgz#0b1e11af8bc44836f04a6407e92da42467b79444"
   integrity sha1-Cx4Rr4vESDbwSmQH6S2kJGe3lEQ=
+
+rxjs@^6.4.0:
+  version "6.5.2"
+  resolved "https://registry.npmjs.org/rxjs/-/rxjs-6.5.2.tgz#2e35ce815cd46d84d02a209fb4e5921e051dbec7"
+  integrity sha512-HUb7j3kvb7p7eCUHE3FqjoDsC1xfZQ4AHFWfTKSpZ+sAhhz5X1WX0ZuUqWbzB2QhSLp3DoLUG+hMdEDKqWo2Zg==
+  dependencies:
+    tslib "^1.9.0"
 
 safe-buffer@5.1.2, safe-buffer@^5.0.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
@@ -6149,7 +6244,7 @@ strip-ansi@^4.0.0:
   dependencies:
     ansi-regex "^3.0.0"
 
-strip-ansi@^5.0.0:
+strip-ansi@^5.0.0, strip-ansi@^5.1.0:
   version "5.2.0"
   resolved "https://registry.npmjs.org/strip-ansi/-/strip-ansi-5.2.0.tgz#8c9a536feb6afc962bdfa5b104a5091c1ad9c0ae"
   integrity sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==
@@ -6328,6 +6423,11 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.npmjs.org/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
+
+tslib@^1.9.0:
+  version "1.10.0"
+  resolved "https://registry.npmjs.org/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
+  integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
 
 tunnel-agent@^0.6.0:
   version "0.6.0"

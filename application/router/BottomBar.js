@@ -91,7 +91,7 @@ class TabBarItem extends PureComponent{
         let item = tabItems[index];
         let image = focused ? item.activeIcon : item.inactiveIcon;
         let color = focused ? '#2EBBC4' : '#979797';  
-        let iconWidth =  index == 2 ? 48 : 22
+        let iconWidth =  index == 2 ? 52 : 22
         
         return (
             <TouchableWithoutFeedback style={styles.iconView} onPress={() => jumpToIndex(index)}>
@@ -111,6 +111,7 @@ class TabBarItem extends PureComponent{
                             width: iconWidth,
                             height: iconWidth,
                             resizeMode: 'stretch',  
+                            marginTop: index == 2 ? -25 : 0
                         }}/> 
                 }
                 {
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         height: 52,
-        backgroundColor: '#fff',
+        backgroundColor: '#fff', 
     },
     iconView: {
         flex: 1,

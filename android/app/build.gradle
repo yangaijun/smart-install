@@ -107,6 +107,11 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        manifestPlaceholders = [
+                JPUSH_APPKEY: "944541bdc12092312cb99b0d",
+                APP_CHANNEL : "default"
+        ]
+
     }
     splits {
         abi {
@@ -137,7 +142,13 @@ android {
     }
 }
 
-dependencies {
+dependencies { 
+    implementation project(':react-native-ble-manager')
+    implementation project(':jcore-react-native')
+    implementation project(':jpush-react-native')
+    implementation project(':react-native-sound')
+    implementation project(':react-native-image-picker')
+    implementation project(':react-native-audio')
     implementation project(':react-native-webview')
     implementation project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])

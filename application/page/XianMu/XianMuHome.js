@@ -29,9 +29,9 @@ export default  class  extends React.Component {
                                 key={key}
                                 data={el}
                                 event={params => { 
-                                    if (params.value.label == '物资')
+                                    if (params.value.row.label == '物资')
                                         this.props.navigation.navigate('WuZiGuanLi')
-                                    else if (params.value.label == '实测实量')
+                                    else if (params.value.row.label == '实测实量')
                                         this.props.navigation.navigate('WoDeRenWu')
                                 }}
                                 columns={ columns.YinYon }

@@ -10,78 +10,155 @@
         <canvas id='canvas_image'></canvas>
         <canvas id='canvas_point' style="position: absolute; left: 0; top: 0"></canvas>
 	</div>
-    <script>
-        start('http://img1.imgtn.bdimg.com/it/u=338326248,1383158485&fm=26&gp=0.jpg')
+    <script> 
+        //指令 
+		//{ key: 'drawPic', pic: '', p}
+		//{ key: 'drawPoints', value: [{},{}]} 
+		//{ key: 'drawSelect', value: {}} //重画 select point
+		//{ key: 'drawAppend', value: {}}
+		//{ key: 'drawOne' }
+		
+        // document.addEventListener('message', function(msg) { 
+            
+        //     var instruction = JSON.parse(msg.data)
 
-        var drawPointFlag = true
-        var pointList = []
+        //     switch (instruction.key) {
+        //         case 'drawPic': 
+        //             drawPic(instruction.value)
+        //             break
+        //         case 'drawPoints': 
+        //             drawPoints(instruction.value) 
+        //             break
+        //         case 'drawSelect':
+        //             drawSelect(instruction.value)
+        //             break
+        //         case 'drawAppend': 
+        //             drawAppend(instruction.value)
+        //             break
+        //         case 'drawOne':
+        //             drawOne()
+        //             break
+        //     } 
+        // });  
+  
         var rangeX = rangeY = 15
+        // start('https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1179289982,1144911896&fm=26&gp=0.jpg', false, [{x: 15, y: 15}, {x: 15, y: 22}, {x: 55, y: 105}])
 
-        function start(url) { 
+        function drawPic(url) {
             var canvas_image = document.getElementById('canvas_image')
             var canvas_point = document.getElementById('canvas_point')
-
             var ctx = canvas_image.getContext("2d");
-            let img = new Image()
+            var img = new Image()
             img.src = url 
             img.onload = function(e) {  
 
-                let newHeight =  window.screen.width / img.width * img.height 
+                var newHeight =  window.screen.width / img.width * img.height 
                 canvas_point.width = canvas_image.width =  window.screen.width
                 canvas_point.height = canvas_image.height =  newHeight
 
                 ctx.drawImage(img, 0, 0, canvas_image.width, newHeight)
+                window.postMessage('drawPicOver')
             }
 
+        }
+
+        function drawPoints(list) {
+            draw(list)
+            var canvas_point = document.getElementById('canvas_point')
             canvas_point.addEventListener('click', function(e) { 
-                if (drawPointFlag) {
-                    let point = {
-                        x: e.pageX,
-                        y: e.pageY
-                    } 
-                    draw([point])
-                    window.postMessage(JSON.stringify(point))
-
+                var _ins = []
+                for(var p of list) {
+                    if (p.x - rangeX < e.pageX && p.x + rangeX > e.pageX && p.y - rangeY < e.pageY && p.y + rangeY > e.pageY)
+                        _ins.push(p)
                 }
-                if (pointList.length) {
-                    let _ins = []
-                    for(let p of pointList) {
-                        if (p.x - rangeX < e.pageX && p.x + rangeX > e.pageX && p.y - rangeY < e.pageY && p.y + rangeY > e.pageY)
-                            _ins.push(p)
-                    }
 
-                    if (_ins.length) {
-                        window.postMessage(JSON.stringify(_ins))
-                    }
-                } 
+                if (_ins.length) { 
+                    window.postMessage(JSON.stringify(_ins))
+                }
             })
         }
-        function draw(points = []) {
+
+        function drawSelect(point) {
+            draw([point], 'q.png', false)
+        }
+
+        function drawAppend(point) {
+            draw([point], 'q.png', false)
+        }
+
+        function drawOne() {
+            var canvas_point = document.getElementById('canvas_point')
+            canvas_point.addEventListener('click', function(e) { 
+                var point = {
+                    x: e.pageX,
+                    y: e.pageY
+                } 
+                draw([point])
+                window.postMessage(JSON.stringify(point))
+            })
+        }
+
+        // function start(url, dp = false, list = []) { 
+		// 	drawPointFlag = dp
+        //     pointList = list
+
+        //     var canvas_image = document.getElementById('canvas_image')
+        //     var canvas_point = document.getElementById('canvas_point')
+
+        //     var ctx = canvas_image.getContext("2d");
+        //     var img = new Image()
+        //     img.src = url 
+        //     img.onload = function(e) {  
+
+        //         var newHeight =  window.screen.width / img.width * img.height 
+        //         canvas_point.width = canvas_image.width =  window.screen.width
+        //         canvas_point.height = canvas_image.height =  newHeight
+
+        //         ctx.drawImage(img, 0, 0, canvas_image.width, newHeight)
+
+        //         if (pointList.length) {
+        //             draw(pointList)
+        //         }
+        //     }
+
+        //     canvas_point.addEventListener('click', function(e) { 
+        //         if (drawPointFlag) {
+        //             var point = {
+        //                 x: e.pageX,
+        //                 y: e.pageY
+        //             } 
+        //             draw([point])
+        //             window.postMessage(JSON.stringify(point))
+
+        //         }
+        //         if (pointList.length) {
+        //             var _ins = []
+        //             for(var p of pointList) {
+        //                 if (p.x - rangeX < e.pageX && p.x + rangeX > e.pageX && p.y - rangeY < e.pageY && p.y + rangeY > e.pageY)
+        //                     _ins.push(p)
+        //             }
+
+        //             if (_ins.length) {
+        //                 alert(JSON.stringify(_ins))
+        //                 window.postMessage(JSON.stringify(_ins))
+        //             }
+        //         } 
+        //     })
+        // }
+		
+        function draw(points = [], imgUrl = 'ok.png', clear = true) {
             var canvas_point = document.getElementById('canvas_point')
             var ctx = canvas_point.getContext("2d");
-
-            ctx.clearRect(0, 0, canvas_point.width, canvas_point.height);  
-            ctx.fillStyle="#ff0000";  
-            for(let point of points) {
-                ctx.fillRect(point.x, point.y, 15, 15);
-            }
-        }
-		
-        window.onload = function() {
-            //指令： {key: 'drawPoint', value: true} , {key: 'boomPoint', value: []}
-			window.postMessage('load over')
-			
-            document.addEventListener('message', function(msg) {
-                let instruction = JSON.parse(msg.data)
-
-                if (instruction.key == 'drawPoint') {
-                    drawPointFlag = instruction.value
-                } else if (instruction.key == 'boomPoint') {
-                    pointList = instruction.value
-                    draw(pointList)
+            if (clear)
+                ctx.clearRect(0, 0, canvas_point.width, canvas_point.height);  
+            var img = new Image()
+            img.src = imgUrl
+            img.onload = function(e) { 
+                for(var point of points) { 
+                    ctx.drawImage(img, point.x - 12, point.y - 20, 25, 25)
                 }
-            });
-        }
+            }
+        } 
     </script>
 </body>
 </html>

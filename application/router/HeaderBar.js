@@ -29,7 +29,8 @@ export default  class  extends React.Component {
         }
         let data = {
             label: ds[navigation.state.index],
-            st: navigation.state.index == 1 ? '设置' : ''
+            st: navigation.state.index == 1,
+            sd: navigation.state.index == 4
         }
         return data
     }
@@ -42,16 +43,19 @@ export default  class  extends React.Component {
                             this.slideLeftPop.show()
                         else if (params.prop == 'setting')
                             this.slideRightPop.show()
+                        else if (params.prop == 'jifen')
+                            this.props.navigation.push('XX_JiFen')
                     }}
                     data={this.state.data}
                     columns={[
                         {type: 'button-image', prop: 'header', value: require('../assets/image_header.png'), style: {width: 42, height: 42, borderRadius: 42}},
-                        {type: 'text-h1', prop: 'label', value:'', style: {flex: 1, paddingLeft: 15}},
-                        {type: 'button-image', value: require('../assets/saoma.png'), style: {height: 28, width: 28, marginLR: 12}},
+                        {type: 'text-h1', prop: 'label', value:'', style: {flex: 1, paddingLeft: 15, fontWeight: 'bold'}},
+                        {type: 'button-image', value: require('../assets/saoma.png'), load: (value, data) => !data.sd, style: {height: 28, width: 28, marginLR: 12}},
+                        {type: 'button-image', prop: 'jifen', value: require('../assets/xx_jifen.png'), load: (value, data) => data.sd,  style: {height: 28, width: 28, marginLR: 12}},
                         {type: 'button-image', value: require('../assets/xiaoxi.png'), style: {height: 28, width: 28}},
                         {type: 'text-badge', value: 8, load: value => value, style: {marginLeft: -10, marginTop: -20}},
                         {type: 'button-image', prop: 'setting', value: require('../assets/setting.png'), load: (value, data) => data.st,  style: {height: 28, width: 28}},
-                        {type: 'br-row'}
+                        {type: 'br-row', style: {paddingTB: 5}}
                     ]}
                 />
                 <Freedomen.SlidePop ref={ref => {this.slideLeftPop = ref}} style={{right: '15'}}>
@@ -63,6 +67,9 @@ export default  class  extends React.Component {
                 <Freedomen.SlidePop ref={ref => {this.slideRightPop = ref}} style={{left: '15'}}>
                     <Freedomen.Region 
                         style={{flex: 1}} 
+                        event={params => {
+                            console.log(params)
+                        }}
                         data={{list: datas.YinYon}}
                         columns={columns.SheZhi}
                     />

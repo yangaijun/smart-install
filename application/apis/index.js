@@ -1,18 +1,13 @@
-import axios from './config' 
+import config from './config'   
 class Api {
     get(url, params) {  
-        return axios.get(url, { params: params })  
+        return config.axios.get(url, { params: params })  
     }
     post(url, params) { 
-        return axios.post(url, params) 
+        return config.axios.post(url, params) 
     }
-    upload(formData) {
-        return axios.axiosOur({
-            url:'/User/upload',
-            method:'post',
-            data: formData,
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        })
+    postForm(url, formData) { 
+        return config.postForm(url, formData)
     } 
 }
  
