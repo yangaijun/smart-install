@@ -56,16 +56,12 @@ export default  class  extends React.Component {
                     columns={[
                         [
                             [
-                                {type: 'text-h3', value: '格林小镇', style: {flex: 1}},
-                                {type: 'text', prop: 'status', value: 1, filter: {1: '待指派', 2: '进行中', 3: '审核中', 4: '已完成'}, style: (value) => {
+                                {type: 'text-h4', value: '格林小镇', style: {flex: 1}},
+                                {type: 'text-status', prop: 'status', value: 1, filter: {1: '待指派', 2: '进行中', 3: '审核中', 4: '已完成'}, style: (value) => {
                                     let bgColor = {1: '#FF6D73', 2: '#FAB722', 3: '#00CC9B', 4: '#999999'}[value]
                                     return {
-                                        color: 'white', 
                                         backgroundColor: bgColor, 
-                                        borderRadius: 16,
-                                        paddingTB: 3,
-                                        paddingLR: 8,
-                                        marginLR: 10
+                                        marginLR: 8
                                     }
                                 }},
                                 {type: 'text', value: '不通过'},

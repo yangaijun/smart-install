@@ -37,7 +37,7 @@ export default  class  extends React.Component {
                 columns={[
                     Search,
                     [ 
-                        {type: 'tags', value: '处罚单', options: '处罚单,奖励单', style: {borderWidth: 0, color: '#191919', flex: 1, borderRadius: 22, height: 40}},
+                        {type: 'tags-tab', value: '处罚单', prop: 'dm', options: '处罚单,奖励单'},
                         {type: 'br-row', style: {marginBottom: 1, align: 'center', marginTop: 10, borderTopColor:　'#f5f5f5', borderTopWidth: 1}}
                     ]
                 ]}

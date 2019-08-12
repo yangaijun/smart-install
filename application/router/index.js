@@ -13,11 +13,8 @@ import XianMu from '../home/XianMu'
 import YinYong from '../home/YinYong'
 
 import ZiXun from '../page/ZiXun'
-
-import GonZuoHome from '../page/GonZuo/GonZuoHome'
 import ZhiLianJianCha from '../page/GonZuo/ZhiLianJianCha'
 import ZhiLianZhenGai from '../page/GonZuo/ZhiLianZhenGai'
-import GonZuoXinJian from '../page/GonZuo/GonZuoXinJian'
 
 import SC_JinXinZhon from '../page/ShiCeShiLian/SC_JinXinZhon'
 import SC_YanShou from '../page/ShiCeShiLian/SC_YanShou'
@@ -33,14 +30,16 @@ import TonJi from '../page/ShiCeShiLian/TonJi'
 import ZhenGaiRen from '../page/ShiCeShiLian/ZhenGaiRen'
 
 import XianMuHome from '../page/XianMu/XianMuHome'
-import WuZiGuanLi from '../page/XianMu/WuZiGuanLi'
-import RuKu from '../page/XianMu/RuKu'
-import XinJianWuZi from '../page/XianMu/XinJianWuZi'
 
+import ShiGonRiZhi_Page from '../page/ShiGonRiZhi'
+import GonZuo_Page from '../page/GonZuo'
 import RiZhouYueBao_Page from  '../page/RiZhouYueBao'
 import WuZi_Page from '../page/WuZi'
 import ZhiLianAnQuan_Page from '../page/ZhiLianAnQuan'
 import XueXi_Page from '../page/XueXi'
+import JiGon_Page from '../page/JiGon'
+import JiXie_Page from '../page/JiXie'
+import WenJian_Page from '../page/WenJian';
 
 const Home = createBottomTabNavigator({
     GonZuoTai: GonZuoTai,
@@ -82,19 +81,18 @@ const AppNavigator = createStackNavigator({
     ZhenGaiRen: ZhenGaiRen,
     SC_ZhiPai: SC_ZhiPai,
     XinZen:XinZen,
-    // XianMuHome: XianMuHome,
-    // WuZiGuanLi: WuZiGuanLi,
-    // RuKu: RuKu,
-    // XinJianWuZi: XinJianWuZi,
     SC_JinXinZhon: SC_JinXinZhon,
     SC_YanShou: SC_YanShou,
     ZiXun: ZiXun,
     BaoDianQinDan: BaoDianQinDan,
-    GonZuoHome: GonZuoHome,
     ZhiLianJianCha: ZhiLianJianCha,
     ZhiLianZhenGai: ZhiLianZhenGai,
-    GonZuoXinJian: GonZuoXinJian,
-    
+    XianMuHome: XianMuHome,
+
+    //施工日志
+    ...ShiGonRiZhi_Page,
+    //工作
+    ...GonZuo_Page,
     //日报 周报 月报
     ...RiZhouYueBao_Page,
     //物资
@@ -102,7 +100,13 @@ const AppNavigator = createStackNavigator({
     //质量安全
     ...ZhiLianAnQuan_Page,
     //学习模块
-    ...XueXi_Page
+    ...XueXi_Page,
+    //记工
+    ...JiGon_Page,
+    //机械
+    ...JiXie_Page,
+    //文件
+    ...WenJian_Page
 }, {
     initialRouteName: "Home",
 });

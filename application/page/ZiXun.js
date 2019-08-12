@@ -21,7 +21,6 @@ export default  class  extends React.Component {
     }
     _loadData() {
         Freedomen.global.api.get('api/newsInfo/admin/getNewsInfoList', this.params).then(res => {
-            console.log(res)
             this.setState({list: res})
         })
     }

@@ -21,7 +21,7 @@ export default  class  extends React.Component {
     }
     mkData(navigation) {
         const ds = {
-            0: '首页',
+            0: '工作',
             1: '应用',
             2: '...',
             3: '我的项目',

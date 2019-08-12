@@ -17,10 +17,7 @@ const ZiXunItem = [
 
 export default {
     GeRenZhonXin: [
-        [
-            {type: 'text', value: '个人中心', style: {fontSize: 22, color: 'white', flex: 1}}, 
-            {type:　'br', style: {flexDirection: 'row', height: 62, backgroundColor: '#3C3B40', alignItems: 'center', paddingLR: 24}}
-        ],
+       
         [
             {type: 'image', prop:'userIconUrl', value: require('../assets/image_header.png'), style: {width: 62, height: 62, borderRadius: 62}},
             [
@@ -86,15 +83,15 @@ export default {
     YinYon: [
         // {type: 'scroll', value: [{}], prop: 'list', style: {flex: 1, backgroundColor: 'white'}, columns: [
             [
-                {type: 'text', value:'', style: {height: 20, width: 4, backgroundColor: '#2EBBC4', marginRight: 8,}},
+                {type: 'text', value:'', style: {height: 20, width: 4, backgroundColor: '#2EBBC4', marginRight: 8}},
                 {type: 'text-title', prop: 'title', value: '办公管理'},
                 {type: 'br', style: {flexDirection: 'row', alignItems: 'center', paddingLR: 24, paddingTB: 5, marginTop: 30}}
             ],
             {type: 'views', prop: 'item', value: [{}], style: {flexDirection: 'row', flexWrap: 'wrap'}, columns: [
                 {type: 'image-item', prop: 'icon', value: require('../assets/icon.png')},
-                {type: 'text-badge', prop: 'badge', value: 0, load: value => value, style: {marginTop: -60, marginLeft: 35, marginBottom: 38 }},
+                {type: 'text-badge', prop: 'badge', value: 0, load: value => value, style: {marginTop: -60, marginLeft: 35, marginBottom: 35}},
                 {type: 'text-h4', prop: 'label', value: '公告'},
-                {type: 'click',  style: {align: 'center', width: '25', marginTop: 22}}
+                {type: 'click',  style: {align: 'center', width: '25', marginTop: 16}}
             ]}
         // ]}
     ],
@@ -176,30 +173,42 @@ export default {
     ZiXunItem: ZiXunItem,
     GonZuoItem: [
         [
-            {type: 'text-h3', value: '格林小镇三号底柱质量整改...'},
-            {type: 'text', prop: 'status', value: 1, filter: {'1': '进行中', '2' : '待接受', 3: '审核中'}, style: value => {
-                let bgColor = {'1': '#FAB722', '2': '#FF6D73', '3': '#00CC9B'}[value + '']
+            {type: 'text-h4', value: '格林小镇三号底柱质量整改...', style: {flex: 1}},
+            {type: 'text-status', prop: 'status', value: 1, filter: {'1': '待接受', '2' : '进行中', 3: '审核中', 4: '已完成'}, style: value => {
+                let bgColor = {1: '#FF6D73', 2: '#FAB722', 3: '#00CC9B', 4 : '#999999'}[value]
                 return {
-                    color: 'white', 
                     backgroundColor: bgColor, 
-                    borderRadius: 16,
-                    paddingTB: 3,
-                    paddingLR: 8,
-                    marginLeft: 10
+                    marginLR: 8
                 }
             }},
-            {type: 'text-label', value: '苏州歌林小镇', style: {flex: 1, alignItems: 'flex-end'}},
-            {type: 'br', style: {flexDirection: 'row', alignItems: 'center'}}
+            {type: 'text-label', value: '苏州歌林小镇', style: {alignItems: 'flex-end'}},
+            {type: 'click', style: {flexDirection: 'row', alignItems: 'center'}}
         ], [
             [
                 {type: 'text-label', value: '王二头', filter:  value => `分派人: ${value}`},
-                {type: 'text-primary', value: '质量整改工作  08.08截止'},
+                [
+                    {type: 'text-primary', value: '质量整改工作  08.08截止'},
+                    {type: 'text', prop: 'cd', filter: {1: '紧急', 2: '一般', 3: '重要'}, style: (value) => {
+                        let color = {1: '#FF6D73', 2: '#00CC9B', 3: '#FAB722'}[value]
+                        return {
+                            color: color,
+                            marginLeft: 8
+                        }
+                    }},
+                    {type: 'br-normal-row'}
+                ],
                 {type: 'br', style: {flex: 1}}
             ],
-            {type: 'progress-circle', value: .5, style: {width: 80}},
-            {type: 'br', style: {flexDirection: 'row', alignItems: 'center', paddingTB: 10}}
-        ],   [
-            {type: 'button-az', value: '整改'},
+            {type: 'progress-circle', prop: 'progress', value: .5, style: {width: 50}},
+            {type: 'click', style: {flexDirection: 'row', alignItems: 'center', paddingTB: 10}}
+        ], [
+            {type: 'button-az', value: '任务完成', load: (value, data) => [2].includes(data.status), style: {color: '#878787', borderColor: '#878787'}},
+            {type: 'button-az', value: '进度反馈', load: (value, data) => [2].includes(data.status)},
+            {type: 'button-az', value: '拒绝任务', load: (value, data) => [1].includes(data.status), style: {color: '#878787', borderColor: '#878787'}},
+            {type: 'button-az', value: '接受任务', load: (value, data) => [1].includes(data.status)},
+            {type: 'button-az', value: '催办审核', load: (value, data) => [3].includes(data.status)},
+            {type: 'button-az', value: '审核回复', load: (value, data) => [3].includes(data.status)},
+            {type: 'button-az', value: '删除', load: (value, data) => [4].includes(data.status), style: {color: '#878787', borderColor: '#878787'}},
             {type: 'br-bottoms'}
         ],
         {type: 'br-list-item'}
@@ -253,21 +262,46 @@ export default {
             {type: 'button-image', prop: 'add', value: require('../assets/xianjiade.png'),style: { flex: 1, width: 35, height: 35, borderRadius: 35}},
             {type: 'br', style: {flexDirection: 'row', paddingTB: 5}}
         ], 
-        {type: 'br', style: {backgroundColor: 'white', padding: 15}}
+        {type: 'br', style: {backgroundColor: 'white', padding: 15}}    
     ],
-    SearchBox: [
-        {type: 'image-icon', value: require('../assets/search.png')},
-        {type: 'input-text', prop: 'content', placeholder: '请输入名称、检查人或检查项查询', style: {flex: 1}},
-        {type: 'button-image-icon', prop: '_clear', load: (value, data) => data.content, value: require('../assets/clear.png')},
-        {type: 'br', style: {flexDirection: 'row', paddingLR: 8, backgroundColor: '#f5f5f5', alignItems: 'center', borderRadius: 26}}
+    //施工日志  表格
+    SGRZ_Table: [
+        {type: 'text', value: '天气', style: {flex: 1, align: 'center'}},
+        [
+            {type: 'text-h5', value: '多云 > 阴', style: {padding: 5, paddingTB: 10, align: 'center'}},
+            {type: 'text-h5', value: '晴', style: {padding: 5, paddingTB: 10, borderColor: '#ccc', borderTopWidth: 1, borderBottomWidth: 1, align: 'center'}},
+            {type: 'text-h5', value: '阵雨', style: {padding: 5, paddingTB: 10, align: 'center'}},
+            {type: 'br', style: {flex: 2, borderColor: '#ccc', borderLeftWidth: 1, borderRightWidth: 1}}
+        ],
+        {type: 'text', value: '温度(℃)', style: {flex: 1, align: 'center'}},
+        [
+            {type: 'text-h5', value: '- 5', style: {padding: 5, paddingTB: 10, align: 'center'}},
+            {type: 'text-h5', value: '2', style: {padding: 5, paddingTB: 10, borderColor: '#ccc', borderTopWidth: 1, borderBottomWidth: 1, align: 'center'}},
+            {type: 'text-h5', value: '1', style: {padding: 5, paddingTB: 10, align: 'center'}},
+            {type: 'br', style: {flex: 2, borderColor: '#ccc', borderLeftWidth: 1, borderRightWidth: 1}}
+        ],
+        {type: 'text', value: '风力(级)', style: {flex: 1, align: 'center'}},
+        [
+            {type: 'text-h5', value: '3', style: {padding: 5, paddingTB: 10, align: 'center'}},
+            {type: 'text-h5', value: '2', style: {padding: 5, paddingTB: 10, borderColor: '#ccc', borderTopWidth: 1, borderBottomWidth: 1, align: 'center'}},
+            {type: 'text-h5', value: '4', style: {padding: 5, paddingTB: 10, align: 'center'}},
+            {type: 'br', style: {flex: 2, borderColor: '#ccc', borderLeftWidth: 1}}
+        ],
+        {type: 'br-normal-row', style: {borderColor: '#ccc', borderWidth: 1, backgroundColor: '#f5f5f5', marginLR: 12}}
+    ],
+    CancelAnConfirm: [
+        {type: 'button-text', prop: 'cancel', value: '取消', style: {flex: 1, padding: 15, align: 'center', fontWeight: 'bold', fontSize: 16, color: '#999'}},
+        {type: 'text', style: {height: 50, width: 1, backgroundColor: '#f5f5f5'}},
+        {type: 'button-text-primary', prop: 'confirm', value: '确定', style: {flex: 1, padding: 15, align: 'center', fontWeight: 'bold'}},
+        {type: 'br', style: {flexDirection: 'row', height: 52, marginTop: 25, borderTopWidth: 1, borderTopColor: '#f5f5f5'}}
     ],
     ZA_Search: (placeholder, prop) => {
         return [
-            {type: 'image-icon', value: require('../assets/search.png')},
+            {type: 'image-icon', value: require('../assets/search.png'), style: {marginTB: 3}},
             {type: 'input-text', prop: prop || 'content', placeholder: placeholder || '请输入名称、检查人或检查项查询', style: {flex: 1}},
-            {type: 'button-image-icon', prop: '_clear', load: (value, data) => data[prop || 'content'], value: require('../assets/clear.png')},
-            {type: 'br', style: {flexDirection: 'row', paddingLR: 8, backgroundColor: '#f5f5f5', alignItems: 'center', borderRadius: 26}}
-        ]
+            {type: 'button-image-icon', prop: '_clear', load: (value, data) => data[prop || 'content'], value: require('../assets/clear.png'), style: {marginTB: 3}},
+            {type: 'br', style: {flexDirection: 'row', paddingLR: 8, backgroundColor: '#f5f5f5', alignItems: 'center', borderRadius: 20}}
+        ].slice()
     },
     CK_Search: (placeholder, prop) => { 
         return [
@@ -277,10 +311,76 @@ export default {
             {type: 'br', style: {flexDirection: 'row', paddingLR: 8, backgroundColor: '#f5f5f5', alignItems: 'center', borderRadius: 5, flex: 1}}
         ]
     },
-    CancelAnConfirm:  [
-        {type: 'button-text', prop: 'cancel', value: '取消', style: {flex: 1, padding: 15, align: 'center', fontWeight: 'bold', fontSize: 16, color: '#999'}},
-        {type: 'text', style: {height: 50, width: 1, backgroundColor: '#f5f5f5'}},
-        {type: 'button-text-primary', prop: 'confirm', value: '确定', style: {flex: 1, padding: 15, align: 'center', fontWeight: 'bold'}},
-        {type: 'br', style: {flexDirection: 'row', height: 52, marginTop: 25, borderTopWidth: 1, borderTopColor: '#f5f5f5'}}
+    SGRZ_ShenChanQinKuan: [
+        [
+            {type: 'text-form-label', value: '开始时间'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'pick-date',  prop: 'start', placeholder: '请选择开始时间'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'br-form-row'}
+        ], [
+            {type: 'text-form-label', value: '结束时间'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'pick-date', prop: 'end', placeholder: '请选择结束时间'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'br-form-row'}
+        ], [
+            {type: 'text-form-label', value: '施工部位'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'text',  value: '请选择施工部位'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'click-form-row'}
+        ], [
+            {type: 'text-form-label', value: '施工内容'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'text',  value: '请选择施工内容'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'click-form-row'}
+        ], [
+            {type: 'text-form-label', value: '完成工作量'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'click-form-row'}
+        ]
+    ],
+    JI$_RiLi: [
+        [
+            {type: 'button-image', prop:　'pre', value: require('../assets/left.png'), style: {paddingLR: 45, width: 20, height: 20}},
+            {type: 'text-primary', prop: 'yearMonth', value: '2019年7月', style: {fontSize: 18, fontWeight: '400'}},
+            {type: 'button-image', prop:　'next', value: require('../assets/right.png'), style: {paddingLR: 45, width: 20, height: 20}},
+            {type: 'br-form-row', style: {align: 'center'}}
+        ],
+        //label标题
+        {type: 'views', value: [{label: '一'}, {label: '二'}, {label: '三'}, {label: '四'}, {label: '五'}, {label: '六'}, {label: '日'}], style: {flexDirection: 'row', height: 38, backgroundColor: 'white', align: 'center'}, columns: [
+            {type: 'text-primary', prop: 'label', style: {fontSize: 16, fontWeight: '500'}},
+            {type: 'br', style: {width: '14.28', align: 'center'}}
+        ]}, 
+        //内容
+        {type: 'views', prop: 'days', value: [], style: {flexDirection: 'row', flexWrap: 'wrap', backgroundColor: 'white', marginBottom: 2}, columns: [
+            {type: 'text-h5', prop: 'label'},
+            [
+                {type: 'text-circle', style: {backgroundColor: '#2EBBC4'}, load: (value, data) =>  data.record},
+                {type: 'image', value: require('../assets/tianjia.png'), style: {width: 14, height: 14}},
+                {type: 'br-normal-row', load: (value, data) =>  data.label && data.label < 12}
+            ],
+            {type: 'click', prop: 'dayItem', style: {width: '14.28', align: 'center', marginTB: 8, minHeight: 40}}
+        ]}
+    ],
+    SGRZ_GonZuoNeiRon: [
+        [
+            {type: 'text-form-label', value: '内容分类'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'text',  prop: 'start', value: '请选择'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'click-form-row'}
+        ], [
+            {type: 'text-form-label', value: '内容描述'},
+            {type: 'input-area-form', prop: 'a', placeholder: '请输入内容', maxLength: 500},
+            {type: 'br-form-col'}
+        ] , [
+            {type: 'text-form-label', value: '备注'},
+            {type: 'input-area-form', prop: 'ab', placeholder: '请输入备注', maxLength: 100},
+            {type: 'br-form-col'}
+        ]
     ]
 }

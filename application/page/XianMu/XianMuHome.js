@@ -30,9 +30,11 @@ export default  class  extends React.Component {
                                 data={el}
                                 event={params => { 
                                     if (params.value.row.label == '物资')
-                                        this.props.navigation.navigate('WuZiGuanLi')
+                                        this.props.navigation.navigate('WZ_Home')
                                     else if (params.value.row.label == '实测实量')
                                         this.props.navigation.navigate('WoDeRenWu')
+                                    else if (params.value.row.label == '质量')
+                                        this.props.navigation.navigate('ZA_Home', {type: 1, label: params.value.row.label})
                                 }}
                                 columns={ columns.YinYon }
                             />

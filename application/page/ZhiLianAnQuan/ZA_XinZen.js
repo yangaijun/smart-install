@@ -28,7 +28,7 @@ export default  class  extends React.Component {
         return (
             <Freedomen.Region 
                 style={{backgroundColor: '#f5f5f5'}}
-                event={params => { }}
+                event={params => {}}
                 redux={'za_xinzen'}
                 columns={[
                     [

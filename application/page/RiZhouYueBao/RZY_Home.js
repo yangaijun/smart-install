@@ -33,7 +33,7 @@ export default  class  extends React.Component {
         return (
             <View style={{flex: 1, backgroundColor: '#f5f5f5'}}>
                 <Freedomen.Region 
-                    style={{backgroundColor: 'white', padding: 10}}
+                    style={{backgroundColor: 'white', padding: 5}}
                     event={params => { 
                         if (params.prop == '_clear') {
                             params.row.content = ''
@@ -43,7 +43,7 @@ export default  class  extends React.Component {
                     columns={[
                         Search,
                         [ 
-                            {type: 'tags', value: '我的日报', options: '我的日报,全部日报', style: {borderWidth: 0, color: '#191919', flex: 1, borderRadius: 22, height: 40}},
+                            {type: 'tags-tab', value: '我的日报', prop:'mm', options: '我的日报,全部日报'},
                             {type: 'br-row', style: {marginBottom: 1, align: 'center', marginTop: 5, borderTopColor:　'#f5f5f5', borderTopWidth: 1, paddingBottom: 0}}
                         ]
                     ]}
@@ -62,9 +62,9 @@ export default  class  extends React.Component {
                                     {type: 'text', value: '19-06-22 星期六'},
                                     {type: 'br', style: {flexDirection: 'row', alignItems: 'center'}}
                                 ], [
-                                    {type: 'image', value: require('../../assets/image_header.png'), style: {width: 80, height: 60, marginRight: 5}},
-                                    {type: 'text', value: '今日总结： 来是是，天天都是来勘查， 加时。 东奔西走喝茶时嘲框架是哥斯达黎加是鞋架芝加哥进国,达黎加是鞋架芝加哥进国', style: {lineHeight: 22, flex: 1}},
-                                    {type: 'click', prop: 'xianqin', style: {flexDirection: 'row', alignItems: 'center', paddingTB: 5}}
+                                    {type: 'image', value: require('../../assets/image_header.png'), style: {width: 80, height: 60, marginRight: 10}},
+                                    {type: 'text-p', value: '今日总结： 来是是，天天都是来勘查， 加时。 东奔西走喝茶时嘲框架是哥斯达黎加是鞋架芝加哥进国,达黎加是鞋架芝加哥进国', style: {flex: 1}},
+                                    {type: 'click', prop: 'xianqin', style: {flexDirection: 'row', alignItems: 'center', paddingTB: 8}}
                                 ], [
                                     {type: 'text', value: '创建人： 王大头', style: {flex: 1}},
                                     {type: 'button-az', value: '评论'},

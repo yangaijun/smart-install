@@ -79,7 +79,7 @@ export default {
     },{
         title: '项目管理',
         item: [{ 
-                label: '日志',
+                label: '施工日志',
                 icon: require('../assets/yrz.png')
                 
             }, {

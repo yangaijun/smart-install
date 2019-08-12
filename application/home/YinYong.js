@@ -1,6 +1,6 @@
 import React from 'react' 
 import Freedomen from 'react-native-freedomen'
-import {ScrollView, StatusBar} from 'react-native'
+import {ScrollView, StatusBar, View} from 'react-native'
 import columns from '../region/columns'
 import datas from '../region/datas'
 const Md5 = require('js-md5')
@@ -38,11 +38,23 @@ export default  class  extends React.Component {
                                     this.props.navigation.navigate('ZA_Home', {type: 2, label: params.value.row.label})
                                 else if (params.value.row.label == '日报')
                                     this.props.navigation.navigate('RZY_Home', {label: params.value.row.label})
+                                else if (params.value.row.label == '工作')
+                                    this.props.navigation.navigate('GZ_Home', {label: '的' + params.value.row.label})
+                                else if (params.value.row.label == '施工日志')
+                                    this.props.navigation.navigate('SGRZ_Home', {label: params.value.row.label})
+                                else if (params.value.row.label == '记工')
+                                    this.props.navigation.navigate('JG_Home', {label: params.value.row.label})
+                                else if (params.value.row.label == '机械')
+                                    this.props.navigation.navigate('JX_Home', {label: params.value.row.label})
+                                else if (params.value.row.label == '文件')
+                                    this.props.navigation.navigate('WJ_Home')
                             }}
                             columns={ columns.YinYon }
                         />
                     })
                 }
+                <View style={{height: 20}}> 
+                </View>
             </ScrollView>
         );
     }

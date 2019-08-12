@@ -1,19 +1,10 @@
 import React from 'react'
 import Freedomen from 'react-native-freedomen' 
 import {View, ScrollView} from 'react-native'
-import Dialog, { DialogContent, DialogTitle, DialogFooter, DialogButton} from 'react-native-popup-dialog';
 
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {return {
         title: '出库记录',
-        // headerRight: <Freedomen.Region 
-        //     event={params => {
-        //         navigation.push('WZ_XinJian')
-        //     }}
-        //     columns={[
-        //         {type: 'button-image', value: require('../../assets/tianjia.png'), style: {width: 28, height: 28, marginRight: 12}}
-        //     ]}
-        // />
     }}
     constructor(props) {
         super(props)

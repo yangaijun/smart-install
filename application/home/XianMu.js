@@ -19,7 +19,7 @@ export default  class  extends React.Component {
                     } )
                 }}
                 columns={[ 
-                    {type: 'tags', value: '正在进行', options: '正在进行,已竣工', style: {borderWidth: 0, color: '#191919', flex: 1}},
+                    {type: 'tags-tab', value: '正在进行', options: '正在进行,已竣工'},
                     {type: 'br-row', style: {marginBottom: 1, align: 'center', paddingTB: 5}}
                 ]}
             />
@@ -34,11 +34,11 @@ export default  class  extends React.Component {
                                 }
                             }}
                             columns={[
-                                {type: 'image', value: require('../assets/image_header.png'), style: {height: 55, width: 55, borderRadius: 5, paddingRight: 15}},
+                                {type: 'image', value: require('../assets/image_header.png'), style: {height: 65, width: 85, borderRadius: 3, paddingRight: 10}},
                                 [
-                                    {type: 'text-h3', value: '歌林小镇综合机电安装工程'},
+                                    {type: 'text-h4', value: '歌林小镇综合机电安装工程', style: {paddingBottom: 10}},
                                     {type: 'text', value: '张无忌', filter: value => `项目负责人：${value}`},
-                                    {type: 'br', style: {marginLeft: 15}}
+                                    {type: 'br', style: {marginLeft: 10}}
                                 ],
                                 {type: 'click-row', prop: 'row', style: {marginBottom: 1}}
                             ]}

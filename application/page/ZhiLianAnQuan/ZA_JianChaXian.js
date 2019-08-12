@@ -38,9 +38,9 @@ export default  class  extends React.Component {
     }
     render() {
         return (
-            <View style={{backgroundColor: '#f5f5f5'}}>
+            <View style={{backgroundColor: '#f5f5f5', flex: 1}}>
                 <Freedomen.Region 
-                    style={{backgroundColor: 'white', padding: 10, paddingBottom:1}}
+                    style={{backgroundColor: 'white', padding: 10, marginBottom:1}}
                     event={params => { 
                         if (params.prop == '_clear') {
                             params.row.content = ''
@@ -75,7 +75,7 @@ export default  class  extends React.Component {
                         }}
                         columns={[
                             {type: 'text-dialog-title', value: '新建检查项', style: {alignSelf: 'center', paddingBottom: 25}},
-                            {type: 'input-text', prop: 'c', placeholder: '请输入检查项名称', style: {backgroundColor: '#f5f5f5', paddingTB: 8, paddingLR: 15, borderRadius: 5}},
+                            {type: 'input-text', others: {autoFocus: true}, prop: 'c', placeholder: '请输入检查项名称', style: {backgroundColor: '#f5f5f5', paddingTB: 8, paddingLR: 15, borderRadius: 5}},
                             columns.CancelAnConfirm,
                             {type: 'br-dialog'}
                         ]}

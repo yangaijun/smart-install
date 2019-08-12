@@ -57,8 +57,8 @@ export default  class  extends React.Component {
                         {type: 'input-text', prop:'dd', placeholder: '请输入金额', style: {alignItems: 'flex-end'}},
                         {type: 'br-form-row'}
                     ], [
-                        {type: 'text-form-label', value: '备注', style: {marginBottom: 10}}, 
-                        {type: 'input-area', prop:　'ar', maxLength: 200, style: {backgroundColor: '#f5f5f5', padding: 10}},
+                        {type: 'text-form-label', value: '备注'}, 
+                        {type: 'input-area-form', prop:　'ar', maxLength: 200},
                         {type: 'br-form-col'}
                     ]
                 ]}

@@ -25,7 +25,7 @@ export default  class  extends React.Component {
                 <Swiper autoplay={true} style={{height: 160, width: '100%', backgroundColor: 'white', paddingTop: 10}}>
                 {
                     [require('../assets/banner1.jpg'), require('../assets/banner2.jpg'), require('../assets/banner3.jpg'), require('../assets/banner4.jpg')].map((el, key) => {
-                        return <Image source={el} key={key} style={{width: '96%', height: 160, alignSelf: 'center', borderRadius: 5, resizeMode: 'cover'}} />
+                        return <Image source={el} key={key} style={{width: '96%', height: 135, alignSelf: 'center', borderRadius: 3, resizeMode: 'cover'}} />
                     })
                 }
                 </Swiper>
@@ -34,9 +34,9 @@ export default  class  extends React.Component {
                         if (params.prop == 'zixun_more') 
                             this.props.navigation.push('ZiXun')
                         else if (params.value.row && ['负责的','分派的', '参与的'].includes(params.value.row.label))
-                            this.props.navigation.push('GonZuoHome', params.value.row)
+                            this.props.navigation.push('GZ_Home', params.value.row)
                         else if (params.value.row && params.value.row.label == '新建') 
-                            this.props.navigation.push('GonZuoXinJian')
+                            this.props.navigation.push('GZ_XinJian')
                     }}
                     data={this.state.data}
                     columns={[

@@ -14,13 +14,22 @@ Freedomen.custom({
 }, {},{
     //form 
     'text-form-label': {
-        color: '#121212',
+        color: '#191919',
         fontSize: 16,
-        fontWeight: '300'
+        fontWeight: '400'
     },
     'br-form-row': {
         paddingHorizontal: 15,
-        paddingVertical: 10,
+        paddingVertical: 8,
+        alignItems: 'center',
+        marginBottom: 1,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        minHeight: 58,
+    },
+    'click-form-row': {
+        paddingHorizontal: 15,
+        paddingVertical: 8,
         alignItems: 'center',
         marginBottom: 1,
         flexDirection: 'row',
@@ -29,26 +38,25 @@ Freedomen.custom({
     },
     'br-form-col': {
         paddingHorizontal: 15,
-        paddingVertical: 10,
+        paddingVertical: 8,
         marginBottom: 1, 
         backgroundColor: 'white'
     },
-    'click-form-row': {
-        paddingHorizontal: 15,
-        paddingVertical: 10,
-        alignItems: 'center',
-        marginBottom: 1,
-        flexDirection: 'row',
-        backgroundColor: 'white',
-        minHeight: 58,
-    },
     'image-form': {
-        height: 22, 
-        width: 22
+        height: 16, 
+        width: 16
     },
     'input-area-form': {
         backgroundColor: '#f5f5f5', 
-        padding: 10
+        padding: 10,
+        marginTop: 8
+    },
+    'input-text-b': {
+        borderColor: '#f5f5f5',
+        borderWidth: 1,
+        borderRadius: 5,
+        paddingHorizontal: 10,
+        paddingVertical: 6
     },
     //dialog
     'text-dialog-title': {
@@ -65,7 +73,6 @@ Freedomen.custom({
         borderRadius: 5, 
         marginHorizontal: 25
     },
-
     'click-col': {
         padding: 15, 
         backgroundColor: 'white',
@@ -76,6 +83,10 @@ Freedomen.custom({
         alignItems: 'center',
         padding: 15, 
         backgroundColor: 'white'
+    },
+    'br-normal-row': {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     'br-row': {
         flexDirection: 'row',
@@ -90,6 +101,18 @@ Freedomen.custom({
         paddingLeft: 1,
         color: '#787878'
     },
+    'text-circle': {
+        height: 8,
+        width: 8,
+        borderRadius: 8,
+        marginRight: 2
+    },
+    'tags-tab': {
+        borderWidth: 0, 
+        color: '#191919', 
+        flex: 1,
+        height: 32
+    },
     'text-tag': {
         borderColor: '#FF2B2B',
         borderWidth: .8, 
@@ -100,13 +123,19 @@ Freedomen.custom({
         justifyContent: 'center',
         marginRight: 10
     },
+    'text-status': {
+        color: 'white', 
+        borderRadius: 16,
+        paddingVertical: 1,
+        paddingHorizontal: 8,
+    },
     //段落
     'text-p': {
-        lineHeight: 22,
+        lineHeight: 20,
         color: '#191919',
         fontSize: 14,
-        paddingTop: 8,
-        paddingBottom: 8,
+        paddingTop: 4,
+        paddingBottom: 4,
     },
     'text-primary': {
         color: '#2EBBC4', 
@@ -120,6 +149,10 @@ Freedomen.custom({
         width: 28, 
         height: 28, 
         marginRight: 12
+    },
+    'button-right': {
+        marginRight: 12,
+        color: '#999999'
     },
     'button-image-icon': {
         height: 26, 
@@ -135,7 +168,7 @@ Freedomen.custom({
     'button-az': {
         borderRadius: 18, 
         paddingVertical: 3, 
-        paddingHorizontal: 15, 
+        paddingHorizontal: 8, 
         borderWidth: 1,
         borderColor: '#2EBBC4',
         color: '#2EBBC4',
@@ -148,7 +181,6 @@ Freedomen.custom({
     'text-h5': {
         color: '#191919'
     },
-    
     'text-badge': {
         color: 'white',
         backgroundColor: 'red',  
@@ -188,15 +220,24 @@ Freedomen.custom({
         padding: 10, 
         paddingHorizontal: 15,
         borderRadius: 2, 
-        marginBottom: 2, 
+        marginBottom: 3, 
+        marginTop: 1
+    },
+    'click-list-item': {
+        backgroundColor: 'white', 
+        padding: 10, 
+        paddingHorizontal: 15,
+        borderRadius: 2, 
+        marginBottom: 3, 
         marginTop: 1
     },
     'br-bottoms': {
         flexDirection: 'row', 
         justifyContent: 'flex-end', 
         paddingTop: 5, 
+        marginTop: 5,
         borderTopWidth: 1, 
-        borderTopColor: '#f5f5f5',
+        borderTopColor: '#fafafa',
         alignItems: 'center'
     },
     'image-item': {
@@ -205,11 +246,13 @@ Freedomen.custom({
         margin: 5,
     },
     'image-header': {
-        height: 39,
-        width: 39,
+        height: 42,
+        width: 42,
         marginLeft: 5,
         marginRight: 5,
-        borderRadius: 39,
+        borderRadius: 42,
     }
 })
+
+
 AppRegistry.registerComponent(appName, () => App);

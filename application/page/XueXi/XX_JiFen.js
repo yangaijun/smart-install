@@ -55,7 +55,7 @@ export default  class  extends React.Component {
                                     {type: 'progress', value: .5, style: {width: 180}},
                                     {type:　'br', style: {flex: 1}}
                                 ],
-                                {type: 'button-cancel', value: '去看看', style: {borderRadius: 5}},
+                                {type: 'button-cancel', value: '去看看', style: {borderRadius: 6, padding: 5}},
                                 {type: 'br', style: {flexDirection: 'row'}}
                             ],
                             {type: 'br-list-item'}

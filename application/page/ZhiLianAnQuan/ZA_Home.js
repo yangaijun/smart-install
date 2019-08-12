@@ -1,7 +1,6 @@
 import React from 'react'
 import Freedomen from 'react-native-freedomen' 
 import {View, ScrollView} from 'react-native'
-import Dialog, { DialogContent, DialogTitle, DialogFooter, DialogButton} from 'react-native-popup-dialog';
 
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {return {
