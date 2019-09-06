@@ -2,21 +2,20 @@ import React from 'react'
 import Freedomen from 'react-native-freedomen'
 import {ScrollView, StatusBar, View} from 'react-native'
 import columns from '../region/columns'
-import datas from '../region/datas'
-const Md5 = require('js-md5')
+import datas from '../region/datas'  
+
 export default  class  extends React.Component {
     constructor(props) {
         super(props) 
     }
     componentWillMount() {
         let  param =  {
-            username: 'wqer',
-            password: Md5('123456')
+            userName: 'admin',
+            password: '123456'
         } 
-        Freedomen.global.api.post('api/user/login', param).then(res => {
-            Freedomen.global.project = {projectId: 79}       
-            Freedomen.global.user = res
-        })  
+        Freedomen.global.api.call('/JasoUser/loginPc', param).then(res => {
+            console.warn('登录成功')
+        })
     }
     render() {
         return (
@@ -28,26 +27,35 @@ export default  class  extends React.Component {
                             key={key}
                             data={el}
                             event={params => { 
+                                const to = (router, params) => {
+                                    if (!params) {
+                                        params = {}
+                                    }
+                                    params.router = router
+                                    this.props.navigation.navigate('XM_XuanZe', params)
+                                }
                                 if (params.value.row.label == '物资')
-                                    this.props.navigation.navigate('WZ_Home')
+                                    to('WZ_Home')
                                 else if (params.value.row.label == '实测实量')
-                                    this.props.navigation.navigate('WoDeRenWu')
+                                    to('SCSL_Home')
                                 else if (params.value.row.label == '质量')
-                                    this.props.navigation.navigate('ZA_Home', {type: 1, label: params.value.row.label})
+                                    to('ZA_Home', {type: 1, label: params.value.row.label})
                                 else if (params.value.row.label == '安全')
-                                    this.props.navigation.navigate('ZA_Home', {type: 2, label: params.value.row.label})
+                                    to('ZA_Home', {type: 2, label: params.value.row.label})
                                 else if (params.value.row.label == '日报')
-                                    this.props.navigation.navigate('RZY_Home', {label: params.value.row.label})
+                                    to('RZY_Home', {label: params.value.row.label})
                                 else if (params.value.row.label == '工作')
-                                    this.props.navigation.navigate('GZ_Home', {label: '的' + params.value.row.label})
+                                    to('GZ_Home', {label: '的' + params.value.row.label})
                                 else if (params.value.row.label == '施工日志')
-                                    this.props.navigation.navigate('SGRZ_Home', {label: params.value.row.label})
+                                    to('SGRZ_Home', {label: params.value.row.label})
                                 else if (params.value.row.label == '记工')
-                                    this.props.navigation.navigate('JG_Home', {label: params.value.row.label})
+                                    to('JG_Home', {label: params.value.row.label})
                                 else if (params.value.row.label == '机械')
-                                    this.props.navigation.navigate('JX_Home', {label: params.value.row.label})
+                                    to('JX_Home', {label: params.value.row.label})
                                 else if (params.value.row.label == '文件')
-                                    this.props.navigation.navigate('WJ_Home')
+                                    to('WJ_Home')
+                                else if (params.value.row.label == '考勤')
+                                    to('KQ_Home', {label: '阿里爹爹'})
                             }}
                             columns={ columns.YinYon }
                         />

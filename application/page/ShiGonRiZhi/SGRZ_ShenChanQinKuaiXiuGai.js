@@ -17,6 +17,7 @@ export default  class  extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {  
+            data: props.navigation.state.params
         }
     } 
     componentDidMount() { } 
@@ -29,6 +30,7 @@ export default  class  extends React.Component {
                         event={params => {
                            
                         }}
+                        data={this.state.data}
                         columns={columns.SGRZ_ShenChanQinKuan}
                     />
                 </ScrollView>

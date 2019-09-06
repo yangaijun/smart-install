@@ -1,8 +1,8 @@
 import React from 'react'
-import {ScrollView, View} from "react-native";
+import {ScrollView, Text, View} from "react-native";
 import Freedomen from 'react-native-freedomen' 
-import columns from '../../region/columns'
-const Search = columns.ZA_Search('请输入创建人查询')
+import columns from '../../region/columns' 
+const redux = {tianjia: false}
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
@@ -13,9 +13,11 @@ export default  class  extends React.Component {
                         navigation.push('SGRZ_ShaiXuan')
                     else navigation.push('SGRZ_XinJian')
                 }}
+                data={redux}
+                redux={'only_page'}
                 columns={[
                     {type: 'button-image-right', prop: 'shaixuan', value: require('../../assets/shaixuan.png')},
-                    {type: 'button-image-right', prop: 'xinjian', value: require('../../assets/tianjia.png')},
+                    {type: 'button-image-right', prop: 'xinjian', value: require('../../assets/tianjia.png'), load: (value, data) => data.tianjia},
                     {type: 'br', style: {flexDirection: 'row'}}
                 ]}
             />
@@ -23,11 +25,128 @@ export default  class  extends React.Component {
     }
     constructor(props) {
         super(props) 
-        this.state = { }
+        this.state = {
+            roles: [],
+            activity: '我的日志',
+            woderizhi: [],
+            quanburizhi: []
+        }
+        this.Search = columns.ZA_Search('请输入创建人查询') 
+
+        this.wodeParams = {pageVo: {
+            pageNo: 1,
+            pageSize: 15
+        }}
+        this.quanbuParams = {pageVo: {
+            pageNo: 1,
+            pageSize: 15
+        }}
     } 
     componentDidMount() { 
-    } 
+        
+        // if (!Freedomen.global.roleTypes)
+        Freedomen.global.api.call('/ConstructLog/getRoleType').then(res => {
+            Freedomen.global.roleTypes = [...res, 3]
+            this.setState({
+                roles: res
+            })
+            if (res.length) {
+                redux.tianjia = true
+                Freedomen.redux({
+                    only_page: redux
+                })
+            }
+           
+        })
+        this._loadData(this.wodeParams, 'woderizhi')
+
+
+        Freedomen.global.callBack = (data) => {
+            this.quanbuParams = {
+                ...this.quanbuParams,
+                ...data
+            }
+            this._loadData(this.quanbuParams, 'quanburizhi')
+        }
+    }   
+    _loadData(params, item) {
+        Freedomen.global.api.call('/ConstructLog/select', params).then(res => {
+            let arr = res.data.map(el => {
+                let content = el.contentList.length ? el.contentList[0] : {}
+                let date = new Date(el.constructLog.constructDate) 
+                let week = '星期' + ({
+                    0: '一',
+                    1: '二',
+                    2: '三',
+                    3: '四',
+                    4: '五',
+                    5: '六',
+                    6: '日'
+                }[date.getDay()] || '?')
+ 
+                let shigonjindus = [], gonzuoneirons = [], shenchanqinkuans = []
+                el.contentList.map(el => {
+                    if (el.constructProgressStartTime) {
+                        shigonjindus.push(el)
+                    } else if (el.jobContentContentType) {
+                        gonzuoneirons.push(el)
+                    } else if (el.productionWorkLoad) {
+                        shenchanqinkuans.push(el)
+                    }
+                })
+                return {
+                    ...el.constructLog,
+                    ...content,
+                    week: week,
+                    shigonjindus: shigonjindus,
+                    gonzuoneirons: gonzuoneirons,
+                    shenchanqinkuans: shenchanqinkuans
+                }
+            }) 
+            let data = {}
+            data[item] = arr
+            this.setState(data)
+            
+        })
+    }
     render() {
+        const columns = [
+            [
+                {type: 'text-h4', prop: 'projectName'},
+                {type: 'image-form', value: require('../../assets/cloud.png'), style: {marginLeft: 30, marginRight: 5}},
+                {type: 'text-h5', prop: 'weather', style: {flex: 1}},
+                {type: 'text', prop: 'constructDate', style: {paddingRight: 5}},
+                {type: 'text', prop: 'week'},
+                {type: 'br', style: {flexDirection: 'row', alignItems: 'center'}}
+            ], [
+                {type: 'image', value: require('../../assets/image_header.png'), style: {width: 80, height: 60, marginRight: 10}},
+                [
+                    {type: 'text-h5', prop: 'productionConstructPart', filter: value => `施工部位：${value}`},
+                    {type: 'text-h5', prop: 'productionConstructContent', filter: value => `施工内容：${value}`},
+                    {type: 'text-h5', prop: 'productionWorkLoad', filter: (value, data) => `完成工作量：${value}`},
+                    {type: 'br', load: (value, data) => data.productionConstructPart}
+                ],
+                [
+                    {type: 'text-h5', prop: 'constructProgressConstructPart', filter: value => `施工部位：${value}`},
+                    {type: 'text-h5', prop: 'constructProgressConstructContent', filter: value => `施工内容：${value}`},
+                    {type: 'text-h5', prop: 'constructProgressTeams', filter: value => `班组：${value}`},
+                    {type: 'text-h5', prop: 'constructProgressNums', filter: value => `施工进度：${value}`},
+                    {type: 'br', load: (value, data) => !data.productionConstructPart && data.constructProgressConstructPart}
+                ],
+                [
+                    {type: 'text-h5', prop: 'jobContentContentType', filter: value => `内容分类：${value}`},
+                    {type: 'text-h5', prop: 'jobConentContentDescribe', filter: value => `描述：${value || ''}`},
+                    {type: 'text', prop: 'jobContentRemark', filter: value => `备注：${value || ''}`},
+                    {type: 'br', load: (value, data) => !data.productionConstructPart && !data.constructProgressConstructPart}
+                ], 
+                {type: 'click', prop: 'xianqin', style: {flexDirection: 'row', alignItems: 'center', paddingTB: 8}}
+            ], [
+                {type: 'text', prop: 'userRealName', filter: value => `创建人: ${value}`, style: {flex: 1}},
+                {type: 'br-bottoms'}
+            ],
+            {type: 'br-list-item'}
+        ]
+
         return (
             <View style={{flex: 1, backgroundColor: '#f5f5f5'}}>
                 <Freedomen.Region 
@@ -36,49 +155,55 @@ export default  class  extends React.Component {
                         if (params.prop == '_clear') {
                             params.row.content = ''
                             return params.row
+                        } else if (params.prop == 'choose') { 
+                            this.setState({
+                                activity: params.value
+                            }, () => {
+                                if (params.value == '我的日志' && this.state.woderizhi.length === 0) {
+                                    this._loadData(this.wodeParams, 'woderizhi')
+                                } else if (params.value == '全部日志' && this.state.quanburizhi.length === 0) {
+                                    this._loadData(this.quanbuParams, 'quanburizhi')
+                                }
+                            }) 
                         }
                     }}
                     columns={[
-                        Search,
+                        this.Search,
                         [ 
-                            {type: 'tags-tab', value: '我的日志', prop:'mm', options: '我的日志,全部日志'},
-                            {type: 'br-row', style: {marginBottom: 1, align: 'center', marginTop: 5, borderTopColor:　'#f5f5f5', borderTopWidth: 1, paddingBottom: 0}}
+                            {type: 'tags-tab', value: '我的日志', prop:'choose', options: '我的日志,全部日志'},
+                            {type: 'br-row', style: {marginBottom: 1, align: 'center', marginTop: 5, borderTopColor:　'#f5f5f5', borderTopWidth: 1, paddingBottom: 0}, load: (value) => this.state.roles.length > 0}
                         ]
                     ]}
                 />
-                <ScrollView>
                 {
-                    [1,2].map(e => {
-                        return <Freedomen.Region 
-                            event={params => {
-                                if (params.prop == 'xianqin')
-                                    this.props.navigation.push('SGRZ_XianQin')
-                            }}
-                            columns={[
-                                [
-                                    {type: 'text-h4', value: '歌林小镇综合'},
-                                    {type: 'image-form', value: require('../../assets/cloud.png'), style: {marginLeft: 30, marginRight: 5}},
-                                    {type: 'text-h5', value: '多云转晴', style: {flex: 1}},
-                                    {type: 'text', value: '19-06-22 星期六'},
-                                    {type: 'br', style: {flexDirection: 'row', alignItems: 'center'}}
-                                ], [
-                                    {type: 'image', value: require('../../assets/image_header.png'), style: {width: 80, height: 60, marginRight: 10}},
-                                    [
-                                        {type: 'text', value: '何老三、 王大头', filter: value => `作业人员：${value}`},
-                                        {type: 'text', value: '别墅', filter: value => `施工部位：${value}`},
-                                        {type: 'text', value: '排水', filter: value => `施工内容：${value}`},
-                                    ],
-                                    {type: 'click', prop: 'xianqin', style: {flexDirection: 'row', alignItems: 'center', paddingTB: 8}}
-                                ], [
-                                    {type: 'text', value: '创建人： 王大头', style: {flex: 1}},
-                                    {type: 'br-bottoms'}
-                                ],
-                                {type: 'br-list-item'}
-                            ]}
-                        />
-                    })
+                    this.state.activity == '我的日志' 
+                    ?  
+                    <Freedomen.FreshList 
+                        event={params => {
+                            if (['$page', '$fresh'].includes(params.prop)) {
+                                this.wodeParams.pageVo.pageNo = params.row.pageNo
+                                this._loadData(this.wodeParams, 'woderizhi')
+                            } else if (params.prop == 'xianqin') {
+                                this.props.navigation.push('SGRZ_XianQin', params.row)
+                            }
+                        }}
+                        data={this.state.woderizhi}
+                        columns={columns}
+                    /> 
+                    :    
+                    <Freedomen.FreshList 
+                        event={params => {
+                            if (['$page', '$fresh'].includes(params.prop)) {
+                                this.quanbuParams.pageVo.pageNo = params.row.pageNo
+                                this._loadData(this.quanbuParams, 'quanburizhi')
+                            }  else if (params.prop == 'xianqin') {
+                                this.props.navigation.push('SGRZ_XianQin', params.row)
+                            }
+                        }}
+                        data={this.state.quanburizhi}
+                        columns={columns}
+                    /> 
                 }
-                </ScrollView>
             </View>
         );
     }

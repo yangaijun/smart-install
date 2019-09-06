@@ -113,7 +113,7 @@ export default {
         [
             {type: 'text', value:'', style: {height: 20, width: 4, backgroundColor: '#2EBBC4', marginRight: 5,}},
             {type: 'text-title', value: '考勤'},
-            {type: 'button-text', value: '去打卡'},
+            {type: 'button-text', prop: 'kaoqin_qudaka', value: '去打卡'},
             {type: 'image', value: require('../assets/right.png'), style: {width: 16, height: 16}},
             {type: 'br', style: {flexDirection: 'row', alignItems: 'center'}}
         ], [
@@ -290,10 +290,10 @@ export default {
         {type: 'br-normal-row', style: {borderColor: '#ccc', borderWidth: 1, backgroundColor: '#f5f5f5', marginLR: 12}}
     ],
     CancelAnConfirm: [
-        {type: 'button-text', prop: 'cancel', value: '取消', style: {flex: 1, padding: 15, align: 'center', fontWeight: 'bold', fontSize: 16, color: '#999'}},
+        {type: 'button-text', prop: 'cancel', value: '取消', style: {flex: 1, padding: 12, align: 'center', fontWeight: 'bold', fontSize: 16, color: '#979797'}},
         {type: 'text', style: {height: 50, width: 1, backgroundColor: '#f5f5f5'}},
-        {type: 'button-text-primary', prop: 'confirm', value: '确定', style: {flex: 1, padding: 15, align: 'center', fontWeight: 'bold'}},
-        {type: 'br', style: {flexDirection: 'row', height: 52, marginTop: 25, borderTopWidth: 1, borderTopColor: '#f5f5f5'}}
+        {type: 'button-text-primary', prop: 'confirm', value: '确定', style: {flex: 1, padding: 12, align: 'center', fontWeight: 'bold'}},
+        {type: 'br', style: {flexDirection: 'row', height: 52, marginTop: 15, borderTopWidth: 1, borderTopColor: '#f5f5f5', marginLR: -10}}
     ],
     ZA_Search: (placeholder, prop) => {
         return [
@@ -315,39 +315,49 @@ export default {
         [
             {type: 'text-form-label', value: '开始时间'},
             {type: 'text-must', value: '*', style: {flex: 1}},
-            {type: 'pick-date',  prop: 'start', placeholder: '请选择开始时间'},
+            {type: 'pick-time',  prop: 'productionStartTime', placeholder: '请选择开始时间'},
             {type: 'image-form', value: require('../assets/right.png')},
             {type: 'br-form-row'}
-        ], [
+        ], 
+        {type: 'text-valid-message', prop: 'productionStartTime-valid', load: value => value},
+        [
             {type: 'text-form-label', value: '结束时间'},
             {type: 'text-must', value: '*', style: {flex: 1}},
-            {type: 'pick-date', prop: 'end', placeholder: '请选择结束时间'},
+            {type: 'pick-time', prop: 'productionEndTime', placeholder: '请选择结束时间'},
             {type: 'image-form', value: require('../assets/right.png')},
             {type: 'br-form-row'}
-        ], [
+        ], 
+        {type: 'text-valid-message', prop: 'productionEndTime-valid', load: value => value},
+        [
             {type: 'text-form-label', value: '施工部位'},
             {type: 'text-must', value: '*', style: {flex: 1}},
-            {type: 'text',  value: '请选择施工部位'},
+            {type: 'text-h5', prop: 'constructProgressConstructPart',  placeholder: '请选择施工部位'},
             {type: 'image-form', value: require('../assets/right.png')},
-            {type: 'click-form-row'}
-        ], [
+            {type: 'click-form-row', prop: 'shigonbuwei'}
+        ], 
+        {type: 'text-valid-message', prop: 'constructProgressConstructPart-valid', load: value => value},
+        [
             {type: 'text-form-label', value: '施工内容'},
             {type: 'text-must', value: '*', style: {flex: 1}},
-            {type: 'text',  value: '请选择施工内容'},
+            {type: 'text-h5', prop: 'constructContentName', placeholder: '请选择施工内容'},
             {type: 'image-form', value: require('../assets/right.png')},
-            {type: 'click-form-row'}
-        ], [
+            {type: 'click-form-row', prop: 'shigonneiron'}
+        ], 
+        {type: 'text-valid-message', prop: 'constructContentName-valid', load: value => value},
+        [
             {type: 'text-form-label', value: '完成工作量'},
             {type: 'text-must', value: '*', style: {flex: 1}},
-            {type: 'image-form', value: require('../assets/right.png')},
-            {type: 'click-form-row'}
-        ]
+            {type: 'input-text-form', prop: 'productionWorkLoad', placeholder: '请输入工作量'},
+            {type: 'text', prop: 'constructContentUnit', filter: value=> value ? ` (${value})` :''},
+            {type: 'br-form-row'}
+        ],
+        {type: 'text-valid-message', prop: 'productionWorkLoad-valid', load: value => value}
     ],
     JI$_RiLi: [
         [
-            {type: 'button-image', prop:　'pre', value: require('../assets/left.png'), style: {paddingLR: 45, width: 20, height: 20}},
+            {type: 'button-image', prop:　'pre', value: require('../assets/leftprimary.png'), style: {paddingLR: 45, width: 20, height: 20}},
             {type: 'text-primary', prop: 'yearMonth', value: '2019年7月', style: {fontSize: 18, fontWeight: '400'}},
-            {type: 'button-image', prop:　'next', value: require('../assets/right.png'), style: {paddingLR: 45, width: 20, height: 20}},
+            {type: 'button-image', prop:　'next', value: require('../assets/rightprimary.png'), style: {paddingLR: 45, width: 20, height: 20}},
             {type: 'br-form-row', style: {align: 'center'}}
         ],
         //label标题
@@ -370,17 +380,68 @@ export default {
         [
             {type: 'text-form-label', value: '内容分类'},
             {type: 'text-must', value: '*', style: {flex: 1}},
-            {type: 'text',  prop: 'start', value: '请选择'},
+            {type: 'text-h5',  prop: 'constructContentTypeName', placeholder: '请选择内容分类'},
             {type: 'image-form', value: require('../assets/right.png')},
-            {type: 'click-form-row'}
-        ], [
+            {type: 'click-form-row', prop: 'neironfenlei'}
+        ], 
+        {type: 'text-valid-message', prop: 'constructContentTypeName-valid', load: value => value}, 
+        [
             {type: 'text-form-label', value: '内容描述'},
-            {type: 'input-area-form', prop: 'a', placeholder: '请输入内容', maxLength: 500},
+            {type: 'input-area-form', prop: 'jobConentContentDescribe', placeholder: '请输入内容', maxLength: 500},
             {type: 'br-form-col'}
         ] , [
             {type: 'text-form-label', value: '备注'},
-            {type: 'input-area-form', prop: 'ab', placeholder: '请输入备注', maxLength: 100},
+            {type: 'input-area-form', prop: 'jobContentRemark', placeholder: '请输入备注', maxLength: 100},
             {type: 'br-form-col'}
+        ]
+    ],
+    SGRZ_ShiGonJinDu: [
+        [
+            {type: 'text-form-label', value: '开始时间'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'pick-time',  prop: 'constructProgressStartTime', placeholder: '请选择开始时间'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'br-form-row'}
+        ], 
+        {type: 'text-valid-message', prop: 'constructProgressStartTime-valid', load: value => value},
+        [
+            {type: 'text-form-label', value: '结束时间'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'pick-time',  prop: 'constructProgressEndTime', placeholder: '请选择结束时间'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'br-form-row'}
+        ],  
+        {type: 'text-valid-message', prop: 'constructProgressEndTime-valid', load: value => value},
+        [
+            {type: 'text-form-label', value: '施工部位'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'text-h5', prop: 'constructProgressConstructPart',  placeholder: '请选择施工部位'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'click-form-row', prop: 'shigonbuwei'}
+        ], 
+        {type: 'text-valid-message', prop: 'constructProgressConstructPart-valid', load: value => value},
+        [
+            {type: 'text-form-label', value: '施工内容'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'text-h5', prop: 'constructContentName', placeholder: '请选择施工内容'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'click-form-row', prop: 'shigonneiron'}
+        ], 
+        {type: 'text-valid-message', prop: 'constructContentName-valid', load: value => value},
+        [
+            {type: 'text-form-label', value: '班组'},
+            {type: 'text-must', value: '*', style: {flex: 1}},
+            {type: 'text-h5', prop: 'teamsName',  placeholder: '请选择班组'},
+            {type: 'image-form', value: require('../assets/right.png')},
+            {type: 'click-form-row', prop: 'banzu'}
+        ], 
+        {type: 'text-valid-message', prop: 'teamsName-valid', load: value => value},
+        [
+            {type: 'text-form-label', value: '工作进度'},
+            {type: 'text-must', value: '*'},
+            {type: 'slider', prop: 'constructProgressNums',  value: 0, style: {flex: 1, paddingLR: 10}},
+            {type: 'text-primary', value: 0, filter: (value, data) => (data.constructProgressNums || value) + '%', style: {minWidth: 38, alignItems: 'flex-end'}},
+            {type: 'br-form-row'}
         ]
     ]
 }

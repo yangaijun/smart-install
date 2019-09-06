@@ -1,109 +1,154 @@
 import React from 'react'
 import Freedomen from 'react-native-freedomen' 
-import {View, ScrollView} from 'react-native'
-import Modal from "react-native-modal";
+import {View, Dimensions} from 'react-native'
 import columns from '../../region/columns'
-const Search = columns.CK_Search('请输入名称、规格', 'name')
-
+import CP_FenLei from './CP_FenLei' 
+var slidePop = null
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {return {
         title: '物资库存',
         headerRight: <Freedomen.Region 
             event={params => {
-                navigation.state.params.show()
+                slidePop.show()
             }}
             columns={[
-                {type: 'button-image-right', value: require('../../assets/more.png')}
+                {type: 'button-image-right', value: require('../../assets/more.png')},
             ]}
         />
     }}
     constructor(props) {
         super(props)
         this.state = {
-            visible: false,
             list: [],
-            activityId: 1,
-            activity: 'full',
-            kinds: {kinds:[{kind: '全部分类'}, {kind: '分类1'}, {kind: '分类2'}, {kind: '分类3'}]}
+            pilian: false,
+            button: {choose: [], label: ''}
         }
+        this.wuZiParams = {  
+            pageVo: {
+                pageNo: 1,
+                pageSize: 15
+            }
+        }
+        this.Search = columns.CK_Search('请输入名称、规格', 'sizeOrName')
+        this.choose = []
     }
     componentDidMount() {
-        this.props.navigation.setParams({show: () => {
-            this.setState({
-                visible: true
-            })
-        }})
-        setTimeout(() => {
-            this.setState({
-                list: [{}, {}, {}]
-            })
-        }, 400);
+        this._loadWuZi()
+    }
+    _loadWuZi(fresh = false) {
+        if (fresh) 
+            this.wuZiParams.pageVo.pageNo = 1
+        Freedomen.global.api.call('/Material/select', this.wuZiParams).then(res => { 
+            !fresh ?
+                this.setState({
+                    list: res.data
+                })
+            : this.refs.list.resetData(res.data) 
+        })
     }
     render() {
         return (
             <View style={{flex: 1, backgroundColor: '#f5f5f5'}}>
                 <Freedomen.Region 
-                    event={params => {
+                   event={params => {
                         if (params.prop == 'clear') {
-                            params.row.name = ''
-                            return params.row
-                        }
+                            this.wuZiParams.sizeOrName = ''
+                            this._loadWuZi(true)
+                            return {
+                                ...params.row,
+                                sizeOrName: ''
+                            }
+                        } else if (params.prop == 'sizeOrName') {
+                            this.wuZiParams.sizeOrName = params.value
+                            this._loadWuZi(true)
+                        } 
                     }}
                     columns={[
                         {type: 'text-h4', value: '有库存', style: {width: 72}},
-                        Search,
+                        this.Search,
                         {type: 'br-row'}
                     ]}
                 />
                 <View style={{flex: 1, backgroundColor: '#f5f5f5', flexDirection: 'row', marginTop: 1 }}>
-                    <Freedomen.Region 
-                        style={{width: 88, marginRight: 1}}
+                    <CP_FenLei event={params => {
+                        this.wuZiParams.materialTypeId = params.materialTypeId
+                        this.kind = params
+                        this._loadWuZi(true)
+                    }}/> 
+                    <View style={{flex: 1}}>
+                    <Freedomen.FreshList  
+                        ref={"list"}
                         event={params => {
-                            this.setState({
-                                activityId: params.value.row.id
-                            })
-                        }}
-                        columns={[
-                            {type: 'views-y', prop:'kinds', value: [{id: 1},{id: 2},{id: 3}], style: {width: 88}, columns: [
-                                {type: 'button-text', prop: 'kind', value: '全部分类', style: (value, data) => {
-                                        let color = this.state.activityId == data.id ? '#2EBBC4': '#191919'
-                                        return {padding: 15, align: 'center', backgroundColor: 'white', marginBottom: 1, color: color}
-                                    }  
+                            if (['$page', '$fresh'].includes(params.prop)) {
+                                this.wuZiParams.pageVo.pageNo = params.row.pageNo
+                                this._loadWuZi()
+                            } else if (params.prop == 'into') {
+                                this.props.navigation.push('WZ_LiuShui', {...params.row, material: this.kind})
+                            } else if (params.prop == 'checked') {
+                                let choose = this.state.button.choose
+                                if (params.value)
+                                    choose.push(params.value)
+                                else {
+                                    for (var i = 0; i < choose.length; i ++) {
+                                        if (params.value.materialId ==  choose[i].materialId)
+                                            break
+                                    }
+                                    if (i !== choose.length)
+                                        choose.splice(i, 1)
                                 }
-                            ]}
+                                this.setState({
+                                    button: {
+                                        ...this.state.button,
+                                        choose: choose
+                                    }
+                                })
+                            }
+                        }}
+                        data={this.state.list}
+                        columns={[
+                            {type: 'text-h4', prop: 'materialName', value: '螺丝刀'},
+                            [
+                                {type: 'text', prop: 'materialSize', value: '45*45*98', style: {flex: 1}},
+                                {type: 'text', prop: 'materialUnit', filter: value => `单位: ${value}`},
+                                {type: 'checkbox', prop: 'checked', load: value=>value !== void 0, style: {marginLeft: 15}},
+                                {type: 'br', style: {flexDirection: 'row', paddingTB: 5}}
+                            ],
+                            [
+                                {type: 'text', prop: 'putNum', filter: value => `入：${value}`, style: {flex: 1}},
+                                {type: 'text', prop: 'outNum', filter: value => `出：${value}`, style: {flex: 1}},
+                                [
+                                    {type: 'text', value: '存：'},
+                                    {type: 'text-primary', prop: 'leaveNum', value: 40},
+                                    {type: 'br', style: {flexDirection: 'row', flex: 1}}
+
+                                ],
+                                {type: 'br', style: {flexDirection: 'row'}}
+                            ],
+                            {type: 'click-list-item', prop: 'into'}
                         ]}
                     /> 
-                    <View style={{flex: 1}}>
-                        <Freedomen.FreshList 
-                            event={params => {
-                                this.setState({
-                                    visible: true
-                                })
-                            }}
-                            data={this.state.list}
-                            columns={[
-                                {type: 'text-h4', value: '螺丝刀'},
-                                [
-                                    {type: 'text', value: '45*45*98', style: {flex: 1}},
-                                    {type: 'text', value: '单位：个'},
-                                    {type: 'br', style: {flexDirection: 'row', paddingTB: 5}}
-                                ],
-                                [
-                                    {type: 'text', value: 40, filter: value => `入：${value}`, style: {flex: 1}},
-                                    {type: 'text', value: 40, filter: value => `出：${value}`, style: {flex: 1}},
-                                    [
-                                        {type: 'text', value: '存：'},
-                                        {type: 'text-primary', value: 40},
-                                        {type: 'br', style: {flexDirection: 'row', flex: 1}}
-
-                                    ],
-                                    {type: 'br', style: {flexDirection: 'row'}}
-                                ],
-                                {type: 'br-list-item'}
-                            ]}
-                        />
                     </View>
                 </View>
+                {
+                    this.state.pilian ? 
+                    <Freedomen.Region 
+                        style={{height: 52}}
+                        data={this.state.button}
+                        columns={[
+                            {type: 'button-text', prop: 'label', filter: (value, data) => data.choose.length == 0 ? '取消' : `${value}(${data.choose.length}项)`, style: value => {
+                                return { 
+                                    align: 'center',
+                                    fontWeight: '500',
+                                    fontSize: 16,
+                                    color: 'white',
+                                    backgroundColor: value == '批量删除' ? '#FF6D73' : '#2EBBC4',
+                                    flex: 1
+                                }
+                            }}
+                        ]}
+                    /> : null
+                }
+                
                 <Freedomen.Region 
                     style={{
                         position: 'absolute',
@@ -118,28 +163,45 @@ export default  class  extends React.Component {
                     columns={[
                         {type: 'button-image', value: require('../../assets/wz_shoudonxinjian.png'), load: (value, data) => data.cancel, style: {width: 110, resizeMode: 'stretch', height: 42, marginRight: 12}},
                         {type: 'button-image', value: require('../../assets/wz_saomadaoru.png'), load: (value, data) => data.cancel, style: {width: 110, resizeMode: 'stretch', height: 42, marginRight: 12}},
-                        {type: 'button-image', prop: 'cancel', filter: value => { return value ? require('../../assets/wz_quxiao.png') : require('../../assets/za_jia.png')}, style: {height: 58, width: 58, marginBottom: 5, alignItems: 'flex-end'}},
+                        {type: 'button-image', prop: 'cancel', filter: value => { return value ? require('../../assets/wz_quxiao.png') : require('../../assets/za_jia.png')}, style: {height: 58, width: 58, marginBottom: 5, alignItems: 'flex-end'}}
                     ]}
                 />
-                <Modal 
-                    isVisible={this.state.visible}
-                    onSwipeComplete={() => this.setState({ visible: false })}
-                    swipeDirection={['up', 'left', 'right', 'down']}
-                    style={{justifyContent: 'flex-end', margin: 0}}>
+
+                <Freedomen.SlidePop style={{top: Dimensions.get('window').height - 215, backgroundColor: '#f5f5f5'}} ref={ref => {slidePop = ref}}> 
                     <Freedomen.Region 
                         event={params => {
-                            this.setState({
-                                visible: false
-                            })
+                            slidePop.hide()
+                            const addCheckBox = (text) => {
+                                let data = this.refs.list.getData() 
+                                data.map(el => {
+                                    el.checked = false
+                                })
+                                this.refs.list.resetData(data)
+                                this.setState({
+                                    pilian: true,
+                                    button: {
+                                        choose: [],
+                                        label: text
+                                    }
+                                })
+                            }
+                            if (params.value == '分类管理')
+                                this.props.navigation.push('WZ_FenLieGuanLi')
+                            else if (params.value == '批量移动') {
+                                addCheckBox(params.value)
+                            } else if (params.value == '批量删除') {
+                                addCheckBox(params.value)
+                            }
                         }}
                         columns={[
-                            {type: 'button-text', value: '分类管理', style: {padding: 15}},
-                            {type: 'button-text', value: '分类管理', style: {padding: 15}},
-                            {type: 'button-text', value: '分类管理', style: {padding: 15}},
-                            {type: 'br', style: {backgroundColor: 'white'}}
+                            {type: 'button-pop-item', value: '分类管理', style: {color: '#2EBBC4', marginBottom: 1}},
+                            {type: 'button-pop-item', value: '批量移动', style: {color: '#2EBBC4', marginBottom: 1}},
+                            {type: 'button-pop-item', value: '批量删除', style: {color: '#FF6D73', marginBottom: 5}},
+                            {type: 'button-pop-item', value: '取消', style: {color: '#898989'}}
                         ]}
                     />
-                </Modal>
+                </Freedomen.SlidePop>
+               
             </View>
             
         );

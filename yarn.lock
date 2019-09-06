@@ -5235,10 +5235,10 @@ react-native-datepicker@^1.7.2:
   dependencies:
     moment "^2.22.0"
 
-react-native-freedomen@^0.2.8:
-  version "0.2.8"
-  resolved "https://registry.npmjs.org/react-native-freedomen/-/react-native-freedomen-0.2.8.tgz#7ddd05a609261287d550b6c0df536005b78b7f0d"
-  integrity sha512-n7B+eueHnn3rsKl7mGon8Q8AaGZImZIkDOr+2QRD62ltSaZoP4IfOHv+KKG9veuFKY38zX14UAToQ0iumtaN8A==
+react-native-freedomen@^0.2.9:
+  version "0.2.9"
+  resolved "https://registry.npmjs.org/react-native-freedomen/-/react-native-freedomen-0.2.9.tgz#b685b8ace6bf49db9dc3b85a7ae31ccd102f6bdb"
+  integrity sha512-XT70NsdvWTpfJqRlY81AeFiCb1/dNAukI499kyKINIShnliavi5f1gaKGR64Vr/tD/lLUbuUSqQByaF8FjZPjA==
   dependencies:
     react-native-datepicker "^1.7.2"
     react-native-progress "^3.6.0"

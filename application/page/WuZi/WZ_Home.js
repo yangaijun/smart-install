@@ -12,15 +12,16 @@ export default  class  extends React.Component {
             data: datas.XianMu
         }
     }
+    
     render() {
         return (
             <Freedomen.Region 
                 style={{backgroundColor: '#f5f5f5'}}
                 event={params => {
                     if (params.prop == 'ruku')
-                        this.props.navigation.push('WZ_RuKuChuKu', {label: '入库：选择物资', type: 1})
+                        this.props.navigation.push('WZ_RuKuChuKu', {label: '入库：选择物资', logType: 0})
                     else if (params.prop == 'chuku')
-                        this.props.navigation.push('WZ_RuKuChuKu', {label: '出库：选择物资', type: 2})
+                        this.props.navigation.push('WZ_RuKuChuKu', {label: '出库：选择物资', logType: 1})
                     else if (params.prop == 'kucun')
                         this.props.navigation.push('WZ_KuCun')
                     else if (params.prop == 'rukujilu')
@@ -33,14 +34,14 @@ export default  class  extends React.Component {
                 columns={[
                     [
                         [
-                            {type: 'image', value: require('../../assets/ruku.png'), style: {width: 38, height: 38, marginBottom: 8}},
-                            {type: 'text-h3', value: '入库'},
+                            {type: 'image-item', value: require('../../assets/ruku.png')},
+                            {type: 'text-h4', value: '入库'},
                             {type: 'click', prop: 'ruku', style: {flex: 1, align: 'center'}}
                         ], 
                         {type: 'text', value: '', style: {height: 88, width: 1, backgroundColor: '#f5f5f5'}},
                         [
-                            {type: 'image', value: require('../../assets/chuku.png'), style: {width: 38, height: 38, marginBottom: 8}},
-                            {type: 'text-h3', value: '出库'},
+                            {type: 'image-item', value: require('../../assets/chuku.png')},
+                            {type: 'text-h4', value: '出库'},
                             {type: 'click', prop: 'chuku', style: {flex: 1, align: 'center'}}
                         ],
                         {type: 'br-row', style: {marginBottom: 1}}

@@ -1,15 +1,47 @@
 import React from 'react'
 import Freedomen from 'react-native-freedomen' 
 import {View, ScrollView} from 'react-native'
-import Modal from "react-native-modal";
-import columns from '../../region/columns'
-const Search = columns.CK_Search('请输入名称、规格', 'name')
+import valid from '../../region/validations'
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {return {
-        title: navigation.state.params.label,
+        title: navigation.state.params.logType === 0 ? '入库:确认信息' : '出库:确认信息',
         headerRight: <Freedomen.Region 
             event={params => {
-                navigation.push('WZ_XinJian')
+                const submit = function(param) {
+                    //*********************接口logType 位置放错 */
+                    Freedomen.global.api.call('/MaterialLog/add', {
+                        ...param,
+                        jasoUserId: param.user && param.user.jasoUserId
+                    }).then(res => {
+                        Freedomen.redux({
+                            rkck_bar: (data) => {
+                                data.count = 0
+                                return data
+                            }
+                        })
+                        navigation.goBack()
+                    }) 
+                }
+
+                if (navigation.state.params.logType === 0) {
+                    Freedomen.redux({
+                        wz_rkck_queren: (data) => {
+                            if (valid(data, 'WZ_RKQueRen')) {
+                                submit(data)
+                            }
+                            return data
+                        }
+                    })
+                } else {
+                    Freedomen.redux({
+                        wz_rkck_queren: (data) => {
+                            if (valid(data, 'WZ_CKWueRen')) {
+                                submit(data)
+                            }
+                            return data
+                        }
+                    })
+                }
             }}
             columns={[
                 {type: 'button-text', value: '保存', style: {marginRight: 12}}
@@ -20,45 +52,63 @@ export default  class  extends React.Component {
         super(props)
         this.state = {
             visible: false,
-            list: [],
-            activityId: 1,
-            activity: 'full',
-            kinds: {kinds:[{kind: '全部分类'}, {kind: '分类1'}, {kind: '分类2'}, {kind: '分类3'}]}
-        }
+            data: {
+                logType: this.props.navigation.state.params.logType,
+                materialLogs: this.props.navigation.state.params.WZ
+            }
+        } 
     }
     componentDidMount() {
-        setTimeout(() => {
-            this.setState({
-                list: [{}, {}, {}]
-            })
-        }, 600);
+        // Freedomen.global.api.call('/JasoUser/getListByProjectId').then(res => {
+        //     console.log(res)
+        // })
     }
     render() {
         return (
             <Freedomen.Region 
                 style={{backgroundColor: '#f5f5f5'}}
+                data={this.state.data}
+                event={params => {
+                    if (params.prop == 'user')
+                        this.props.navigation.push('UserList', {label: '选择领取人', formName: 'wz_rkck_queren'});
+                }}
+                redux={'wz_rkck_queren'}
                 columns={[
                     [
                         {type: 'text-form-label', value: '日期：', style: {flex: 1}},
-                        {type: 'pick-date', placeholder: '请选择'},
+                        {type: 'pick-date', prop: 'createTime', placeholder: '请选择日期'},
                         {type: 'image-form', value: require('../../assets/right.png')},
                         {type: 'br-form-row'}
                     ], [
                         {type: 'text-form-label', value: '领取人:'},
                         {type: 'text-must', value: '*', style: {flex: 1}},
-                        {type: 'pick-date', placeholder: '请选择'},
+                        {type: 'text-h5', prop: 'user', value: '请选择', filter: value => value.userRealName || value},
                         {type: 'image-form', value: require('../../assets/right.png')},
-                        {type: 'click-form-row'}
-                    ], [
+                        {type: 'click-form-row', prop: 'user', load: (value, data) => data.logType === 1}
+                    ], 
+                    {type: 'text-valid-message', prop: 'user-valid', load: value => value}, 
+                    [
+                        {type: 'text-form-label', value: '物资来源:'},
+                        {type: 'text-must', value: '*', style: {flex: 1}},
+                        {type: 'input-text-form', prop: 'fromWhere', placeholder: '请输入来源'},
+                        {type: 'br-form-row',  load: (value, data) => data.logType === 0}
+                    ],
+                    {type: 'text-valid-message', prop: 'fromWhere-valid', load: value => value}, 
+                    [
                         {type: 'text-form-label', value: '备注:', style: {flex: 1}},
-                        {type: 'input-text', prop: 'bz', placeholder: '请输入备注'},
+                        {type: 'input-text-form', prop: 'remark', placeholder: '请输入备注'},
                         {type: 'br-form-row'}
                     ],
-                    {type: 'text', value: '本次入库物资', style: {padding: 12, align: 'center'}},
-                    {type: 'views', value: [{}, {}], columns: [
-                        {type: 'text-form-label', value: '螺丝', style: {flex: 1}},
-                        {type: 'text-form-label', value: 2, filter: value => `${value}个`},
-                        {type: 'br-form-row'}
+                    {type: 'text-label',  filter: (value, data) =>  data.logType ===0  ? `本次入库物资: ${data.materialLogs.length}项` : `本次出库物资: ${data.materialLogs.length}项`, style: {padding: 12, align: 'center'}},
+                    {type: 'views', prop: 'materialLogs',  columns: [
+                        [
+                            {type: 'text-form-label', prop: 'materialName', style: {flex: 1}},
+                            {type: 'text-form-label', prop: 'logNum'},
+                            {type: 'text-form-label', prop: 'materialUnit'},
+                            {type: 'br-normal-row'}
+                        ],
+                        {type: 'text', prop: 'price', filter: (value, data) => `￥${value} /${data.materialUnit}`, load: value => this.state.data.logType === 0, style: {alignItems: 'flex-end', paddingTop: 5} },
+                        {type: 'br-form-col'}
                     ]}
                 ]}
             />

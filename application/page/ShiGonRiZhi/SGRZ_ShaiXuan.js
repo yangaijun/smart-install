@@ -31,30 +31,37 @@ export default  class  extends React.Component {
             <Freedomen.Region 
                 style={{backgroundColor: '#f5f5f5'}}
                 event={params => { 
-                    
+                    if (params.prop == 'biaoduan')
+                        this.props.navigation.push('CP_BiaoDuan', {...params.row, label: '标段', formName: 'sgrz_shaixuan'})
+                    else if (params.prop == 'chuanjianren')
+                        this.props.navigation.push('CP_User', {...params.row, label: '创建人', formName: 'sgrz_shaixuan'})
+                    else if (params.value == '确定') {
+                        Freedomen.global.callBack(params.row)
+                        this.props.navigation.goBack()
+                    }
                 }}
                 redux={'sgrz_shaixuan'}
                 columns={[
                     [
                        {type: 'text-form-label', value: '标段', style: {flex: 1}},
-                       {type: 'text', placeholder: '请选择标段'},
+                       {type: 'text-h5', prop: 'tendersName', placeholder: '请选择标段'},
                        {type: 'image-form', value: require('../../assets/right.png')},
-                       {type: 'click-form-row'}
+                       {type: 'click-form-row', prop: 'biaoduan'}
                    ], [
                        {type: 'text-form-label', value: '开始时间', style: {flex: 1}},
-                       {type: 'pick-date', placeholder: '请选择开始时间', prop: 'kssj'},
+                       {type: 'pick-date', prop: 'startTime', placeholder: '请选择开始时间'},
                        {type: 'image-form', value: require('../../assets/right.png')},
                        {type: 'br-form-row'}
                    ], [
                        {type: 'text-form-label', value: '结束时间', style: {flex: 1}},
-                       {type: 'pick-date', placeholder: '请选择结束时间', prop: 'jssj'},
+                       {type: 'pick-date', placeholder: '请选择结束时间', prop: 'endTime'},
                        {type: 'image-form', value: require('../../assets/right.png')},
                        {type: 'br-form-row'}
                    ], [
                        {type: 'text-form-label', value: '创建人', style: {flex: 1}},
-                       {type: 'text', value: '请选择'},
+                       {type: 'text-h5', prop: 'userRealName', placeholder: '请选择'},
                        {type: 'image-form', value: require('../../assets/right.png')},
-                       {type: 'click-form-row'}
+                       {type: 'click-form-row', prop: 'chuanjianren'}
                    ],[
                         {type: 'button-primary', value: '确定', style: {width: '58', borderRadius: 28}},
                         {type: 'br', style: {paddingTop: 35, backgroundColor: 'white', align: 'center'}}

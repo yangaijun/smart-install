@@ -9,16 +9,12 @@ export default  class  extends React.Component {
         super(props)
         this.state = {
             data: {
-               ...datas.GonZuo
+               ...datas.GonZuo 
             }
         }
     }
-    componentWillMount() {console.log(this.state.data)
-        Freedomen.global.api.get('api/newsInfo/admin/getNewsInfoList', {
-            pageSize: 2
-        }).then(res => { 
-        })
-    }
+    componentWillMount() {  }
+    
     render() {
         return (
             <ScrollView showsVerticalScrollIndicator={false} style={{backgroundColor: '#f5f5f5'}}> 
@@ -37,6 +33,8 @@ export default  class  extends React.Component {
                             this.props.navigation.push('GZ_Home', params.value.row)
                         else if (params.value.row && params.value.row.label == '新建') 
                             this.props.navigation.push('GZ_XinJian')
+                        else if (params.prop == 'kaoqin_qudaka')
+                            this.props.navigation.navigate('KQ_Home', {label: '阿里爹爹'})
                     }}
                     data={this.state.data}
                     columns={[
@@ -47,7 +45,7 @@ export default  class  extends React.Component {
                         columns.GonZuoTai_KaoQin,
                         columns.GonZuoTai_GonZuo,
                         columns.GonZuoTai_ShiGonRiZhi,
-                        columns.GonZuoTai_XinWenZiXun
+                        columns.GonZuoTai_XinWenZiXun 
                     ]}
                 />
             </ScrollView>

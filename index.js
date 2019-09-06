@@ -6,17 +6,34 @@ import {AppRegistry} from 'react-native';
 import App from './application/router/index';
 import {name as appName} from './app.json';
 import Freedomen from 'react-native-freedomen'
-import api from './application/apis'
+import api from './application/apis2'
 Freedomen.global.api = api  
 
 Freedomen.custom({
     primaryColor: '#2EBBC4'
-}, {},{
+}, {}, {
     //form 
     'text-form-label': {
         color: '#191919',
         fontSize: 16,
         fontWeight: '400'
+    },
+    'text-list': {
+        fontWeight: '800', 
+        fontSize: 22, 
+        color: 'white', 
+        backgroundColor: '#2EBBC4', 
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        width: 45, 
+        height: 45, 
+        marginLR: 15, 
+        borderRadius: 45
+    },
+    'text-valid-message': {
+        color: '#FF6D73',
+        marginLeft: 10,
+        padding: 5,
     },
     'br-form-row': {
         paddingHorizontal: 15,
@@ -25,7 +42,7 @@ Freedomen.custom({
         marginBottom: 1,
         flexDirection: 'row',
         backgroundColor: 'white',
-        minHeight: 58,
+        minHeight: 52 
     },
     'click-form-row': {
         paddingHorizontal: 15,
@@ -34,7 +51,7 @@ Freedomen.custom({
         marginBottom: 1,
         flexDirection: 'row',
         backgroundColor: 'white',
-        minHeight: 58,
+        minHeight: 52 
     },
     'br-form-col': {
         paddingHorizontal: 15,
@@ -51,6 +68,21 @@ Freedomen.custom({
         padding: 10,
         marginTop: 8
     },
+    'input-text-form': {
+        alignItems: 'flex-end'
+    },
+    'input-text-item': {
+        borderColor: '#ccc', 
+        borderWidth: .5, 
+        width: 55,
+        textAlignVertical: 'center',
+        textAlign: 'center'
+    },
+    'text-form-must': {
+        color: '#FF6D73',
+        padding: 5,
+        flex: 1
+    },
     'input-text-b': {
         borderColor: '#f5f5f5',
         borderWidth: 1,
@@ -61,17 +93,18 @@ Freedomen.custom({
     //dialog
     'text-dialog-title': {
         alignSelf: 'center', 
-        paddingBottom: 20,
-        fontSize: 18,
-        fontWeight: 'bold',
+        paddingBottom: 15,
+        fontSize: 16,
+        fontWeight: '500',
         color: '#121212' 
     },
     'br-dialog': {
         backgroundColor: 'white', 
         padding: 25, 
+        paddingTop: 20,
         paddingBottom: 0, 
         borderRadius: 5, 
-        marginHorizontal: 25
+        marginHorizontal: '10%'
     },
     'click-col': {
         padding: 15, 
@@ -151,7 +184,7 @@ Freedomen.custom({
         marginRight: 12
     },
     'button-right': {
-        marginRight: 12,
+        marginRight: 15,
         color: '#999999'
     },
     'button-image-icon': {
@@ -164,6 +197,16 @@ Freedomen.custom({
         fontSize: 18,
         color: '#191919',
         flex: 1
+    },
+    'button-pop-item': {
+        color: '#2EBBC4',
+        fontSize: 18, 
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        justifyContent: 'center',
+        backgroundColor: 'white', 
+        height: 52, 
+        width: '100%'
     },
     'button-az': {
         borderRadius: 18, 
