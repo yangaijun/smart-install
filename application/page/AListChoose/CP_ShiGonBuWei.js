@@ -41,6 +41,7 @@ export default  class  extends React.Component {
     }
     _loadData() {
         Freedomen.global.api.call('/ProjectBuilding/selectTree').then(res => {
+            console.log(res)
             let arr = [
                 {type: 'input-text', prop: 'content', placeholder: '详细地址，例：16#5层501室'},
                 {type: 'br-form-row'}

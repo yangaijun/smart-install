@@ -2,7 +2,8 @@ package com.nsmarti;
 
 import android.app.Application;
 
-import com.facebook.react.ReactApplication; 
+import com.facebook.react.ReactApplication;
+// import com.brentvatne.react.ReactVideoPackage;
 import it.innove.BleManagerPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.imagepicker.ImagePickerPackage;
@@ -13,6 +14,7 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import cn.jpush.reactnativejpush.JPushPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -29,12 +31,14 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            // new ReactVideoPackage(),
             new BleManagerPackage(),
             new RNSoundPackage(),
             new ImagePickerPackage(),
             new ReactNativeAudioPackage(),
             new RNCWebViewPackage(),
-            new RNGestureHandlerPackage()
+            new RNGestureHandlerPackage(),
+            new JPushPackage(false, false)
       );
     }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import Freedomen from 'react-native-freedomen' 
-import {View} from 'react-native'
+import {View, Alert} from 'react-native'
 import Modal from "react-native-modal";
 import columns from '../../region/columns'
 import CP_FenLei from './CP_FenLei' 
@@ -30,10 +30,20 @@ export default  class  extends React.Component {
                 pageSize: 15
             }
         }
+        console.log(this.props.navigation.state.params)
+        this.WZ = []
         this.Search = columns.CK_Search('请输入名称、规格', 'sizeOrName')
     }
     componentDidMount() {
-       this._loadWuZi()
+        this._loadWuZi()
+        Freedomen.global.fn = (data) => {
+            data.isCommon = data.isCommon ? 1 : 0
+            data.currentInputNum = data.putNum
+            if (this.props.navigation.state.params.logType === 1) {
+                data.putNum = undefined
+            }
+            this.WZ.push(data)
+        }
     }
     _loadWuZi(fresh = false) {
         if (fresh) 
@@ -118,7 +128,7 @@ export default  class  extends React.Component {
                         {type: 'image-icon', value: require('../../assets/xuanhao.png')},
                         {type: 'text-badge', prop: 'count', style: {marginTop: -22, marginLeft: -15}, load: value => value},
                         {type: 'text', value: '', style: {flex: 1}},
-                        {type: 'button-primary', value: '选好了', disabled: (value, data) => !data.count, style: {width: 100, height: 34, padding: 5, borderRadius: 16}},
+                        {type: 'button-primary', value: '选好了', disabled: (value, data) => !data.count, style: {width: 100, height: 34, padding: 5, borderRadius: 18}},
                         {type: 'br-row', style: {height: 52}}
                     ]}
                 />  
@@ -135,15 +145,13 @@ export default  class  extends React.Component {
                         event={params => {
                             if (params.prop == 'cancel' || params.prop == 'confirm') {
                                 if (params.prop == 'confirm') {
-                                    if (!params.row.logNum) {
+                                    if (!params.row.logNumTemp) {
                                         return {
                                             ...params.row,
-                                            'logNum-valid': '请正确输入数量'
+                                            'logNumTemp-valid': '请正确输入数量'
                                         }
                                     }
-                                    if (!this.WZ) {
-                                        this.WZ = []
-                                    }
+                                    params.row.currentInputNum = params.row.logNumTemp
                                     this.WZ.push(params.row)
 
                                     Freedomen.redux({
@@ -163,11 +171,11 @@ export default  class  extends React.Component {
                             {type:'text-dialog-title', prop: 'materialName'},
                             [
                                 {type: 'text-h5', value: '数量:'},
-                                {type: 'counter', prop: 'logNum', value: 0, style: {marginLR: 10}},
+                                {type: 'counter', prop: 'logNumTemp', value: 0, max: 100000000, min: -10000000, style: {marginLR: 10}},
                                 {type: 'text-h5', prop: 'materialUnit', value: '把'},
                                 {type: 'br-row', style: {alignSelf: 'center'}}
                             ], 
-                            {type: 'text-valid-message', prop: 'logNum-valid', load: value => value, style: {marginLeft: 40}}, 
+                            {type: 'text-valid-message', prop: 'logNumTemp-valid', load: value => value, style: {marginLeft: 40}}, 
                             [
                                 {type: 'text-h5', value: '单价:'},
                                 {type: 'input-text', prop: 'price', value: '0',  style: {marginLR: 10, borderRadius: 5, padding: 3, alignItems: 'center', borderWidth: .6,  width: 138, borderColor: '#ccc'}},

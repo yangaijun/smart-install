@@ -10,6 +10,7 @@ import WZ_RuKuJiLu from './WZ_RuKuJiLu'
 import WZ_FenLeiXuanZe from './WZ_FenLeiXuanZe'
 import WZ_LiuShui from './WZ_LiuShui';
 import WZ_BianJi from './WZ_BianJi'
+import WZ_PiLianCaoZuo from './WZ_PiLianCaoZuo';
 
 export default {
     WZ_Home: WZ_Home,
@@ -23,5 +24,6 @@ export default {
     WZ_FenLeiXuanZe: WZ_FenLeiXuanZe,
     WZ_XianQin: WZ_XianQin,
     WZ_LiuShui: WZ_LiuShui,
-    WZ_BianJi: WZ_BianJi
+    WZ_BianJi: WZ_BianJi,
+    WZ_PiLianCaoZuo: WZ_PiLianCaoZuo
 }

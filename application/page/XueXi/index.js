@@ -9,8 +9,12 @@ import XX_TiMu from './XX_TiMu'
 import XX_TiKuHome from './XX_TiKuHome'
 import XX_TiaoZhanTiMu from './XX_TiaoZhanTiMu'
 import XX_JiFen from './XX_JiFen'
+import XX_PlayVideo from './XX_PlayVideo';
+import XX_TiMuXianQin from './XX_TiMuXianQin';
 
 export default {
+    XX_TiMuXianQin: XX_TiMuXianQin,
+    XX_PlayVideo: XX_PlayVideo,
     XX_DaTiJinHua: XX_DaTiJinHua,
     XX_MeiRiYiLian: XX_MeiRiYiLian,
     XX_QianDao: XX_QianDao,

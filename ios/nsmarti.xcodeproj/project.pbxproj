@@ -60,6 +60,7 @@
 		10F7CFD12DCE4EAAB50CBEE4 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B19174C29524CDD8E18776F /* libresolv.tbd */; };
 		0DD9D75779A74E4CA6405D03 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3021DE06F0432EB2464CB7 /* CoreGraphics.framework */; };
 		7E413B7E13BB4180A3563734 /* libBleManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 408E516BBB3F4BE9AEA5BE3D /* libBleManager.a */; };
+		CF6BFF1FC89848A4A64C24B2 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CDCC0D1C8554D7EAFB8D84D /* libRCTVideo.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -397,6 +398,8 @@
 		8C3021DE06F0432EB2464CB7 /* CoreGraphics.framework */ = {isa = PBXFileReference; name = "CoreGraphics.framework"; path = "System/Library/Frameworks/CoreGraphics.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		BC1A0A7195984C73A84C908B /* BleManager.xcodeproj */ = {isa = PBXFileReference; name = "BleManager.xcodeproj"; path = "../node_modules/react-native-ble-manager/ios/BleManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		408E516BBB3F4BE9AEA5BE3D /* libBleManager.a */ = {isa = PBXFileReference; name = "libBleManager.a"; path = "libBleManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		2DF8E59C295B482D98F07F30 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; name = "RCTVideo.xcodeproj"; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		2CDCC0D1C8554D7EAFB8D84D /* libRCTVideo.a */ = {isa = PBXFileReference; name = "libRCTVideo.a"; path = "libRCTVideo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -445,6 +448,7 @@
 				10F7CFD12DCE4EAAB50CBEE4 /* libresolv.tbd in Frameworks */,
 				0DD9D75779A74E4CA6405D03 /* CoreGraphics.framework in Frameworks */,
 				7E413B7E13BB4180A3563734 /* libBleManager.a in Frameworks */,
+				CF6BFF1FC89848A4A64C24B2 /* libRCTVideo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +659,7 @@
 				1EAE22085B9E4F69BD4DAFA4 /* RCTJCoreModule.xcodeproj */,
 				1C47FEC87D334AF5B7800462 /* RCTJPushModule.xcodeproj */,
 				BC1A0A7195984C73A84C908B /* BleManager.xcodeproj */,
+				2DF8E59C295B482D98F07F30 /* RCTVideo.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1283,15 +1288,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1304,6 +1300,7 @@
 					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
 					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
 				);
 			};
 			name = Debug;
@@ -1326,15 +1323,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1347,6 +1335,7 @@
 					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
 					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
 				);
 			};
 			name = Release;
@@ -1378,6 +1367,7 @@
 					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
 					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
 				);
 			};
 			name = Debug;
@@ -1408,6 +1398,7 @@
 					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
 					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
 				);
 			};
 			name = Release;
@@ -1438,15 +1429,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1459,6 +1441,7 @@
 					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
 					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
 				);
 			};
 			name = Debug;
@@ -1489,15 +1472,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1510,6 +1484,7 @@
 					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
 					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
 				);
 			};
 			name = Release;
@@ -1539,15 +1514,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1560,6 +1526,7 @@
 					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
 					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
 				);
 			};
 			name = Debug;
@@ -1589,15 +1556,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1610,6 +1568,7 @@
 					"$(SRCROOT)\..\node_modules\jcore-react-native\ios\RCTJCoreModule",
 					"$(SRCROOT)\..\node_modules\jpush-react-native\ios\RCTJPushModule",
 					"$(SRCROOT)\..\node_modules\react-native-ble-manager\ios",
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
 				);
 			};
 			name = Release;

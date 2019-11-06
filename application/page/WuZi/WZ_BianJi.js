@@ -12,6 +12,7 @@ export default  class  extends React.Component {
                     wz_xinjian: (data) => {
                         if (valid(data, 'WZ_XinJian')) {
                             Freedomen.global.api.call('/Material/add', data).then(res => {
+                                navigation.navigate('WZ_KuCun')
                                 navigation.goBack()
                             })
                         } 

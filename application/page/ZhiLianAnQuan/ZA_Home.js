@@ -27,17 +27,17 @@ export default  class  extends React.Component {
                 style={{alignItems: 'center', paddingTop: 10, flex: 1, backgroundColor: 'white'}}
                 event={params => {
                     if (params.prop == 'jiancha')
-                        this.props.navigation.navigate('ZA_LieBiao', {label: '质量检查'})
+                        this.props.navigation.navigate('ZA_LieBiao', this.props.navigation.state.params)
                     else if (params.prop == 'zhengai')
-                        this.props.navigation.navigate('ZA_LieBiao', {label: '质量整改'})
+                        this.props.navigation.navigate('ZA_LieBiao', this.props.navigation.state.params)
                     else if (params.prop == 'daiwozhengai')
-                        this.props.navigation.navigate('ZA_LieBiao', {label: '待我整改'})
+                        this.props.navigation.navigate('ZA_LieBiao', this.props.navigation.state.params)
                     else if (params.prop == 'daiwoyanshou')
-                        this.props.navigation.navigate('ZA_LieBiao', {label: '待我验收'})
+                        this.props.navigation.navigate('ZA_LieBiao', this.props.navigation.state.params)
                     else if (params.prop == 'jianchen')
-                        this.props.navigation.navigate('ZA_JianChen')
+                        this.props.navigation.navigate('ZA_JianChen', this.props.navigation.state.params)
                     else if (params.prop == 'jianchaxian') 
-                        this.props.navigation.navigate('ZA_JianChaXian')
+                        this.props.navigation.navigate('ZA_JianChaXian', this.props.navigation.state.params)
                 }}
                 columns={[
                     [

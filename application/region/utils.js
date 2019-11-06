@@ -1,6 +1,13 @@
+import {Dimensions, Platform} from 'react-native';
+const {height, width} = Dimensions.get('window');
+const X_width = 375, XR_WIDTH = 414;
+const X_height = 812, XR_HEIGHT = 896;
+const isIPhoneX = Platform.OS === 'ios' && ( (height === X_height && width ===X_width) || (height === XR_HEIGHT && width === XR_WIDTH));
+const PhoneType = Platform.OS === 'ios' ? (isIPhoneX ? 'iosx' : 'ios') : 'android'
+
 function change(obj, oldKey, newKey) {
     if (typeof newKey === 'function') { 
-        obj[oldKey] = newKey(obj[oldKey])
+        obj[oldKey] = newKey(obj[oldKey], obj)
     } else {
         obj[newKey] = obj[oldKey] 
     }
@@ -89,5 +96,5 @@ const formatDate = {
 }
 
 export default {
-    varChange, formatDate
+    varChange, formatDate, PhoneType
 }

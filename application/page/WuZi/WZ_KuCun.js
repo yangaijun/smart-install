@@ -1,8 +1,8 @@
 import React from 'react'
 import Freedomen from 'react-native-freedomen' 
-import {View, Dimensions} from 'react-native'
+import {View, Text, Dimensions} from 'react-native'
 import columns from '../../region/columns'
-import CP_FenLei from './CP_FenLei' 
+import CP_FenLei from './CP_FenLei'  
 var slidePop = null
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {return {
@@ -19,9 +19,10 @@ export default  class  extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            list: [],
-            pilian: false,
-            button: {choose: [], label: ''}
+            list: [] ,
+            cover: {
+                cancel: false
+            }
         }
         this.wuZiParams = {  
             pageVo: {
@@ -30,10 +31,12 @@ export default  class  extends React.Component {
             }
         }
         this.Search = columns.CK_Search('请输入名称、规格', 'sizeOrName')
-        this.choose = []
     }
     componentDidMount() {
         this._loadWuZi()
+        Freedomen.global.fn = () => {
+            this._loadWuZi(true)
+        }
     }
     _loadWuZi(fresh = false) {
         if (fresh) 
@@ -47,6 +50,26 @@ export default  class  extends React.Component {
         })
     }
     render() {
+        const _columns = [
+            {type: 'text-h4', prop: 'materialName', value: '螺丝刀'},
+            [
+                {type: 'text', prop: 'materialSize', value: '45*45*98', style: {flex: 1}},
+                {type: 'text', prop: 'materialUnit', filter: value => `单位: ${value}`}, 
+                {type: 'br', style: {flexDirection: 'row', paddingTB: 5}}
+            ],
+            [
+                {type: 'text', prop: 'putNum', filter: value => `入：${value}`, style: {flex: 1}},
+                {type: 'text', prop: 'outNum', filter: value => `出：${value}`, style: {flex: 1}},
+                [
+                    {type: 'text', value: '存：'},
+                    {type: 'text-primary', prop: 'leaveNum', value: 40},
+                    {type: 'br', style: {flexDirection: 'row', flex: 1}}
+
+                ],
+                {type: 'br', style: {flexDirection: 'row'}}
+            ],
+            {type: 'click-list-item', prop: 'into'}
+        ]
         return (
             <View style={{flex: 1, backgroundColor: '#f5f5f5'}}>
                 <Freedomen.Region 
@@ -76,118 +99,61 @@ export default  class  extends React.Component {
                         this._loadWuZi(true)
                     }}/> 
                     <View style={{flex: 1}}>
-                    <Freedomen.FreshList  
-                        ref={"list"}
-                        event={params => {
-                            if (['$page', '$fresh'].includes(params.prop)) {
-                                this.wuZiParams.pageVo.pageNo = params.row.pageNo
-                                this._loadWuZi()
-                            } else if (params.prop == 'into') {
-                                this.props.navigation.push('WZ_LiuShui', {...params.row, material: this.kind})
-                            } else if (params.prop == 'checked') {
-                                let choose = this.state.button.choose
-                                if (params.value)
-                                    choose.push(params.value)
-                                else {
-                                    for (var i = 0; i < choose.length; i ++) {
-                                        if (params.value.materialId ==  choose[i].materialId)
-                                            break
-                                    }
-                                    if (i !== choose.length)
-                                        choose.splice(i, 1)
+                        <Freedomen.FreshList  
+                            ref={"list"}
+                            event={params => {
+                                if (['$page', '$fresh'].includes(params.prop)) {
+                                    this.wuZiParams.pageVo.pageNo = params.row.pageNo
+                                    this._loadWuZi()
+                                } else if (params.prop == 'into') {
+                                    this.props.navigation.push('WZ_LiuShui', {...params.row, material: this.kind})
                                 }
-                                this.setState({
-                                    button: {
-                                        ...this.state.button,
-                                        choose: choose
-                                    }
-                                })
-                            }
-                        }}
-                        data={this.state.list}
-                        columns={[
-                            {type: 'text-h4', prop: 'materialName', value: '螺丝刀'},
-                            [
-                                {type: 'text', prop: 'materialSize', value: '45*45*98', style: {flex: 1}},
-                                {type: 'text', prop: 'materialUnit', filter: value => `单位: ${value}`},
-                                {type: 'checkbox', prop: 'checked', load: value=>value !== void 0, style: {marginLeft: 15}},
-                                {type: 'br', style: {flexDirection: 'row', paddingTB: 5}}
-                            ],
-                            [
-                                {type: 'text', prop: 'putNum', filter: value => `入：${value}`, style: {flex: 1}},
-                                {type: 'text', prop: 'outNum', filter: value => `出：${value}`, style: {flex: 1}},
-                                [
-                                    {type: 'text', value: '存：'},
-                                    {type: 'text-primary', prop: 'leaveNum', value: 40},
-                                    {type: 'br', style: {flexDirection: 'row', flex: 1}}
-
-                                ],
-                                {type: 'br', style: {flexDirection: 'row'}}
-                            ],
-                            {type: 'click-list-item', prop: 'into'}
-                        ]}
-                    /> 
+                            }}
+                            data={this.state.list}
+                            columns={_columns}
+                        /> 
                     </View>
                 </View>
                 {
-                    this.state.pilian ? 
-                    <Freedomen.Region 
-                        style={{height: 52}}
-                        data={this.state.button}
-                        columns={[
-                            {type: 'button-text', prop: 'label', filter: (value, data) => data.choose.length == 0 ? '取消' : `${value}(${data.choose.length}项)`, style: value => {
-                                return { 
-                                    align: 'center',
-                                    fontWeight: '500',
-                                    fontSize: 16,
-                                    color: 'white',
-                                    backgroundColor: value == '批量删除' ? '#FF6D73' : '#2EBBC4',
-                                    flex: 1
-                                }
-                            }}
-                        ]}
-                    /> : null
+                    this.state.cover.cancel && 
+                    <View style={{position: 'absolute', top: 0, bottom: 0, right: 0, left: 0, backgroundColor: 'rgba(0,0,0,0.2)'}}></View>
                 }
-                
                 <Freedomen.Region 
                     style={{
                         position: 'absolute',
                         bottom: 45,
                         right: 22
                     }}
+                    data={this.state.cover}
                     event={params => {
                         if (params.prop == 'cancel') {
-                            return {cancel: !params.row.cancel}
-                        }
+                            this.setState({
+                                cover: {cancel: !params.row.cancel}
+                            }) 
+                        } else if (params.prop == 'shoudonxinjian') {
+                            this.props.navigation.push('WZ_XinJian', {logType: 0})
+                        } 
                     }}
                     columns={[
-                        {type: 'button-image', value: require('../../assets/wz_shoudonxinjian.png'), load: (value, data) => data.cancel, style: {width: 110, resizeMode: 'stretch', height: 42, marginRight: 12}},
+                        {type: 'button-image', prop: 'shoudonxinjian', value: require('../../assets/wz_shoudonxinjian.png'), load: (value, data) => data.cancel, style: {width: 110, resizeMode: 'stretch', height: 42, marginRight: 12}},
                         {type: 'button-image', value: require('../../assets/wz_saomadaoru.png'), load: (value, data) => data.cancel, style: {width: 110, resizeMode: 'stretch', height: 42, marginRight: 12}},
                         {type: 'button-image', prop: 'cancel', filter: value => { return value ? require('../../assets/wz_quxiao.png') : require('../../assets/za_jia.png')}, style: {height: 58, width: 58, marginBottom: 5, alignItems: 'flex-end'}}
                     ]}
                 />
-
                 <Freedomen.SlidePop style={{top: Dimensions.get('window').height - 215, backgroundColor: '#f5f5f5'}} ref={ref => {slidePop = ref}}> 
                     <Freedomen.Region 
                         event={params => {
                             slidePop.hide()
-                            const addCheckBox = (text) => {
+                            const addCheckBox = () => {
                                 let data = this.refs.list.getData() 
                                 data.map(el => {
                                     el.checked = false
                                 })
-                                this.refs.list.resetData(data)
-                                this.setState({
-                                    pilian: true,
-                                    button: {
-                                        choose: [],
-                                        label: text
-                                    }
-                                })
+                                this.props.navigation.push('WZ_PiLianCaoZuo', {data: data, label: params.value})
                             }
                             if (params.value == '分类管理')
                                 this.props.navigation.push('WZ_FenLieGuanLi')
-                            else if (params.value == '批量移动') {
+                            else if (params.value == '批量移动') { 
                                 addCheckBox(params.value)
                             } else if (params.value == '批量删除') {
                                 addCheckBox(params.value)

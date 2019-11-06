@@ -11,6 +11,14 @@ export default  class  extends React.Component {
                 event={params => { 
                     Freedomen.redux({
                         sgrz_shigonjidu: (data) => {
+                            if (data.constructProgressStartTime) {
+                                if (valid(data, 'SGRZ_ShiGonJinDu')) {
+                                    data.list.push({
+                                        ...data,
+                                        list: undefined
+                                    })
+                                }
+                            }
                             Freedomen.redux({
                                 sgrz_xinjian: info => {
                                     return {

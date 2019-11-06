@@ -1,5 +1,5 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
+import { ScrollView, Alert } from 'react-native'
 import Freedomen from 'react-native-freedomen' 
 
 export default  class  extends React.Component {
@@ -33,11 +33,23 @@ export default  class  extends React.Component {
                                 Freedomen.global.project = params.row
 
                                 const navigation = this.props.navigation
-                                navigation.push(navigation.state.params.router, navigation.state.params)
+                                if (navigation.state.params.router == 'XM_MoXinLiuLan') {
+                                    Freedomen.global.api.call('/Bimface/getModelViewToken', Freedomen.global.project).then(res => {
+                                        if (res) {
+                                            navigation.push(navigation.state.params.router, {viewToken: res})
+                                        } else {
+                                            Alert.alert('提示','此项目未发现模型', [{text: '确定'}])
+                                        }
+                                    }).catch(e => {
+                                        Alert.alert('提示','此项目未发现模型', [{text: '确定'}])
+                                    })
+                                } else {
+                                    navigation.push(navigation.state.params.router, navigation.state.params)
+                                }
                             }
                         }}
                         columns={[
-                            {type: 'text-h5', prop: 'projectName', value: '歌林小镇综合机电安装工程', style: {flex: 1}},
+                            {type: 'text-h5', prop: 'projectName',   style: {flex: 1}},
                             {type: 'image-form', value: require('../../assets/right.png')},
                             {type: 'click-form-row', prop: 'row'}
                         ]}

@@ -34,14 +34,16 @@ export default  class  extends React.Component {
                             key={index}
                             data={el}
                             event={params => {
-                                let obj = {}
-                                obj[this.props.navigation.state.params.formName] = (data) => {
-                                    return {
-                                        ...data,
-                                        ...params.row
+                                if (this.props.navigation.state.params.formName) {
+                                    let obj = {}
+                                    obj[this.props.navigation.state.params.formName] = (data) => {
+                                        return {
+                                            ...data,
+                                            ...params.row
+                                        }
                                     }
+                                    Freedomen.redux(obj)
                                 }
-                                Freedomen.redux(obj)
                                 this.props.navigation.goBack()
                             }}
                             columns={[

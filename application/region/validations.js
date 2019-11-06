@@ -1,4 +1,4 @@
-
+import util from './utils'
 const rules = {
     // not empty
     must: {
@@ -49,7 +49,7 @@ const validations = {
         putNum: ['must','number']
     },
     WZ_RKQueRen: {
-        fromWhere: 'must'
+        materialFrom: 'must'
     },
     WZ_CKWueRen: {
         user: 'must'
@@ -72,7 +72,34 @@ const validations = {
         teamsName: 'must'
     },
     SGRZ_XinJian: {
-        tendersName: 'must'
+        tendersName: 'must',
+        constructDate: (value) => {  
+            if (value instanceof Date) {
+                value = util.formatDate.format(value, 'yyyy-MM-dd')
+            }
+            let date1 = new Date(), date2 = new Date()
+            date1.setDate(-15)
+            let towWeek = util.formatDate.format(date1, 'yyyy-MM-dd')
+            let today = util.formatDate.format(date2, 'yyyy-MM-dd')
+
+            if (value < towWeek || value > today) {
+                return '日期不在范围内'
+            } 
+        }
+    },
+    ZL_XinJian: {
+        startDate: 'must',
+        qualityCheckName: 'must' 
+    },
+    AQ_XinJian: {
+        startDate: 'must',
+        securityCheckName: 'must' 
+    },
+    GZ_XinJian: {
+        projectName: 'must',
+        taskTopic: 'must',
+        taskTime: 'must',
+        workTaskUserList: 'must'
     }
 }
 
@@ -91,8 +118,7 @@ function test(arr, value, data) {
 }
 
 function validate(data, name) {
-    let commit = true
-    console.log(data)
+    let commit = true 
     for (let key in validations[name]) {
         
         let vs = validations[name][key] 

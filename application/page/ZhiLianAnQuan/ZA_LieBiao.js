@@ -7,7 +7,7 @@ const Search = columns.ZA_Search()
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
-            title: navigation.state.params.label,
+            title: navigation.state.params.label + '检查',
             headerRight: <Freedomen.Region 
                 event={params => {  
                     if (params.prop == 'shaixuan')
@@ -24,6 +24,22 @@ export default  class  extends React.Component {
         this.state = {
             list: []
         }
+        this.params = props.navigation.state.params.type == 1 ? 
+        //质量
+        {
+            pageVo:{
+                pageNo: 1,
+                pageSize: 15
+            }
+        } 
+        : 
+        //安全
+        {
+            pageVo:{
+                pageNo: 1,
+                pageSize: 15
+            }
+        }
     }
     componentDidMount() {
         setTimeout(() => {
@@ -31,6 +47,12 @@ export default  class  extends React.Component {
                 list:[{status: 1},{status: 2},{status: 3},{status: 4}]
             })
         }, 200);
+        this._loadData()
+    }
+    _loadData() {
+        Freedomen.global.api.call(this.props.navigation.state.params.type == 1 ? '/QualityCheck/select' : '/SecurityCheck/select', this.params).then(res => {
+            console.log(res)
+        })
     }
     render() {
         return (
@@ -55,18 +77,23 @@ export default  class  extends React.Component {
                     }}
                     columns={[
                         [
-                            [
-                                {type: 'text-h4', value: '格林小镇', style: {flex: 1}},
-                                {type: 'text-status', prop: 'status', value: 1, filter: {1: '待指派', 2: '进行中', 3: '审核中', 4: '已完成'}, style: (value) => {
-                                    let bgColor = {1: '#FF6D73', 2: '#FAB722', 3: '#00CC9B', 4: '#999999'}[value]
-                                    return {
-                                        backgroundColor: bgColor, 
-                                        marginLR: 8
-                                    }
-                                }},
-                                {type: 'text', value: '不通过'},
-                                {type: 'br', style: {flexDirection: 'row', alignItems: 'center', padding: 3}}
-                            ],
+                            // [
+                            //     {type: 'text-h4', value: '格林小镇', style: {flex: 1}},
+                            //     {type: 'text-status', value: 1, filter: (value, data) => {
+                            //         data.qualityCheck.jasoUserId == Freedomen.global.user.jasoUserId
+                            //         {1: '待指派', 2: '进行中', 3: '审核中', 4: '已完成'},
+                            //     },  style: (value, data) => {
+                            //         data.qualityCheck.jasoUserId == Freedomen.global.user.jasoUserId
+                            //         data.qualityCheck.status
+                            //         let bgColor = {1: '#FF6D73', 2: '#FAB722', 3: '#00CC9B', 4: '#999999'}[value]
+                            //         return {
+                            //             backgroundColor: bgColor, 
+                            //             marginLR: 8
+                            //         }
+                            //     }},
+                            //     {type: 'text', value: '不通过'},
+                            //     {type: 'br', style: {flexDirection: 'row', alignItems: 'center', padding: 3}}
+                            // ],
                             {type: 'text', value: '王大头', filter: value => `整改人：${value}`, style: {padding: 3}},
                             {type: 'text-primary', value: '2019-07-11', style: {padding: 3}},
                             {type: 'click', prop: 'detail'}

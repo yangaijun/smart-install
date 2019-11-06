@@ -27,7 +27,7 @@ export default  class  extends React.Component {
         return (
             <View style={{flex: 1, backgroundColor: '#f5f5f5'}}>
             <Freedomen.Region 
-                style={{backgroundColor: 'white', padding: 10, paddingBottom:1}}
+                style={{backgroundColor: 'white', padding: 5, paddingBottom:1}}
                 event={params => { 
                     if (params.prop == '_clear') {
                         params.row.content = ''
@@ -38,7 +38,7 @@ export default  class  extends React.Component {
                     Search,
                     [ 
                         {type: 'tags-tab', value: '处罚单', prop: 'dm', options: '处罚单,奖励单'},
-                        {type: 'br-row', style: {marginBottom: 1, align: 'center', marginTop: 10, borderTopColor:　'#f5f5f5', borderTopWidth: 1}}
+                        {type: 'br-row', style: {marginBottom: 1, align: 'center', marginTop: 5, borderTopColor:　'#f5f5f5', borderTopWidth: 1, paddingBottom: 0}}
                     ]
                 ]}
             />

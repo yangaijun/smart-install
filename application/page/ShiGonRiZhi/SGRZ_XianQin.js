@@ -10,9 +10,14 @@ export default  class  extends React.Component {
     }
     constructor(props) {
         super(props) 
+        let params = {...props.navigation.state.params}
+        params.pics = (props.navigation.state.params.pics || '').split(',').map(el => {
+            return {picture: el}
+        })
         this.state = {
-            data: props.navigation.state.params
+            data: params
         }
+        console.log(params,props.navigation.state.params)
     } 
     componentDidMount() { } 
     render() {
@@ -20,13 +25,17 @@ export default  class  extends React.Component {
             <View style={{flex: 1, backgroundColor: '#f5f5f5'}}>
                 <ScrollView style={{flex: 1}}>
                     <Freedomen.Region 
-                        event={params => {}}
+                        event={params => {
+                            if (params.value && params.value.prop == 'picture') {
+                                this.props.navigation.push('P_ZoomImage', {pictures: params.row, index: params.$index})
+                        }
+                        }}
                         data={this.state.data}
                         columns={[
                             [
                                 [
-                                    {type: 'image-header', value: require('../../assets/image_header.png')},
-                                    {type: 'text-h4', value: '王大头', style: {flex: 1, paddingLeft: 5}},
+                                    {type: 'image-header', prop: 'userIcon', filter: value=> `http://www.jasobim.com:8085/${value}`},
+                                    {type: 'text-h4', prop: 'userRealName', style: {flex: 1, paddingLeft: 5}},
                                     [
                                         {type: 'text', prop: 'constructDate'},
                                         {type: 'text', prop: 'week'}
@@ -57,16 +66,16 @@ export default  class  extends React.Component {
                                 ]},
                                 {type: 'br', style: {backgroundColor: 'white', padding: 10}, load: (value, data) => data.shenchanqinkuans.length}
                             ], [
-                                {type: 'text-label', value: '工作内容'},
+                                {type: 'text-h5', value: '工作内容'},
                                 {type: 'views', prop: 'gonzuoneirons', style:{marginBottom: 2}, columns: [
-                                    {type: 'text-list', prop: '$index', filter: value => value + 1 },
+                                    {type: 'text', prop: '$index', filter: value => value + 1 + '、  ' },
                                     [
                                         {type: 'text-h5', prop: 'jobContentContentType', filter: value => `内容分类：${value}`},
                                         {type: 'text-h5', prop: 'jobConentContentDescribe', filter: value => `描述：${value || ''}`},
-                                        {type: 'text-h5', prop: 'jobContentRemark', filter: value => `备注：${value || ''}`},
+                                        {type: 'text', prop: 'jobContentRemark', filter: value => `备注：${value || ''}`},
                                         {type: 'br', style: {flex: 1}}
                                     ], 
-                                    {type: 'br-normal-row', style: {paddingTB: 5}}
+                                    {type: 'br', style: {paddingTB: 5, flexDirection: 'row'}}
                                 ]},
                                 {type: 'br', style: {backgroundColor: 'white', padding: 10}, load: (value, data) => data.gonzuoneirons.length}
                             ], [
@@ -107,11 +116,17 @@ export default  class  extends React.Component {
                                     {type: 'text-label', value: '自检报告: ', style: {width: 110}},
                                     {type: 'text-h5',  prop: 'selfCheckReport', filter: {1: '合格', 2: '不合格', 3: '施工中'}},
                                     {type: 'br-normal-row', style: {marginBottom: 5}}
-                                ], 
-                                {type: 'br', style: {backgroundColor: 'white', padding: 10}, load: (value, data) => data.selfCheckReport}
-                            ], 
+                                ],
+                                {type: 'br', style: {backgroundColor: 'white', padding: 10}, load: (value, data) => data.existingProblems}
+                            ], [
+                                {type: 'text-h5', value: '图片', style: {width: 110}},
+                                {type: 'views', prop: 'pics', columns: [
+                                    {type: 'button-image-picture', prop: 'picture', filter: value=> `http://www.jasobim.com:8085/${value}`}
+                                ]},
+                                {type: 'br-form-col', load: (value, data) => data.pics.length, style: {marginTop: 2}}
+                            ]
                         ]}
-                    />
+                    /> 
                 </ScrollView>
             </View>
         );

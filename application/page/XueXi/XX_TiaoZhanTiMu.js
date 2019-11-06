@@ -1,40 +1,78 @@
 import React from 'react'
 import Freedomen from 'react-native-freedomen'
 import {View} from 'react-native'
-import columns from '../../region/columns'
-import datas from '../../region/datas'
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
-            title: navigation.state.params.label,
+            title: navigation.state.params.createTime,
         }
     } 
     constructor(props) {
         super(props)
         this.state = {
-            
+            data: this.props.navigation.state.params
         }
     }
     render() {
         return (
             <Freedomen.Region 
+                data={this.state.data}
+                style={{flex: 1, padding: 10}}
                 event={params => {
-                    if (params.prop == 'submit') {
-                        params.row.isJieXi = true
-                        return params.row
+                    if (params.value && params.value.prop == 'choose') {
+                        this.state.data.choose = params.value.row.$index
+                        this.setState({
+                            data: this.state.data
+                        })
+                    } else if (params.prop == 'submit') {
+                        const m416 = {
+                            0: 'A',
+                            1: 'B',
+                            2: 'C',
+                            3: 'D',
+                            4: 'E',
+                            5: 'F'
+                        } 
+                        console.log({
+                            ...params.row,
+                            isRight: m416[params.row.choose] == params.row.rightKey ? 1 : 0,
+                            personalAnswer: m416[params.row.choose],
+                            studyDataId: params.row.studyDataId
+                        })
+                        Freedomen.global.api.call('/StudyPractice/submit', {
+                            ...params.row,
+                            isRight: m416[params.row.choose] == params.row.rightKey ? 1 : 0,
+                            personalAnswer: m416[params.row.choose],
+                            studyDataId: params.row.studyDataId
+                        }).then(res => {
+                            console.log(res)
+                        })
+                        return {
+                            ...params.row,
+                            isJieXi: true
+                        }
                     }
                 }}
-                style={{flex: 1, padding: 10}}
                 columns={[
-                    {type: 'text-h3', prop: 'title', value: '1.什么题目,下列关于水的写法是不同与其它的是什么？（）', style: {paddingTB: 10,lineHeight: 25}},
-                    {type: 'radios', prop: 'a', options: '个不是真的3,个不是真的2,个不是真的4,个不是真的1', style: {flexDirection: 'column', paddingTB: 5}},
+                    {type: 'text-h3', prop: 'dataName', style: {paddingTB: 10,lineHeight: 25}},
+                    {
+                        type: 'views', 
+                        prop: 'studyDataOptions',
+                        columns: [
+                            {type: 'image-icon', value: require('../../assets/right.png'), filter: (value, data) => {
+                                return this.state.data.choose === data.$index ? require('../../assets/check.png'): require('../../assets/uncheck.png')
+                            }},
+                            {type: 'text-label', prop: 'xuanxian'},
+                            {type: 'click-row', prop: 'choose'}
+                        ]
+                    },
                     [
                         {type: 'text', value: '【正确答案】', style: {color: '#FF6D73', fontWeight: 'bold'}},
-                        {type: 'text-h3', value: 'A'},
+                        {type: 'text-h3', prop: 'rightKey', value: 'A'},
                         {type: 'br', load: (value, data) => data.isJieXi, style: {flexDirection: 'row', alignItems: 'center', paddingTB: 10}}
                     ], [
                         {type: 'text', value: '【答题解析】', style: {color: '#2EBBC4', fontWeight: 'bold'}},
-                        {type: 'text-h4', value: 'XXX本题解析内容'},
+                        {type: 'text-h4', prop: 'answerAnalysis'},
                         {type: 'br', load: (value, data) => data.isJieXi, style: {flexDirection: 'row', alignItems: 'center'}}
                     ],
                     {type: 'text', style: {flex: 1}},

@@ -1,7 +1,6 @@
 import React from 'react'
 import Freedomen from 'react-native-freedomen' 
-import {View, ScrollView} from 'react-native'
-import valid from '../../region/validations'
+
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
@@ -41,7 +40,7 @@ export default  class  extends React.Component {
                 columns={[
                     [
                         {type: 'text-form-label', value: '日期：', style: {width: 88}},
-                        {type: 'text-label', prop: 'createTime', value: '2017-08-09'},
+                        {type: 'text-label', prop: 'createTime', filter: '2017-08-09'},
                         {type: 'br-form-row'}
                     ], [
                         {type: 'text-form-label', value: '领取人:', style: {width: 88}},
@@ -50,12 +49,12 @@ export default  class  extends React.Component {
                     ],  
                     [
                         {type: 'text-form-label', value: '物资来源:', style: {width: 88}},
-                        {type: 'text-label', prop: 'materialFrom', value: '不知道'},
+                        {type: 'text-label', prop: 'materialFrom'},
                         {type: 'br-form-row',  load: (value, data) => data.logType === 0}
                     ], 
                     [
                         {type: 'text-form-label', value: '备注:', style: {width: 88}},
-                        {type: 'text-label', prop: 'remark', value: '不知道'},
+                        {type: 'text-label', prop: 'remark'},
                         {type: 'br-form-row'}
                     ],
                     {type: 'text-label',  filter: (value, data) =>  data.logType ===0  ? `本次入库物资: ${data.materialLogs.length}项` : `本次出库物资: ${data.materialLogs.length}项`, style: {padding: 12, align: 'center'}},

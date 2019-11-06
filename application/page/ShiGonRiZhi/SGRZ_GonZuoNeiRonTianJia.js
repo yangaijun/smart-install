@@ -10,10 +10,17 @@ export default  class  extends React.Component {
             title: '工作内容',
             headerRight: <Freedomen.Region 
                 event={params => { 
+                    
                     Freedomen.redux({
                         sgrz_gonzuoneiron: (data) => {
                             Freedomen.redux({
                                 sgrz_xinjian: info => {
+                                    if (data.constructContentTypeName) {
+                                        data.list.push({
+                                            ...data,
+                                            list: undefined
+                                        })
+                                    }
                                     return {
                                         ...info,
                                         gonzuoneirons: data.list 
@@ -22,6 +29,7 @@ export default  class  extends React.Component {
                             }) 
                         }
                     })
+                    navigation.goBack()
                 }}
                 columns={[
                     {type: 'button-right', value: '确认'},
@@ -73,7 +81,7 @@ export default  class  extends React.Component {
                     data={this.state.data}
                     columns={[
                         {type: 'views', prop: 'list', style:{marginBottom: 2}, columns: [
-                            {type: 'text-list', prop: '$index', filter: value => value + 1 },
+                            {type: 'text', prop: '$index', filter: value => value + 1 + '、  ' },
                             [
                                 {type: 'text-h5', prop: 'constructContentTypeName', filter: value => `内容分类：${value}`},
                                 {type: 'text-h5', prop: 'jobConentContentDescribe', filter: value => `描述：${value || ''}`},
@@ -89,8 +97,8 @@ export default  class  extends React.Component {
                         columns.SGRZ_GonZuoNeiRon,
                         [
                             {type: 'image-form', value: require('../../assets/tianjia.png')},
-                            {type: 'button-text-primary', prop: 'gonZuoNeiRonTianJia', value: '添加工作内容', style: {marginLeft: 5}},
-                            {type: 'br-form-row', style: {align: 'center'}}
+                            {type: 'text-primary',  value: '添加工作内容', style: {marginLeft: 5}},
+                            {type: 'click-form-row', prop: 'gonZuoNeiRonTianJia', style: {align: 'center'}}
                         ]
                     ]}
                 />

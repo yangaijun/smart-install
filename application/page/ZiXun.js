@@ -12,16 +12,16 @@ export default  class  extends React.Component {
             list: []
         }
         this.params = {
-            pageSize: 15,
-            pageIndex: 1
+            pageVo: {pageNo: 1, pageSize: 15}
         }
     }
     componentDidMount() {
         this._loadData()
     }
     _loadData() {
-        Freedomen.global.api.get('api/newsInfo/admin/getNewsInfoList', this.params).then(res => {
-            this.setState({list: res})
+        Freedomen.global.api.call('/NewsInfo/select', this.params).then(res => {
+            console.log(res.data)
+            this.setState({list: res.data})
         })
     }
     render() {
@@ -32,6 +32,8 @@ export default  class  extends React.Component {
                         if (['$page', '$fresh'].includes(params.prop)) {
                             this.params.pageIndex = params.row.pageNo
                             this._loadData()
+                        } else if (params.prop == 'into') {
+                            this.props.navigation.push('P_View',  {uri: params.row.content, ...params.row})
                         }
                     }}
                     data={this.state.list}

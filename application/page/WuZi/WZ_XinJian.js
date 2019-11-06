@@ -11,12 +11,14 @@ export default  class  extends React.Component {
                     Freedomen.redux({
                         wz_xinjian: (data) => {
                             if (valid(data, 'WZ_XinJian')) {
-                                Freedomen.global.api.call('/Material/add', {
-                                    ...data, 
-                                    isCommon: data.isCommon ? 1 : 0
-                                }).then(res => {
-                                    navigation.goBack()
+                                Freedomen.redux({
+                                    rkck_bar: data => {
+                                        data.count ? data.count ++ : data.count = 1
+                                        return data
+                                    }
                                 })
+                                Freedomen.global.fn && Freedomen.global.fn(data)
+                                navigation.goBack()
                             } 
                             return data
                         }

@@ -13,6 +13,14 @@ export default  class  extends React.Component {
                         sgrz_shenchanqinkuan: (data) => {
                             Freedomen.redux({
                                 sgrz_xinjian: info => {
+                                    if (data.productionStartTime) {
+                                        if (valid(data, 'SGRZ_ShenChanQinKuan')) {
+                                            data.list.push({
+                                                ...data,
+                                                list: undefined
+                                            })
+                                        }
+                                    }
                                     return {
                                         ...info,
                                         shenchanqinkuans: data.list 
@@ -93,8 +101,8 @@ export default  class  extends React.Component {
                         columns.SGRZ_ShenChanQinKuan,
                         [
                             {type: 'image-form', value: require('../../assets/tianjia.png')},
-                            {type: 'button-text-primary', prop: 'tianjiashenchanqinkuan', value: '添加生产情况', style: {marginLeft: 5}},
-                            {type: 'br-form-row', style: {align: 'center', marginBottom: 2}}
+                            {type: 'text-primary', value: '添加生产情况', style: {marginLeft: 5}},
+                            {type: 'click-form-row', prop: 'tianjiashenchanqinkuan', style: {align: 'center', marginBottom: 2}}
                         ]
                     ]}
                 />

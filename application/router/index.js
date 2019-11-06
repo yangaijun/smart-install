@@ -1,4 +1,4 @@
-import { createStackNavigator, createAppContainer, createBottomTabNavigator} from "react-navigation";
+import { createStackNavigator, createAppContainer, createBottomTabNavigator, createSwitchNavigator} from "react-navigation";
  
 
 import React from 'react'
@@ -11,26 +11,13 @@ import GonZuoTai from '../home/GonZuoTai'
 import TianJia from '../home/TianJia'
 import XianMu from '../home/XianMu'
 import YinYong from '../home/YinYong'
+import DenLu from '../home/DenLu'
+import WanJiMiMa from '../home/WanJiMiMa';
+import YinYongSheZhi from '../home/YinYongSheZhi'
 
-import ZiXun from '../page/ZiXun'
-import ZhiLianJianCha from '../page/GonZuo/ZhiLianJianCha'
-import ZhiLianZhenGai from '../page/GonZuo/ZhiLianZhenGai'
+import ZiXun from '../page/ZiXun' 
 import CP_UserList from '../page/CP_UserList'
-
-// import SC_JinXinZhon from '../page/ShiCeShiLian/SC_JinXinZhon'
-// import SC_YanShou from '../page/ShiCeShiLian/SC_YanShou'
-// import GuoLvQiRuKou from '../page/ShiCeShiLian/GuoLvQiRuKou'
-// import BaoDianQinDan from '../page/ShiCeShiLian/BaoDianQinDan'
-// import ShiCeShiLian from '../page/ShiCeShiLian/ShiCeShiLian'
-// import WenTiXianQin from '../page/ShiCeShiLian/WenTiXianQin'
-// import SC_ZhiPai from '../page/ShiCeShiLian/SC_ZhiPai'
-// import MiaoDian from '../page/ShiCeShiLian/MiaoDian'
-// import WoDeRenWu from '../page/ShiCeShiLian/WoDeRenWu'
-// import XinZen from '../page/ShiCeShiLian/XinZen'
-// import TonJi from '../page/ShiCeShiLian/TonJi' 
-// import ZhenGaiRen from '../page/ShiCeShiLian/ZhenGaiRen'
-
-
+ 
 import ListChoose_Components from '../page/AListChoose';
 import Public_Components from '../page/APublic';
 
@@ -40,21 +27,24 @@ import ShiGonRiZhi_Page from '../page/ShiGonRiZhi'
 import GonZuo_Page from '../page/GonZuo'
 import RiZhouYueBao_Page from  '../page/RiZhouYueBao'
 import WuZi_Page from '../page/WuZi'
-import ZhiLianAnQuan_Page from '../page/ZhiLianAnQuan'
+// import ZhiLianAnQuan_Page from '../page/ZhiLianAnQuan'
+import ZhiLian_Page from '../page/ZhiLian';
 import XueXi_Page from '../page/XueXi'
 import JiGon_Page from '../page/JiGon'
 import JiXie_Page from '../page/JiXie'
 import WenJian_Page from '../page/WenJian';
 import XianMu_Page from '../page/XianMu'
+import GeRenZhonXin_Page from '../page/GeRenZhonXin';
+import ShiGonRenWuDan_Page from '../page/ShiGonRenWuDan';
 
 const Home = createBottomTabNavigator({
     GonZuoTai: GonZuoTai,
     YinYong: YinYong,
-    TianJia: TianJia,
     XianMu: XianMu,
+    TianJia: TianJia,
     XueXi: XueXi,
 }, {
-    initialRouteName: "YinYong",
+    initialRouteName: "GonZuoTai",
     tabBarComponent: BottomBar,
     navigationOptions : ({navigation}) => { 
         return {
@@ -84,6 +74,10 @@ const KQ_Home = createBottomTabNavigator({
     tabBarOptions: {
         activeTintColor: '#2EBBC4',
         inactiveTintColor: '#cacaca',
+       
+    },
+    tabStyle: {
+        height: 65
     },
     navigationOptions : ({navigation}) => {
         return {
@@ -91,8 +85,10 @@ const KQ_Home = createBottomTabNavigator({
         }
     }
 });
+
 const AppNavigator = createStackNavigator({
-    Home: Home,
+    YinYongSheZhi: YinYongSheZhi,
+    Home: Home, 
     // ShiCeShiLianHome: ShiCeShiLianHome,
     // GuoLvQiRuKou: GuoLvQiRuKou,
     // ShiCeShiLian: ShiCeShiLian,
@@ -105,9 +101,7 @@ const AppNavigator = createStackNavigator({
     // SC_YanShou: SC_YanShou,
     // BaoDianQinDan: BaoDianQinDan,
     
-    ZiXun: ZiXun,
-    ZhiLianJianCha: ZhiLianJianCha,
-    ZhiLianZhenGai: ZhiLianZhenGai,
+    ZiXun: ZiXun, 
 
     UserList: CP_UserList,
     //考勤
@@ -130,7 +124,8 @@ const AppNavigator = createStackNavigator({
     //物资
     ...WuZi_Page,
     //质量安全
-    ...ZhiLianAnQuan_Page,
+    // ...ZhiLianAnQuan_Page,
+    ...ZhiLian_Page,
     //学习模块
     ...XueXi_Page,
     //记工
@@ -140,10 +135,36 @@ const AppNavigator = createStackNavigator({
     //文件
     ...WenJian_Page,
     //项目
-    ...XianMu_Page
+    ...XianMu_Page,
+    //个人中心
+    ...GeRenZhonXin_Page,
+    //施工任务单
+    ...ShiGonRenWuDan_Page
 }, {
     initialRouteName: "Home",
 });
-  
-export default createAppContainer(AppNavigator);
+
+const LAF = createStackNavigator({
+    DenLu: {
+        screen: DenLu,
+        navigationOptions: {
+            header:　null
+        }
+    },
+    WanJiMiMa: WanJiMiMa
+}, {
+    initialRouteName: 'DenLu',
+    headerMode: 'float',  
+})
+
+const Entry = createSwitchNavigator({
+    DenLu: LAF,
+    AppNavigator: {
+        screen: AppNavigator
+    } 
+}, {
+    initialRouteName: "DenLu",
+})
+
+export default createAppContainer(Entry);
  

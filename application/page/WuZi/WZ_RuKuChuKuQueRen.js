@@ -7,11 +7,16 @@ export default  class  extends React.Component {
         title: navigation.state.params.logType === 0 ? '入库:确认信息' : '出库:确认信息',
         headerRight: <Freedomen.Region 
             event={params => {
-                const submit = function(param) {
-                    //*********************接口logType 位置放错 */
+                const submit = function(param) { 
+ 
                     Freedomen.global.api.call('/MaterialLog/add', {
                         ...param,
-                        jasoUserId: param.user && param.user.jasoUserId
+                        log: {
+                            ...param,
+                            materialLogs: undefined,
+                            projectId: Freedomen.global.project.projectId
+                        },
+                        materialList: param.materialLogs 
                     }).then(res => {
                         Freedomen.redux({
                             rkck_bar: (data) => {
@@ -19,10 +24,10 @@ export default  class  extends React.Component {
                                 return data
                             }
                         })
+                        Freedomen.global.toast((navigation.state.params.logType === 0 ? '入库': '出库') + ' 成功')
                         navigation.goBack()
                     }) 
                 }
-
                 if (navigation.state.params.logType === 0) {
                     Freedomen.redux({
                         wz_rkck_queren: (data) => {
@@ -90,10 +95,10 @@ export default  class  extends React.Component {
                     [
                         {type: 'text-form-label', value: '物资来源:'},
                         {type: 'text-must', value: '*', style: {flex: 1}},
-                        {type: 'input-text-form', prop: 'fromWhere', placeholder: '请输入来源'},
+                        {type: 'select', prop: 'materialFrom', options: '供应采购,零星采购,甲供,调拨入库,其他', placeholder: '请选择来源', style: {width: 145, height: 42}},
                         {type: 'br-form-row',  load: (value, data) => data.logType === 0}
                     ],
-                    {type: 'text-valid-message', prop: 'fromWhere-valid', load: value => value}, 
+                    {type: 'text-valid-message', prop: 'materialFrom-valid', load: value => value}, 
                     [
                         {type: 'text-form-label', value: '备注:', style: {flex: 1}},
                         {type: 'input-text-form', prop: 'remark', placeholder: '请输入备注'},
@@ -103,7 +108,7 @@ export default  class  extends React.Component {
                     {type: 'views', prop: 'materialLogs',  columns: [
                         [
                             {type: 'text-form-label', prop: 'materialName', style: {flex: 1}},
-                            {type: 'text-form-label', prop: 'logNum'},
+                            {type: 'text-form-label', prop: 'currentInputNum'},
                             {type: 'text-form-label', prop: 'materialUnit'},
                             {type: 'br-normal-row'}
                         ],

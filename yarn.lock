@@ -3772,6 +3772,11 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+keymirror@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmjs.org/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
+  integrity sha1-kYiJ6hP40KQufFVyUO7nE63JXDU=
+
 kind-of@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/kind-of/-/kind-of-1.1.0.tgz#140a3d2d41a36d2efcfa9377b62c24f8495a5c44"
@@ -3905,6 +3910,11 @@ lodash.throttle@^4.1.1:
   version "4.1.1"
   resolved "https://registry.npmjs.org/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
   integrity sha1-wj6RtxAkKscMN/HhzaknTMOb8vQ=
+
+lodash@^4.16.4:
+  version "4.17.15"
+  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.11"
@@ -5235,10 +5245,10 @@ react-native-datepicker@^1.7.2:
   dependencies:
     moment "^2.22.0"
 
-react-native-freedomen@^0.2.9:
-  version "0.2.9"
-  resolved "https://registry.npmjs.org/react-native-freedomen/-/react-native-freedomen-0.2.9.tgz#b685b8ace6bf49db9dc3b85a7ae31ccd102f6bdb"
-  integrity sha512-XT70NsdvWTpfJqRlY81AeFiCb1/dNAukI499kyKINIShnliavi5f1gaKGR64Vr/tD/lLUbuUSqQByaF8FjZPjA==
+react-native-freedomen@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.npmjs.org/react-native-freedomen/-/react-native-freedomen-0.3.4.tgz#b25dd94180e9624ff3255d8038bcc480e48aa8cb"
+  integrity sha512-ckMLTLfF+jwv/cVLnNrDqdqNjzt4PgL5qlaIa67UZmrcQ/2dxfgkWu6QlvXInpe3XU1uozIBiJfPrd4o7FtJ3w==
   dependencies:
     react-native-datepicker "^1.7.2"
     react-native-progress "^3.6.0"
@@ -5271,6 +5281,13 @@ react-native-image-zoom-viewer@^2.2.26:
   integrity sha512-Mh4+CJQCDcAumLFXLlDk8nQ5iMxNnupc9HwktsZ3I/v4HULcFPmTLDQ0HGAxjLa5foZRPnKDN06iKGsEb9raoA==
   dependencies:
     react-native-image-pan-zoom "^2.1.9"
+
+react-native-input-scroll-view@^1.9.3:
+  version "1.9.3"
+  resolved "https://registry.npmjs.org/react-native-input-scroll-view/-/react-native-input-scroll-view-1.9.3.tgz#064eb1c5208445eeba0dde97b0bee4b67910fd45"
+  integrity sha512-7NMWeW/jhnQmmbyB4rv4KQJ2ydAL3tMqQA/4PpjL6ozlirU1gglvSQrHTCbgOHYULaQPtjdHwcYU9ZYGukbsNQ==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-modal@^11.3.0:
   version "11.3.0"
@@ -5309,6 +5326,14 @@ react-native-qrcode-scanner@^1.2.1:
     prop-types "^15.5.10"
     react-native-permissions "^1.1.1"
 
+react-native-root-siblings@^3.0.0:
+  version "3.2.3"
+  resolved "https://registry.npmjs.org/react-native-root-siblings/-/react-native-root-siblings-3.2.3.tgz#df5a1cff3a3a1f433f57320e1cae719f1b15a3f2"
+  integrity sha512-wOCCtKJteaSIW3K++hzhkfdWRikTqjrG34DnhNDVSzKatuNQyFY1fPBD1YFT/3+kxOIUmNsJdiaPMao9QgoZMA==
+  dependencies:
+    prop-types "^15.6.2"
+    static-container "^1.0.0"
+
 react-native-root-siblings@^3.1.7:
   version "3.2.1"
   resolved "https://registry.npmjs.org/react-native-root-siblings/-/react-native-root-siblings-3.2.1.tgz#06bd8722babe8a30e914b73eae4beffa3218ec57"
@@ -5316,6 +5341,14 @@ react-native-root-siblings@^3.1.7:
   dependencies:
     prop-types "^15.6.2"
     static-container "^1.0.0"
+
+react-native-root-toast@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.npmjs.org/react-native-root-toast/-/react-native-root-toast-3.1.2.tgz#c8a1944f101c0768045202a276f46f9d710181a2"
+  integrity sha512-68OhAjRMwUsNeKC7GE5Sgems6dXY2VzuTsNe4hRbbN23V/bFeItnJAvgV4lib4hsCvO4KZjUtUqRY/nQd8s/7Q==
+  dependencies:
+    prop-types "^15.5.10"
+    react-native-root-siblings "^3.0.0"
 
 react-native-safe-area-view@^0.14.1:
   version "0.14.5"
@@ -5379,6 +5412,22 @@ react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
   integrity sha512-Bke8KkDcDhvB/z0AS7MnQKMD2p6Kwfc1rSKlMOvg9CC5CnClQ2QEnhPSbwegKDYhUkBI92iH/BYy7hNSm5kbUQ==
   dependencies:
     prop-types "^15.6.1"
+
+react-native-video-controls@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.npmjs.org/react-native-video-controls/-/react-native-video-controls-2.2.3.tgz#f0927e11aeb2cbbb03935e21bac0caa1d46d8a67"
+  integrity sha512-jC7wazPUx8TxZZAp52dOkHUOEGyUb294NI3PIZp+IjsaG1KYkZ84rxUBLMvGiTPno2Jxw19nl8cgQSv6sMGpPQ==
+  dependencies:
+    lodash "^4.16.4"
+
+react-native-video@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/react-native-video/-/react-native-video-5.0.2.tgz#8f07da0cd85a1d4b316d115f3786409efc9e39fb"
+  integrity sha512-zbItbMH0uZYkK7xFKa41+950QjoTrIl60bY1vAP7gxTn20HGHvHZRw28h9A5npK5T0QuWMAkn8twaGzqcDkTug==
+  dependencies:
+    keymirror "^0.1.1"
+    prop-types "^15.5.10"
+    shaka-player "^2.4.4"
 
 react-native-webview@^5.12.1:
   version "5.12.1"
@@ -5962,6 +6011,11 @@ setprototypeof@1.1.1:
   version "1.1.1"
   resolved "https://registry.npmjs.org/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
   integrity sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
+
+shaka-player@^2.4.4:
+  version "2.5.5"
+  resolved "https://registry.npmjs.org/shaka-player/-/shaka-player-2.5.5.tgz#81e7265f28f631afd3837c06ec6637824bda71e4"
+  integrity sha512-YEWBFapWKjwy2+wIgH9NqoFW9A14LIYNAoJ9cQr3c9BGS7qjqxeiYM/H1BJ8so1FQexpsWUdyjwHvcspdc7/nw==
 
 shebang-command@^1.2.0:
   version "1.2.0"

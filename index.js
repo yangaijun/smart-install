@@ -7,7 +7,18 @@ import App from './application/router/index';
 import {name as appName} from './app.json';
 import Freedomen from 'react-native-freedomen'
 import api from './application/apis2'
+import Toast from 'react-native-root-toast'
 Freedomen.global.api = api  
+Freedomen.global.toast = (message) => {
+    Toast.show(message, {
+        duration: Toast.durations.LONG,
+        position: Toast.positions.BOTTOM,
+        shadow: true,
+        animation: true,
+        hideOnPress: true,
+        delay: 0
+    })
+}
 
 Freedomen.custom({
     primaryColor: '#2EBBC4'
@@ -23,12 +34,12 @@ Freedomen.custom({
         fontSize: 22, 
         color: 'white', 
         backgroundColor: '#2EBBC4', 
-        textAlign: 'center',
-        textAlignVertical: 'center',
-        width: 45, 
-        height: 45, 
+        width: 40, 
+        height: 40, 
+        paddingLeft: 14,
+        paddingTop: 5,
         marginLR: 15, 
-        borderRadius: 45
+        borderRadius: 20
     },
     'text-valid-message': {
         color: '#FF6D73',
@@ -152,15 +163,18 @@ Freedomen.custom({
         color: '#FF2B2B', 
         borderRadius: 2,
         padding: 2,
+        fontSize: 12,
+        paddingLeft: 3,
         alignItems: 'center',
         justifyContent: 'center',
         marginRight: 10
     },
     'text-status': {
         color: 'white', 
-        borderRadius: 16,
+        fontSize: 12,
+        borderRadius: 9,
         paddingVertical: 1,
-        paddingHorizontal: 8,
+        paddingHorizontal: 5,
     },
     //段落
     'text-p': {
@@ -188,28 +202,35 @@ Freedomen.custom({
         color: '#999999'
     },
     'button-image-icon': {
-        height: 26, 
-        width: 26, 
-        margin: 5
+        width: 22,
+        height: 22,
+        marginRight: 5
+    },
+    'button-image-picture': {
+        height: 65,
+        width: 65,
+        marginTop: 5,
     },
     'text-title': {
-        fontWeight: 'bold',
-        fontSize: 18,
+        fontSize: 16,
         color: '#191919',
         flex: 1
+    },
+    'text-h4': {
+        fontSize: 14,
+        color: '#191919',
     },
     'button-pop-item': {
         color: '#2EBBC4',
         fontSize: 18, 
         textAlign: 'center',
-        textAlignVertical: 'center',
-        justifyContent: 'center',
+        paddingVertical: 15,
         backgroundColor: 'white', 
         height: 52, 
         width: '100%'
     },
     'button-az': {
-        borderRadius: 18, 
+        borderRadius: 12, 
         paddingVertical: 3, 
         paddingHorizontal: 8, 
         borderWidth: 1,
@@ -232,7 +253,7 @@ Freedomen.custom({
         padding: 3, 
         paddingLeft: 7,
         paddingRight: 7,
-        borderRadius: 16,
+        borderRadius: 11,
         padding: 1, 
         textAlign: 'center',
         marginLeft: -3,
@@ -254,9 +275,9 @@ Freedomen.custom({
         borderColor: '#f5f5f5'
     },
     'image-icon': {
-        width: 26,
-        height: 26,
-        margin: 5,
+        width: 22,
+        height: 22,
+        marginRight: 5
     }, 
     'br-list-item': {
         backgroundColor: 'white', 
@@ -293,7 +314,7 @@ Freedomen.custom({
         width: 42,
         marginLeft: 5,
         marginRight: 5,
-        borderRadius: 42,
+        borderRadius: 21,
     }
 })
 

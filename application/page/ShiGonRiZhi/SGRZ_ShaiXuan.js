@@ -36,7 +36,7 @@ export default  class  extends React.Component {
                     else if (params.prop == 'chuanjianren')
                         this.props.navigation.push('CP_User', {...params.row, label: '创建人', formName: 'sgrz_shaixuan'})
                     else if (params.value == '确定') {
-                        Freedomen.global.callBack(params.row)
+                        Freedomen.global.callback && Freedomen.global.callback(params.row)
                         this.props.navigation.goBack()
                     }
                 }}

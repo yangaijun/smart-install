@@ -1,7 +1,7 @@
 import React from 'react'
 import Freedomen from 'react-native-freedomen'
 import {View} from 'react-native'
-import columns from '../../region/columns'
+
 export default  class  extends React.Component {
     static navigationOptions = {
         title: '视听学习',
@@ -11,31 +11,44 @@ export default  class  extends React.Component {
         this.state = {
             list: []
         }
+        this.params = {
+            pageVo: {pageSize: 15, pageNo: 1}, 
+            type: 1 
+        }
     }
     componentDidMount() {
-        this.setState({
-            list: [{}, {}, {}]
+        this._loadData()
+    }
+    _loadData() {
+        Freedomen.global.api.call('/StudyFile/select', this.params).then(res => {
+            this.setState({
+                list: res.data
+            })
         })
     }
     render() {
         return (
-            <View style={{backgroundColor: '#f5f5f5'}}>
+            <View style={{backgroundColor: '#f5f5f5', flex: 1}}>
                 <Freedomen.FreshList
                     data={this.state.list} 
+                    event={params => {
+                        if (['$page', '$fresh'].includes(params.prop)) {
+                            this.params.pageVo.pageNo = params.row.pageNo
+                            this._loadData()
+                        }
+                    }}
                     columns={[
                         [
-                            {type: 'text-h4', prop: 'topic', value: '10月20日嘉实正式成为最新大佬， 2019年，让美好与我同在...'},
-                            [
-                                {type: 'text-tag', prop: 'readStatus', value: '置顶', filter: {1: '置顶', 0: '普通'}, load: value => value},
-                                {type: 'text-label', prop: 'createDate', value: '2分钟前'},
-                                {type: 'br', style: {flexDirection: 'row', paddingTB: 15, alignItems: 'center'}}
-                            ],
-                            {type: 'br', style: {flex: 1, marginRight: 5}}
+                            {type: 'text-h4', prop: 'title', value: '天外飞来了一头猪'},
+                            {type: 'text', prop: 'name', value: '19-08-11'},
+                            {type: 'br', style: {flex: 1}}
+                        ], [
+                            {type: 'image', value: require('../../assets/play.png'), style: {width: 26, height: 26}},
+                            {type: 'backimage', prop: 'pic', filter: value =>`http://www.jasobim.com:8085/${value}`, style: {width: 120, height: 80, align: 'center'}},
                         ],
-                        {type: 'image', value: require('../../assets/image_header.png'), prop: 'remark', style: {width: 120, height: 80}},
-                        {type: 'click-row', prop: 'into', style: {marginTop: 1}}
+                        {type: 'click-col', prop: 'shitixianqin', style: {flexDirection:'row'}}
                     ]}
-            />
+                />
            </View>
         );
     }

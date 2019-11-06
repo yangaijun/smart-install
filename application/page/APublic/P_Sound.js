@@ -1,5 +1,6 @@
 import {AudioRecorder, AudioUtils} from 'react-native-audio'   
 import Sound from 'react-native-sound'
+import Freedomen from 'react-native-freedomen'
 
 var fileName
 export default {
@@ -24,25 +25,36 @@ export default {
                     uri: 'file://' + res,
                     type: 'audio/acc',
                     name: fileName
-                }
+                } 
+                Freedomen.global.api.upload(upload).then(res =>{
+                    resolve(res.data.data[0])
+                })
                 
-                console.log(upload)  
-                resolve(upload)
             }) 
         })
         
     },
     play: (path) => {
-        var sound = new Sound(path, (e) => {
+        path = 'http://www.jasobim.com:8085/' + path
+        console.log(path)
+        var sound = new Sound(path, '', (e) => {
             console.log('error')
         });
-
-        sound.play((success) => {
-            if (success) {
-                console.log('successfully finished playing');
-              } else {
-                console.log('playback failed due to audio decoding errors');
-              }
-        })
+        var index = 0
+        const fn = () => {
+            setTimeout(() => { 
+                if (!sound._loaded && index ++ <= 10)
+                    fn()
+                else 
+                    sound.play((success) => {
+                        if (success) {
+                            console.log('successfully finished playing');
+                          } else {
+                            console.log('playback failed due to audio decoding errors');
+                          }
+                    })
+            }, 80)
+        }
+        fn()
     }
 } 

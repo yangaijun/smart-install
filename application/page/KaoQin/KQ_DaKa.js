@@ -36,7 +36,13 @@ export default  class  extends React.Component {
                 event={params => {
                     if (params.prop == 'daka') {
                         navigator.geolocation.getCurrentPosition(location => {
-                            console.log(location.coords)
+                            Freedomen.global.api.getPosition({location: location.coords.longitude + "," + location.coords.latitude}).then(res => {
+                                console.log(res)
+                                if (res.data.regeocode && res.data.regeocode.formatted_address) {
+                                    console.log(res.data.regeocode.formatted_address)
+                                }
+                                    
+                            })
                             this.setState({
                                 data: {
                                     time: new Date(),

@@ -1,4 +1,5 @@
 import ImagePicker from 'react-native-image-picker'
+import Freedomen from 'react-native-freedomen';
 
 const photoOptions = {
     title:'请选择',
@@ -15,7 +16,8 @@ const photoOptions = {
 }; 
 
 export default function() {
-    ImagePicker.showImagePicker(photoOptions, (response) => {
+    return new Promise((resolve, reject) => {
+      ImagePicker.showImagePicker(photoOptions, (response) => {
         if (response.didCancel) {
           console.log('User cancelled image picker');
         } else if (response.error) {
@@ -28,8 +30,11 @@ export default function() {
                 type: response.type,
                 name: response.fileName
             }
-            console.log(upload)
-            return upload
+            Freedomen.global.api.upload(upload).then(res =>{
+              resolve(res.data.data)
+            })
         } 
       });
+    })
+    
 }

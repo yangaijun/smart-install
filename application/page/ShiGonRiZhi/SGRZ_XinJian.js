@@ -3,7 +3,9 @@ import {ScrollView, View} from "react-native";
 import Freedomen from 'react-native-freedomen' 
 import columns from '../../region/columns' 
 import valid from '../../region/validations'
-import utils from '../../region/utils'
+import utils from '../../region/utils' 
+import P_PickImage from '../APublic/P_PickImage' 
+
 export default  class  extends React.Component {
     static navigationOptions = ({navigation}) => {
         return {
@@ -23,13 +25,18 @@ export default  class  extends React.Component {
                                         ...data, 
                                         shenchanqinkuans: undefined,    
                                         gonzuoneirons: undefined,
-                                        shigonjindus: undefined
+                                        shigonjindus: undefined,
+                                        pics: data.pictures.map(el =>  el.picture).join(','),
+
                                     },
                                     //解决变量定义不规范
                                     contentList: [
                                         ...utils.varChange({
                                             constructProgressConstructPart: 'productionConstructPart',
                                             constructContentName: 'productionConstructContent',
+                                            productionWorkLoad: (value, data) => {
+                                                return value + data.constructContentUnit
+                                            },
                                             'productionStartTime': (value) => {  
                                                 let date = utils.formatDate.format(new Date(), "yyyy-MM-dd") 
                                                 return  utils.formatDate.parse(date + " " + value, "yyyy-MM-dd hh:mm")
@@ -56,6 +63,8 @@ export default  class  extends React.Component {
                                         }, data.shigonjindus)
                                     ]
                                 }).then(res => {
+                                    Freedomen.global.toast('创建成功')
+                                    Freedomen.global.fn && Freedomen.global.fn()
                                     navigation.goBack()
                                 })
                                 return
@@ -72,7 +81,9 @@ export default  class  extends React.Component {
     }
     constructor(props) {
         super(props) 
-        this.state = { }
+        this.state = { 
+            data: {shenchanqinkuans: [], gonzuoneirons: [], shigonjindus: [], selfCheckReport: 1, pictures: [], constructDate:  new Date()}
+        }
     } 
     componentDidMount() { } 
     render() {
@@ -82,11 +93,11 @@ export default  class  extends React.Component {
                     <Freedomen.Region 
                         style={{backgroundColor: '#f5f5f5'}}
                         event={params => { 
-                            if (params.value == '添加工作内容')
+                            if (params.prop == 'SGRZ_GonZuoNeiRonTianJia')
                                 this.props.navigation.push('SGRZ_GonZuoNeiRonTianJia', {list: params.row.gonzuoneirons})
-                            else if (params.value == '添加施工进度')
+                            else if (params.prop == 'tianjiashigonjindu')
                                 this.props.navigation.push('SGRZ_ShiGonJinDuTianJia', {list: params.row.shigonjindus})
-                            else if (params.value == '添加生产情况')
+                            else if (params.prop == 'tianjiashenchanqinkuan')
                                 this.props.navigation.push('SGRZ_ShenChanQinKuaiTianJia', {list: params.row.shenchanqinkuans})
                             else if (params.prop == 'cunzaiwenti')
                                 this.props.navigation.push('CP_WenTi', {...params.row, label: '存在问题', formName: 'sgrz_xinjian'})
@@ -96,17 +107,31 @@ export default  class  extends React.Component {
                                 this.props.navigation.push('CP_JiXie', {...params.row, label: '机械申请', formName: 'sgrz_xinjian'})
                             else if (params.prop == 'biaoduan')
                                 this.props.navigation.push('CP_BiaoDuan', {...params.row, label: '标段', formName: 'sgrz_xinjian'})
-                            
+                            else if (params.prop == 'choose') {
+                                return new Promise((resolve, reject) => {
+                                    P_PickImage().then(res => {
+                                        params.row.pictures && params.row.pictures.push(...res.map(el => {
+                                            return {picture: el}
+                                        })) 
+                                        resolve(params.row)
+                                    }) 
+                                })
+                            }  else if (params.value && params.value.prop == 'picture') {
+                                this.props.navigation.push('P_ZoomImage', {pictures: params.row, index: params.$index})
+                            }
                         }}
                         redux={'sgrz_xinjian'}
-                        data={{shenchanqinkuans: [], gonzuoneirons: [], shigonjindus: [], selfCheckReport: 1}}
+                        data={this.state.data}
                         columns={[
+                            {type: 'image', value: require('../../assets/tip.png'), style: {width: '100', height: 40, resizeMode: 'stretch'}},
                             [
                                 {type: 'text-form-label', value: '日期', style: {flex: 1}},
                                 {type: 'pick-date', prop: 'constructDate', placeholder: '请选择日期'},
                                 {type: 'image-form', value: require('../../assets/right.png')},
                                 {type: 'br-form-row', style: {marginBottom: 0}}
-                            ], [
+                            ], 
+                            {type: 'text-valid-message', prop: 'constructDate-valid', load: value => value},
+                            [
                                 columns.SGRZ_Table,
                                 {type: 'br-normal-row', style: {backgroundColor: 'white'}}
                             ], [
@@ -117,8 +142,6 @@ export default  class  extends React.Component {
                                 {type: 'click-form-row', prop: 'biaoduan'}
                             ], 
                             {type: 'text-valid-message', prop: 'tendersName-valid', load: value => value},
-
-
                             [
                                 [
                                     {type: 'text-label', value: '生产情况'},
@@ -130,14 +153,14 @@ export default  class  extends React.Component {
                                         {type: 'text-h5', filter: (value, data) => `时间：${data.productionStartTime} -  ${data.productionEndTime}`},
                                         {type: 'text-h5', prop: 'constructProgressConstructPart', filter: value => `施工部位：${value}`},
                                         {type: 'text-h5', prop: 'constructContentName', filter: value => `施工内容：${value}`},
-                                        {type: 'text-h5', prop: 'productionWorkLoad', filter: value => `完成工作量：${value}`},
+                                        {type: 'text-h5', prop: 'productionWorkLoad', filter: (value, data) => `完成工作量：${value + data.constructContentUnit}`},
                                         {type: 'br', style: {flex: 1}}
                                     ],
                                     {type: 'br-normal-row', style: {paddingTB: 10}}
                                 ]}, [
                                     {type: 'image-form', value: require('../../assets/tianjia.png')},
-                                    {type: 'button-text-primary', value: '添加生产情况', style: {marginLeft: 5}},
-                                    {type: 'br-form-row', style: {align: 'center', marginBottom: 5}}
+                                    {type: 'text-primary', value: '添加生产情况', style: {marginLeft: 5}},
+                                    {type: 'click-form-row', prop: 'tianjiashenchanqinkuan', style: {align: 'center', marginBottom: 5}}
                                 ], 
                                 {type: 'br', load: value => Freedomen.global.roleTypes.includes(1) || Freedomen.global.roleTypes.includes(3)}
                             ],
@@ -147,7 +170,7 @@ export default  class  extends React.Component {
                                     {type: 'br-form-row', style: {backgroundColor: '#f5f5f5'}}
                                 ], 
                                 {type: 'views', prop: 'gonzuoneirons', style:{marginBottom: 2}, columns: [
-                                    {type: 'text-list', prop: '$index', filter: value => value + 1 },
+                                    {type: 'text', prop: '$index', filter: value => value + 1 + '、  ' },
                                     [
                                         {type: 'text-h5', prop: 'constructContentTypeName', filter: value => `内容分类：${value}`},
                                         {type: 'text-h5', prop: 'jobConentContentDescribe', filter: value => `描述：${value || ''}`},
@@ -158,13 +181,11 @@ export default  class  extends React.Component {
                                 ]},
                                 [
                                     {type: 'image-form', value: require('../../assets/tianjia.png')},
-                                    {type: 'button-text-primary', value: '添加工作内容', style: {marginLeft: 5}},
-                                    {type: 'br-form-row', prop: 'SGRZ_GonZuoNeiRonTianJia', style: {align: 'center', marginBottom: 5}}
+                                    {type: 'text-primary', value: '添加工作内容', style: {marginLeft: 5}},
+                                    {type: 'click-form-row', prop: 'SGRZ_GonZuoNeiRonTianJia', style: {align: 'center', marginBottom: 5}}
                                 ], 
                                 {type: 'br', load: value => Freedomen.global.roleTypes.includes(2)}
-                            ],
-                            
-
+                            ], 
                             [ 
                                [
                                     {type: 'text-label', value: '施工进度'},
@@ -183,14 +204,11 @@ export default  class  extends React.Component {
                                     {type: 'br-normal-row', style: {paddingTB: 10}}
                                 ]},[
                                     {type: 'image-form', value: require('../../assets/tianjia.png')},
-                                    {type: 'button-text-primary', value: '添加施工进度', style: {marginLeft: 5}},
-                                    {type: 'br-form-row', style: {align: 'center', marginBottom: 5}}
+                                    {type: 'text-primary', value: '添加施工进度', style: {marginLeft: 5}},
+                                    {type: 'click-form-row', prop: 'tianjiashigonjindu', style: {align: 'center', marginBottom: 5}}
                                 ],
                                 {type: 'br', load: value => Freedomen.global.roleTypes.includes(2)}
-                            ], 
-                            
-
-                            [
+                            ], [
                                 [
                                     {type: 'text-form-label', value: '存在问题', style: {flex: 1}},
                                     {type: 'text-h5',  prop: 'existingProblemName', placeholder: '请选择'},
@@ -214,13 +232,11 @@ export default  class  extends React.Component {
                                 ], 
                                 {type: 'br', load: value => Freedomen.global.roleTypes.includes(3)}
                             ],
-                            [
-                                {type: 'text-form-label', value: '图片'},
-                                {type: 'br-form-col'}
-                            ]
+                            columns.Pic
                         ]}
                     />
                 </ScrollView> 
+                 
            </View>
         );
     }

@@ -1,6 +1,6 @@
 import axios from 'axios'     
 const axiosInstance = axios.create({
-    baseURL: 'http://192.168.5.152:8090/jaso/',
+    baseURL: 'http://www.jasobim.com:8089/jaso/',
     timeout: 30000
 })  
 
@@ -22,7 +22,7 @@ axiosInstance.interceptors.response.use((response) => {
         }
     } catch (e) {} 
     
-    return response.data.data
+    return response.data.data || response.data
    
 }, function(error) {   
     return Promise.reject(error);

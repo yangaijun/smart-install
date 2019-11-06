@@ -42,11 +42,11 @@ export default  class  extends React.Component {
                                 }
                             }}
                             columns={[
-                                {type: 'image', prop: 'projectIcon', value: require('../assets/image_header.png'), style: {height: 65, width: 85, borderRadius: 3, paddingRight: 10}},
+                                {type: 'image', prop: 'projectIcon', filter: value => `http://www.jasobim.com:8085/${value}`, style: {height: 87, width: 138, borderRadius: 2, paddingRight: 10}},
                                 [
                                     {type: 'text-h4', prop: 'projectName', value: '歌林小镇综合机电安装工程', style: {paddingBottom: 10}},
-                                    {type: 'text', value: '张无忌', filter: value => `项目负责人：${value}`},
-                                    {type: 'br', style: {marginLeft: 10}}
+                                    {type: 'text', value: '张无忌', filter: value => `项目负责人：${value}`, style: {fontSize: 12}},
+                                    {type: 'br', style: {marginLeft: 10, flex: 1}}
                                 ],
                                 {type: 'click-row', prop: 'row', style: {marginBottom: 1}}
                             ]}

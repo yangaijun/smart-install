@@ -26,14 +26,14 @@ export default  class  extends React.Component {
     render() {
         
         return ( 
-                <ScrollView style={{flex: 1}}>
-                    <Freedomen.Region 
-                        style={{backgroundColor: '#f5f5f5'}}
-                        event={params => {
-                        }} 
-                        columns={columns.SGRZ_GonZuoNeiRon}
-                    />
-                </ScrollView> 
+            <ScrollView style={{flex: 1}}>
+                <Freedomen.Region 
+                    style={{backgroundColor: '#f5f5f5'}}
+                    event={params => {
+                    }} 
+                    columns={columns.SGRZ_GonZuoNeiRon}
+                />
+            </ScrollView> 
         );
     }
   }

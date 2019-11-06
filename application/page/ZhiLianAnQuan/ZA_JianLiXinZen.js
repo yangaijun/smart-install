@@ -46,7 +46,7 @@ export default  class  extends React.Component {
                         {type: 'image-form', value: require('../../assets/right.png')},
                         {type: 'br-form-row'}
                     ], [
-                        {type: 'text-form-label', value: '受奖人'},
+                        {type: 'text-form-label', value: '受奖方'},
                         {type: 'text-must', value: '*', style: {flex: 1}},
                         {type: 'text-h4', value: '请选择'},
                         {type: 'image-form', value: require('../../assets/right.png')},

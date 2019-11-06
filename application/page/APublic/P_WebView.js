@@ -9,18 +9,8 @@ export default  class  extends React.Component {
     
     constructor(props) {
         super(props) 
-
-        store.get('measurePaperList').then(res => {
-            for (let i of res) {
-                if (i.measurePaperId == props.measurePaperId) {
-                    this.image = 'data:image/png;base64,' + i.paperUrl
-                    return
-                }
-            }
-        })
     }
     componentDidMount() {
-        
     }
     //{ key: 'drawPic', pic: '', p}
     //{ key: 'drawPoints', value: [{},{}]} 
@@ -39,12 +29,20 @@ export default  class  extends React.Component {
                 javaScriptEnabled={true}  
                 useWebKit={true}  
                 onLoadEnd={() => { 
-                   
-                    this.webView.postMessage(JSON.stringify(
-                        { key: 'drawPic', value: this.image || 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2174909441,2495215020&fm=26&gp=0.jpg' }
-                    ))  
-                         
-                    
+                    console.log('load webview over')
+                    store.get('measurePaperList').then(res => {
+                        console.log('load over backimage')
+                        for (let i of res) {
+                            if (i.measurePaperId == this.props.measurePaperId) {
+                                this.image = 'data:image/png;base64,' + i.paperUrl
+                                this.webView.postMessage(JSON.stringify(
+                                    { key: 'drawPic', value: this.image || 'https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2174909441,2495215020&fm=26&gp=0.jpg' }
+                                ))  
+                                console.log('load over backimage')
+                                return
+                            }
+                        }
+                    })
                 }}
                 source={{html: datas.html}} 
                 onMessage={e => {   

@@ -111,7 +111,7 @@ export default  class  extends React.Component {
             <Freedomen.Tab   
                 columns={[
                     {prop: 't1', value: '按区域排列', view: this._t1()},
-                    {prop: 't2', value: '爆点清单', view:  <P_Chat />}//<BDQD navigation={this.props.navigation} />}
+                    {prop: 't2', value: '爆点清单', view:  <BDQD navigation={this.props.navigation} />}
                 ]}
             />
         );

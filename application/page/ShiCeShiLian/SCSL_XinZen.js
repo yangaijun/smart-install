@@ -1,8 +1,6 @@
 import React from 'react'
 import {Text, View, ScrollView, Platform} from "react-native";
 import Freedomen from 'react-native-freedomen'
-import WebView from 'react-native-webview' 
-import datas from '../../region/datas'
 import store from 'react-native-freedomen/store'
 
 import P_WebView from '../APublic/P_WebView'  
@@ -35,10 +33,8 @@ export default  class  extends React.Component {
                         this.slidePop.show() 
                     }
                     
-                    console.log(params)
-                    
                 }}/>
-                <Freedomen.SlidePop style={{top: '48'}} ref={ref => this.slidePop = ref} >
+                <Freedomen.SlidePop style={{top: '48'}} old={true} ref={ref => this.slidePop = ref} >
                     <Freedomen.Region 
                         style={{flex: 1, paddingTop: 2}}
                         event={params => {

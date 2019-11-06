@@ -33,7 +33,7 @@ export default  class  extends React.Component {
         }
         this.Search = columns.ZA_Search('请输入创建人查询') 
 
-        this.wodeParams = {pageVo: {
+        this.wodeParams = {jasoUserId: Freedomen.global.user.jasoUserId, pageVo: {
             pageNo: 1,
             pageSize: 15
         }}
@@ -43,10 +43,9 @@ export default  class  extends React.Component {
         }}
     } 
     componentDidMount() { 
-        
         // if (!Freedomen.global.roleTypes)
         Freedomen.global.api.call('/ConstructLog/getRoleType').then(res => {
-            Freedomen.global.roleTypes = [...res, 3]
+            Freedomen.global.roleTypes = res
             this.setState({
                 roles: res
             })
@@ -56,12 +55,12 @@ export default  class  extends React.Component {
                     only_page: redux
                 })
             }
-           
         })
         this._loadData(this.wodeParams, 'woderizhi')
-
-
-        Freedomen.global.callBack = (data) => {
+        Freedomen.global.fn = () => {
+            this._loadData(this.wodeParams, this.state.activity == '我的日志' ? 'woderizhi' : 'quanburizhi')
+        }
+        Freedomen.global.callback = (data) => {
             this.quanbuParams = {
                 ...this.quanbuParams,
                 ...data
@@ -75,14 +74,14 @@ export default  class  extends React.Component {
                 let content = el.contentList.length ? el.contentList[0] : {}
                 let date = new Date(el.constructLog.constructDate) 
                 let week = '星期' + ({
-                    0: '一',
-                    1: '二',
-                    2: '三',
-                    3: '四',
-                    4: '五',
-                    5: '六',
-                    6: '日'
-                }[date.getDay()] || '?')
+                    1: '一',
+                    2: '二',
+                    3: '三',
+                    4: '四',
+                    5: '五',
+                    6: '六',
+                    0: '日'
+                }[date.getDay()] || '')
  
                 let shigonjindus = [], gonzuoneirons = [], shenchanqinkuans = []
                 el.contentList.map(el => {
@@ -105,35 +104,36 @@ export default  class  extends React.Component {
             }) 
             let data = {}
             data[item] = arr
-            this.setState(data)
-            
+            setTimeout(() => {
+                this.setState(data)
+            }, 200)
         })
     }
     render() {
         const columns = [
             [
-                {type: 'text-h4', prop: 'projectName'},
-                {type: 'image-form', value: require('../../assets/cloud.png'), style: {marginLeft: 30, marginRight: 5}},
-                {type: 'text-h5', prop: 'weather', style: {flex: 1}},
-                {type: 'text', prop: 'constructDate', style: {paddingRight: 5}},
-                {type: 'text', prop: 'week'},
+                {type: 'text-h4', prop: 'tendersName', style: {flex: 1}}, 
+                {type: 'text-h5', prop: 'weather'}, 
                 {type: 'br', style: {flexDirection: 'row', alignItems: 'center'}}
             ], [
-                {type: 'image', value: require('../../assets/image_header.png'), style: {width: 80, height: 60, marginRight: 10}},
-                [
+                {type: 'image', filter: (value, data) => {
+                        let arr = (data.pics || '').split(',')
+                        if (arr.length > 0) {
+                            return `http://www.jasobim.com:8085/${arr[0]}`
+                        } else return ''
+                    }, style: {width: 80, height: 60, marginRight: 10}
+                }, [
                     {type: 'text-h5', prop: 'productionConstructPart', filter: value => `施工部位：${value}`},
                     {type: 'text-h5', prop: 'productionConstructContent', filter: value => `施工内容：${value}`},
                     {type: 'text-h5', prop: 'productionWorkLoad', filter: (value, data) => `完成工作量：${value}`},
                     {type: 'br', load: (value, data) => data.productionConstructPart}
-                ],
-                [
+                ], [
                     {type: 'text-h5', prop: 'constructProgressConstructPart', filter: value => `施工部位：${value}`},
                     {type: 'text-h5', prop: 'constructProgressConstructContent', filter: value => `施工内容：${value}`},
                     {type: 'text-h5', prop: 'constructProgressTeams', filter: value => `班组：${value}`},
                     {type: 'text-h5', prop: 'constructProgressNums', filter: value => `施工进度：${value}`},
                     {type: 'br', load: (value, data) => !data.productionConstructPart && data.constructProgressConstructPart}
-                ],
-                [
+                ], [
                     {type: 'text-h5', prop: 'jobContentContentType', filter: value => `内容分类：${value}`},
                     {type: 'text-h5', prop: 'jobConentContentDescribe', filter: value => `描述：${value || ''}`},
                     {type: 'text', prop: 'jobContentRemark', filter: value => `备注：${value || ''}`},
@@ -142,11 +142,12 @@ export default  class  extends React.Component {
                 {type: 'click', prop: 'xianqin', style: {flexDirection: 'row', alignItems: 'center', paddingTB: 8}}
             ], [
                 {type: 'text', prop: 'userRealName', filter: value => `创建人: ${value}`, style: {flex: 1}},
+                {type: 'text', prop: 'constructDate', style: {paddingRight: 5}},
+                {type: 'text', prop: 'week'},
                 {type: 'br-bottoms'}
             ],
             {type: 'br-list-item'}
         ]
-
         return (
             <View style={{flex: 1, backgroundColor: '#f5f5f5'}}>
                 <Freedomen.Region 

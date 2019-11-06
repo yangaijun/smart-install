@@ -1,32 +1,36 @@
 const JianTou = require('../assets/old/youjiantou.png')
+import utils from './utils'
+
 const ZiXunItem = [
     [
-        {type: 'text-h4', prop: 'topic', value: '10月20日嘉实正式成为最新大佬， 2019年，让美好与我同在...'},
+        {type: 'text-h5', prop: 'topic', value: '10月20日...', filter:value => {
+            if (value && value.length > 25) {
+                return value.substring(0, 25) + '...'
+            }
+            return value
+        }, style:{lineHeight: 22}},
         [
-            {type: 'text-tag', prop: 'readStatus', value: '置顶', filter: {1: '置顶', 0: '普通'}, load: value => value},
-            {type: 'text-tag', prop: 'readState', value: '置顶', filter: {1: '热门', 0: '普通'}, load: value => value},
-            {type: 'text-label', prop: 'createDate', value: '2分钟前'},
+            {type: 'text-tag', prop: 'readStatus', filter: {1: '置顶', 2: '热门', 3: '置顶'},  load: (value) => value != 1},
+            // {type: 'text-label', prop: 'createDate', value: '2分钟前'},
             {type: 'text-label', prop: 'readNum', filter: value => `阅读 ${value}`},
-            {type: 'br', style: {flexDirection: 'row', paddingTB: 15, alignItems: 'center',}}
+            {type: 'br', style: {flexDirection: 'row', paddingTB: 6, alignItems: 'center'}}
         ],
         {type: 'br', style: {flex: 1, marginRight: 5}}
     ],
-    {type: 'image', value: require('../assets/image_header.png'), prop: 'remark', style: {width: 120, height: 80}},
-    {type: 'click-row', prop: 'into', style: {marginTop: 1}}
+    {type: 'image', prop: 'remark', style: {width: 120, height: 80}},
+    {type: 'click-row', prop: 'into', style: {marginTop: 1, paddingTB: 15}}
 ]
-
 export default {
     GeRenZhonXin: [
-       
         [
-            {type: 'image', prop:'userIconUrl', value: require('../assets/image_header.png'), style: {width: 62, height: 62, borderRadius: 62}},
+            {type: 'image', prop:'userIcon', filter: (value) => `http://www.jasobim.com:8085/${value}`, style: {width: 62, height: 62, borderRadius: 62}},
             [
-                {type: 'text', prop: 'userName', value: 'Hunter.xu', style: {color: '#252525', fontSize: 18}},
-                {type: 'text', prop: 'workName', value: '后来', style: {color: '#787878'}},
+                {type: 'text', prop: 'userRealName', value: 'Hunter.xu', style: {color: '#252525', fontSize: 18}},
+                {type: 'text', prop: 'userTel', value: '后来', style: {color: '#787878'}},
                 {type: 'br', style: {marginLeft: 12, flex: 1}}
             ],
             // {type: 'image', value: icon, style: {height: 10, width: 6}},
-            {type: 'click', prop: 'ccc', style: {flexDirection: 'row', height: 91, backgroundColor: 'white', alignItems: 'center', paddingLR: 19, paddingTB: 15, backgroundColor: 'white'}}
+            {type: 'click', prop: 'ccc', style: {flexDirection: 'row', height: 91, backgroundColor: 'white', alignItems: 'center', paddingLR: 19, paddingTB: 15, backgroundColor: 'white', marginTop: utils.PhoneType == 'iosx' ? 44 : 0}}
         ], [
             {type: 'image', value: require('../assets/old/tonxunlu.png'), style: {width: 19, height: 19}},
             {type: 'text', value: '通讯录', style: {flex: 1, fontSize: 15, color: '#252525', marginLeft: 12}},
@@ -64,54 +68,23 @@ export default {
             {type:　'click', style:　{backgroundColor: 'white', flexDirection: 'row', paddingLR: 19, paddingTB: 14, alignItems: 'center', marginBottom: 10}}
         ], 
         {type: 'button-primary', value: '退出登录', prop: 'exit', style: {fontSize: 15, color: 'white', backgroundColor: '#FF6D73', marginLR: 15,}}  
-    ],
-    SheZhi: [
-        [
-            {type: 'text', value: '设置', style: {fontSize: 22, color: 'white', flex: 1}}, 
-            {type:　'br', style: {flexDirection: 'row', height: 62, backgroundColor: '#3C3B40', alignItems: 'center', paddingLR: 24}}
-        ],
-        {type: 'scroll', prop: 'list', value: [{},{},{}], style: {backgroundColor: 'white'}, columns: [
-            {type: 'text-h3', prop: 'title', value: '办公管理', style: {paddingLR: 24, paddingTB: 5}},
-            {type: 'views', prop: 'item', value: [], columns: [
-                {type: 'image-item', prop: 'icon', value: require('../assets/icon.png')},
-                {type: 'text-h4', prop: 'label', value: '公告', style: {flex: 1}},
-                {type: 'switch', prop: 'switch', value: true},
-                {type: 'br-row', style: {marginBottom: 1, paddingTB: 2}}
-            ]}
-        ]}
-    ],
+    ], 
     YinYon: [
-        // {type: 'scroll', value: [{}], prop: 'list', style: {flex: 1, backgroundColor: 'white'}, columns: [
-            [
-                {type: 'text', value:'', style: {height: 20, width: 4, backgroundColor: '#2EBBC4', marginRight: 8}},
-                {type: 'text-title', prop: 'title', value: '办公管理'},
-                {type: 'br', style: {flexDirection: 'row', alignItems: 'center', paddingLR: 24, paddingTB: 5, marginTop: 30}}
-            ],
-            {type: 'views', prop: 'item', value: [{}], style: {flexDirection: 'row', flexWrap: 'wrap'}, columns: [
-                {type: 'image-item', prop: 'icon', value: require('../assets/icon.png')},
-                {type: 'text-badge', prop: 'badge', value: 0, load: value => value, style: {marginTop: -60, marginLeft: 35, marginBottom: 35}},
-                {type: 'text-h4', prop: 'label', value: '公告'},
-                {type: 'click',  style: {align: 'center', width: '25', marginTop: 16}}
-            ]}
-        // ]}
-    ],
-    GuoLv: [
-        {type: 'text-h3', value: '测区类型', style: {backgroundColor: 'white', marginTop: 1, paddingLeft: 10, paddingTB: 10}},
-        {type: 'view', prop: 'cequleixin', style: {backgroundColor: 'white', paddingLeft: 20, paddingBottom: 10}, value:[{}], columns: [
-            {type: 'checkbox', prop: 'b1', value: false, unCheck: require('../assets/uncheck.png'), checked: require('../assets/check.png')},
-            {type: 'text-h4', prop: 'bName', value: '--', style: {paddingLeft: 15}},
-            {type: 'br', style: {flexDirection: 'row', alignItems: 'center', paddingTB: 5}}
-        ]},
-        {type: 'text-h3',  value: '检查项', style: {backgroundColor: 'white', marginTop: 1, paddingLeft: 10, paddingTB: 10}},
-        {type: 'view', prop: 'jianchaxian',  style: {backgroundColor: 'white', paddingLeft: 20, paddingBottom: 10}, value:[{}], columns: [
-            {type: 'checkbox', prop: 'b', value: false, unCheck: require('../assets/uncheck.png'), checked: require('../assets/check.png')},
-            {type: 'text-h4', prop: 'checkName', value: '--', style: {paddingLeft: 15}},
-            {type: 'br', style: {flexDirection: 'row', alignItems: 'center', paddingTB: 5}}
-        ]}
+        [
+            {type: 'text', value:'', style: {height: 14, width: 4, borderRadius: 2, backgroundColor: '#2EBBC4', marginRight: 5,}},
+            {type: 'text-title', prop: 'title', value: '办公管理'},
+            {type: 'br', style: {flexDirection: 'row', alignItems: 'center', paddingLR: 15, paddingTB: 5, marginTop: 30}}
+        ],
+        {type: 'views', prop: 'item', value: [{}], style: {flexDirection: 'row', flexWrap: 'wrap'}, columns: [
+            {type: 'image-item', prop: 'icon', value: require('../assets/icon.png')},
+            {type: 'text-badge', prop: 'badge', value: 0, load: value => value, style: {marginTop: -60, marginLeft: 35, marginBottom: 35}},
+            {type: 'text-h4', prop: 'label'},
+            {type: 'click',  style: {align: 'center', width: '25', marginTop: 12}}
+        ]} 
     ],
     GonZuoTai_KaoQin: [
         [
-            {type: 'text', value:'', style: {height: 20, width: 4, backgroundColor: '#2EBBC4', marginRight: 5,}},
+            {type: 'text', value:'', style: {height: 14, width: 4, borderRadius: 2, backgroundColor: '#2EBBC4', marginRight: 5,}},
             {type: 'text-title', value: '考勤'},
             {type: 'button-text', prop: 'kaoqin_qudaka', value: '去打卡'},
             {type: 'image', value: require('../assets/right.png'), style: {width: 16, height: 16}},
@@ -122,11 +95,11 @@ export default {
             {type: 'text-h4', value: '天'},
             {type: 'br', style: {flexDirection: 'row', align: 'center', height: 120}}
         ],
-        {type: 'br', style: {backgroundColor: 'white', marginTop: 10, padding: 10,}}
+        {type: 'br', style: {backgroundColor: 'white', marginTop: 10, padding: 10}}
     ],
     GonZuoTai_GonZuo: [
         [
-            {type: 'text', value:'', style: {height: 20, width: 4, backgroundColor: '#2EBBC4', marginRight: 5,}},
+            {type: 'text', value:'', style: {height: 14, width: 4, borderRadius: 2, backgroundColor: '#2EBBC4', marginRight: 5,}},
             {type: 'text-title', prop: 'title', value: '工作'},
             {type: 'br', style: {alignItems: 'center', flexDirection: 'row'}}
         ],
@@ -136,32 +109,36 @@ export default {
             {type: 'text-h4', prop: 'label', value: '公告'},
             {type: 'click', style: {align: 'center', width: '24', marginTop: 10}}
         ]},
-        {type: 'br', style: {backgroundColor: 'white', marginTop: 5, padding: 10, paddingTB: 20,}}
+        {type: 'br', style: {backgroundColor: 'white', marginTop: 5, padding: 10, paddingTB: 20}}
     ],
     GonZuoTai_ShiGonRiZhi: [
         [
-            {type: 'text', value:'', style: {height: 20, width: 4, backgroundColor: '#2EBBC4', marginRight: 5,}},
+            {type: 'text', value:'', style: {height: 14, width: 4, borderRadius: 2, backgroundColor: '#2EBBC4', marginRight: 5,}},
             {type: 'text-title', value: '施工日志'},
-            {type: 'button-text', value: '更多'},
+            {type: 'button-text', prop: 'sgrz_more', value: '更多'},
             {type: 'image', value: require('../assets/right.png'), style: {width: 16, height: 16}},
             {type: 'br', style: {flexDirection: 'row', alignItems: 'center', paddingBottom: 15}}
         ], 
-        {type: 'scroll-x', prop: 'sgrz', value: [{},{},{},{}], style: {backgroundColor: 'white'}, columns: [
-            {type: 'text-h4', value: '开封销户', style: {color: '#FF8400', backgroundColor: '#dedde6', padding: 3, borderRadius: 8, alignSelf: 'center', paddingLR: 8}},
-            {type: 'text-p', value: '居庙堂之高，处江湖之远， 上善若水，水利万物而..'},
-            {type: 'text', value: '2019-09-15'},
+        {type: 'scroll-x', prop: 'sgrz', value: [], style: {backgroundColor: 'white'}, columns: [
+            {type: 'text-h4', prop: 'projectName', value: '...', style: {color: '#FF8400', backgroundColor: '#fdeee3', padding: 3, borderRadius: 8, alignSelf: 'center', paddingLR: 8}},
+            {type: 'text-p', prop: 'productionConstructContent', value: '居庙堂之高，处江湖之远， 上善若水，水利万物而..', filter: value => {
+                if (value && value.length > 20)
+                    return value.substring(0, 20) + '...'
+                return value
+            }},
+            {type: 'text', prop: 'createTime', filter: 'yyyy-MM-dd'},
             [
                 {type: 'image-icon', value: require('../assets/cloud.png')},
-                {type: 'text-h5', value: '多云'},
+                {type: 'text-h5', prop: 'weather'},
                 {type: 'br', style: {flexDirection: 'row', alignItems: 'center'}}
             ],
-            {type: 'br', style: {padding: 10, borderRadius: 5, borderColor: '#f5f5f5', borderWidth: 2, marginLR: 5, width: '33'}}
+            {type: 'click', prop: 'sgrz-detail', style: {padding: 10, borderRadius: 5, borderColor: '#f5f5f5', borderWidth: 2, marginLR: 5, width: 180, height: 140}}
         ]},
-        {type: 'br', style: {backgroundColor: 'white', marginTop: 5, padding: 10, paddingTB: 15}}
+        {type: 'br', style: {backgroundColor: 'white', marginTop: 5, padding: 10, paddingTB: 15, minHeight: 220}}
     ],
     GonZuoTai_XinWenZiXun: [
         [
-            {type: 'text', value:'', style: {height: 20, width: 4, backgroundColor: '#2EBBC4', marginRight: 5}},
+            {type: 'text', value:'', style: {height: 14, width: 4, borderRadius: 2, backgroundColor: '#2EBBC4', marginRight: 5,}},
             {type: 'text-title', value: '新闻资讯'},
             {type: 'button-text', prop: 'zixun_more', value: '更多'},
             {type: 'image', value: require('../assets/right.png'), style: {width: 16, height: 16}},
@@ -173,7 +150,7 @@ export default {
     ZiXunItem: ZiXunItem,
     GonZuoItem: [
         [
-            {type: 'text-h4', value: '格林小镇三号底柱质量整改...', style: {flex: 1}},
+            {type: 'text-h4', prop: 'projectName', value: '整改...', style: {flex: 1}},
             {type: 'text-status', prop: 'status', value: 1, filter: {'1': '待接受', '2' : '进行中', 3: '审核中', 4: '已完成'}, style: value => {
                 let bgColor = {1: '#FF6D73', 2: '#FAB722', 3: '#00CC9B', 4 : '#999999'}[value]
                 return {
@@ -181,11 +158,11 @@ export default {
                     marginLR: 8
                 }
             }},
-            {type: 'text-label', value: '苏州歌林小镇', style: {alignItems: 'flex-end'}},
+            {type: 'text-label', prop: 'projectName', value: '苏州歌林小镇', style: {alignItems: 'flex-end'}},
             {type: 'click', style: {flexDirection: 'row', alignItems: 'center'}}
         ], [
             [
-                {type: 'text-label', value: '王二头', filter:  value => `分派人: ${value}`},
+                {type: 'text-label', value: '王二头', prop: 'userRealName', filter:  value => `分派人: ${value}`},
                 [
                     {type: 'text-primary', value: '质量整改工作  08.08截止'},
                     {type: 'text', prop: 'cd', filter: {1: '紧急', 2: '一般', 3: '重要'}, style: (value) => {
@@ -254,7 +231,7 @@ export default {
                 } 
                 let arr = []
                 for (let i = 0; i < icons.length; i ++) {
-                    arr.push({type: 'image', filter: () => `http://www.jasobim.com:8080/${icons[i].userIcon || icons[i].url}`,  style: {width: 35, height: 35, borderRadius: 35}},)
+                    arr.push({type: 'image', filter: () => `http://www.jasobim.com:8085/${icons[i].userIcon || icons[i].url}`,  style: {width: 35, height: 35, borderRadius: 35}},)
                 }
                 arr.push({type: 'br', style: {flexDirection: 'row'}})
                 return arr
@@ -290,25 +267,25 @@ export default {
         {type: 'br-normal-row', style: {borderColor: '#ccc', borderWidth: 1, backgroundColor: '#f5f5f5', marginLR: 12}}
     ],
     CancelAnConfirm: [
-        {type: 'button-text', prop: 'cancel', value: '取消', style: {flex: 1, padding: 12, align: 'center', fontWeight: 'bold', fontSize: 16, color: '#979797'}},
+        {type: 'button-text', prop: 'cancel', value: '取消', style: {flex: 1, padding: 6, align: 'center', fontWeight: 'bold', fontSize: 16, color: '#979797'}},
         {type: 'text', style: {height: 50, width: 1, backgroundColor: '#f5f5f5'}},
-        {type: 'button-text-primary', prop: 'confirm', value: '确定', style: {flex: 1, padding: 12, align: 'center', fontWeight: 'bold'}},
+        {type: 'button-text-primary', prop: 'confirm', value: '确定', style: {flex: 1, padding: 6, align: 'center', fontWeight: 'bold'}},
         {type: 'br', style: {flexDirection: 'row', height: 52, marginTop: 15, borderTopWidth: 1, borderTopColor: '#f5f5f5', marginLR: -10}}
     ],
     ZA_Search: (placeholder, prop) => {
         return [
-            {type: 'image-icon', value: require('../assets/search.png'), style: {marginTB: 3}},
+            {type: 'image-icon', value: require('../assets/search.png'), style: {marginTB: 6, marginLeft: 10}},
             {type: 'input-text', prop: prop || 'content', placeholder: placeholder || '请输入名称、检查人或检查项查询', style: {flex: 1}},
             {type: 'button-image-icon', prop: '_clear', load: (value, data) => data[prop || 'content'], value: require('../assets/clear.png'), style: {marginTB: 3}},
-            {type: 'br', style: {flexDirection: 'row', paddingLR: 8, backgroundColor: '#f5f5f5', alignItems: 'center', borderRadius: 20}}
+            {type: 'br', style: {flexDirection: 'row', paddingLR: 8, paddingTB: 3, backgroundColor: '#f5f5f5', alignItems: 'center', borderRadius: 20}}
         ].slice()
     },
     CK_Search: (placeholder, prop) => { 
         return [
-            {type: 'image-icon', value: require('../assets/search.png')},
+            {type: 'image-icon', value: require('../assets/search.png'), style: {marginTB: 6, marginLeft: 10}},
             {type: 'input-text', prop: prop || 'content', placeholder: placeholder || '请输入名称、检查人或检查项查询', style: {flex: 1}},
             {type: 'button-image-icon', prop: 'clear', load: (value, data) => data[prop || 'content'], value: require('../assets/clear.png')},
-            {type: 'br', style: {flexDirection: 'row', paddingLR: 8, backgroundColor: '#f5f5f5', alignItems: 'center', borderRadius: 5, flex: 1}}
+            {type: 'br', style: {flexDirection: 'row', paddingLR: 8, paddingTB: 3, backgroundColor: '#f5f5f5', alignItems: 'center', borderRadius: 5, flex: 1}}
         ]
     },
     SGRZ_ShenChanQinKuan: [
@@ -361,7 +338,7 @@ export default {
             {type: 'br-form-row', style: {align: 'center'}}
         ],
         //label标题
-        {type: 'views', value: [{label: '一'}, {label: '二'}, {label: '三'}, {label: '四'}, {label: '五'}, {label: '六'}, {label: '日'}], style: {flexDirection: 'row', height: 38, backgroundColor: 'white', align: 'center'}, columns: [
+        {type: 'views', prop: 'label', value: [{label: '一'}, {label: '二'}, {label: '三'}, {label: '四'}, {label: '五'}, {label: '六'}, {label: '日'}], style: {flexDirection: 'row', height: 38, backgroundColor: 'white', align: 'center'}, columns: [
             {type: 'text-primary', prop: 'label', style: {fontSize: 16, fontWeight: '500'}},
             {type: 'br', style: {width: '14.28', align: 'center'}}
         ]}, 
@@ -442,6 +419,66 @@ export default {
             {type: 'slider', prop: 'constructProgressNums',  value: 0, style: {flex: 1, paddingLR: 10}},
             {type: 'text-primary', value: 0, filter: (value, data) => (data.constructProgressNums || value) + '%', style: {minWidth: 38, alignItems: 'flex-end'}},
             {type: 'br-form-row'}
+        ]
+    ],
+    ShiJian: [
+        [
+            {type: 'text-h5', prop: 'topic', value: '10月20日...', filter:value => {
+                if (value && value.length > 25) {
+                    return value.substring(0, 25) + '...'
+                }
+                return value
+            }, style:{lineHeight: 22}},
+            {type: 'br', style: {flex: 1, marginRight: 5}}
+        ], [
+            // {type: 'text-label', prop: 'createDate', value: '2分钟前'},
+            {type: 'text-label', prop: 'readNum'},
+            {type: 'br', style: {flexDirection: 'row', paddingTB: 6, alignItems: 'center'}}
+        ],
+        {type: 'image', prop: 'pic', style: {width: 120, height: 80}},
+        {type: 'click-row', prop: 'into', style: {marginTop: 1, paddingTB: 15}}
+    ],
+    Pic: [
+        {type: 'text-form-label', value: '图片'},
+        [ 
+            {type: 'views-x',  prop: 'pictures', columns: [
+                {type: 'button-image-picture', prop: 'picture',  filter: (value) => `http://www.jasobim.com:8085/${value}`, style: {marginRight: 2}},
+            ], value: []},
+            {type: 'button-image-picture', prop: 'choose',  filter: (value, data) => {
+                if (data.pictures && data.pictures.length > 0)
+                    return require('../assets/plus.png')
+                return require('../assets/uptupian.png')
+            }, load:(value, data) =>  data.pictures.length < 4},
+            {type: 'br-normal-row'}
+        ],
+        {type: 'br-form-col'}
+    ], 
+    PicAndImg: [
+        [
+            {type: 'text-form-label', value: '图片'},
+            [ 
+                {type: 'views-x',  prop: 'pictures', columns: [
+                        {type: 'button-image-picture', prop: 'picture',  filter: (value) => `http://www.jasobim.com:8085/${value}`, style: {marginRight: 2}},
+                    ], value: []
+                },
+                {type: 'button-image-picture', prop: 'choose',  filter: (value, data) => {
+                    if (data.pictures && data.pictures.length > 0)
+                        return require('../assets/plus.png')
+                    return require('../assets/uptupian.png')
+                }, load:(value, data) =>  data.pictures.length < 4},
+                {type: 'br-normal-row'}
+            ],
+            {type: 'br-form-col'}
+        ], [
+            {type: 'text-form-label', value: '录音'},
+            [ 
+                {type: 'views-x', prop: 'luyins', columns: [
+                    {type: 'button-image-picture', prop: 'luyins', value: require('../assets/lywenjian.png'), style: {marginRight: 2}},
+                ], value: []},
+                {type: 'button-image-picture', prop: 'luyin', value: require('../assets/luyin.png'), load:(value, data) =>  data.luyins.length < 4},
+                {type: 'br-normal-row'}
+            ],
+            {type: 'br-form-col'}
         ]
     ]
 }

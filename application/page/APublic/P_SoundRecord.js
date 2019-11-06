@@ -1,5 +1,6 @@
 import React from 'react' 
 import Freedomen from 'react-native-freedomen'
+import {Dimensions} from 'react-native'
 import {AudioRecorder, AudioUtils} from 'react-native-audio'   
 
 
@@ -63,17 +64,18 @@ export default  class  extends React.Component {
                     uri: 'file://' + res,
                     type: 'audio/acc',
                     name:  this._fileName
-                }
-                
-                console.log(upload)  
-                resolve(upload)
+                } 
+                Freedomen.global.api.upload(upload).then(res => {
+                    console.log(res)
+                    resolve(1)
+                }).catch(e=> alert(2))
             }) 
         })
         
     }
     render() {
         return (
-            <Freedomen.SlidePop style={{top: '65'}} ref={ref => this.slidePop = ref} close={() => {
+            <Freedomen.SlidePop style={{top:  Dimensions.get('screen').height - 280}} ref={ref => this.slidePop = ref} close={() => {
                 if (this.start) {
                     AudioRecorder.stopRecording() 
                 }
@@ -107,14 +109,13 @@ export default  class  extends React.Component {
                                     type: 'audio/acc',
                                     name:  this.fileName
                                 }
-                                
-                                console.log(upload)
                                 this.slidePop.hide()
                                 this.start = false
-                                this.props.over && this.props.over(upload)
+                                Freedomen.global.api.upload(upload).then(res => {
+                                    this.props.over && this.props.over(res.data.data[0])
+                                }) 
                             }) 
-                        }
-                            
+                        } 
                     }}
                     data={this.state.data}
                     columns={[
@@ -122,7 +123,7 @@ export default  class  extends React.Component {
                         {type: 'button-image', prop: 'luyin', filter: value => {
                             return value ? require('../../assets/zantin.png') : require('../../assets/kaishi.png')
                         }, style: {height: 105, width: 105}},
-                        {type: 'br', style: {align: 'center', paddingTop: 25}}
+                        {type: 'br', style: {align: 'center', paddingTB: 15, width: '100'}}
                     ]}
                 />
             </Freedomen.SlidePop>

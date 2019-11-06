@@ -7,7 +7,7 @@ export default  class  extends React.Component {
         title: '入库记录',
         headerRight: <Freedomen.Region 
             event={params => {
-                navigation.push('WZ_XinJian', {logType: 0})
+                navigation.push('WZ_RuKuChuKu', {label: '入库：选择物资', logType: 0})
             }}
             columns={[
                 {type: 'button-image-right', value: require('../../assets/tianjia.png')}
@@ -52,7 +52,7 @@ export default  class  extends React.Component {
                     data={this.state.list}
                     columns={[
                         [
-                            {type: 'text-h4', prop: 'createTime', value: 'yyyy-MM-dd', style: {flex: 1}},
+                            {type: 'text-h4', prop: 'createTime', filter: 'yyyy-MM-dd', style: {flex: 1}},
                             {type: 'text-primary', prop: 'listNum', filter: value => `${value}项材料`},
                             {type: 'br', style: {flexDirection: 'row', alignItems: 'center', paddingBottom: 5}}
                         ],

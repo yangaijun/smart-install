@@ -10,7 +10,7 @@ export default class extends React.Component {
     }
     render() {
         return (
-            <Text>he</Text>
+            <Text></Text>
         );
     }
   }
